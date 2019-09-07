@@ -1,0 +1,14 @@
+{
+  "name": "tp1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node pug-server.js"
+  },
+  "author": "Konstantinos Lambrou-Latreille",
+  "devDependencies": {
+    "node-static": "^0.7.11",
+    "pug": "^2.0.4"
+  }
+}

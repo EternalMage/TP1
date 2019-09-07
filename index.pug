@@ -1,0 +1,81 @@
+-
+  let feeds = [
+    { title: 'Déception machine et Hallucinations profondes d\'Érudits: Pourquoi Repère ? Pourquoi maintenant ?',
+      presentator: 'Olivier Spéciel',
+      date: 'jeudi 12 novembre 2020 05:00',
+      createdAt: '22 décembre 2020',
+      location: 'Salle M-1022 <a href=\'https://www.openstreetmap.org/way/24150964\'>au pavillon Lassonde à Polytechnique Montréal</a>',
+      type: 'seminar'
+    },
+    { title: 'OntoMic, une ontologie pour les laboratoires de microbiologie clinique',
+      presentator: 'Jean-Guy Levreault',
+      date: 'mardi 12 novembre 2019 05:00',
+      createdAt: '13 décembre 2019',
+      location: 'Salle 3195, Pavillon André-Aisenstadt',
+      type: 'seminar'
+    },
+    { title: 'SC-LSTM: Learning Task-Specific Representations in Multi-Task Learning for Sequence Labeling',
+      presentator: 'Peng Lu',
+      date: 'mardi 12 novembre 2019 05:00',
+      createdAt: '12 décembre 2019',
+      location: 'Salle 3195, Pavillon André-Aisenstadt',
+      type: 'seminar'
+    },
+    { createdAt: '12 novembre 2019',
+      text: 'Le travail de <a href="">Marc Jacques</a> est disponible sur <a href="http://scholar.google.com/">Google Scholar</a>.\n',
+      type: 'news'
+    }
+  ]
+
+  let description = "Le <strong>laboratoire Semantic IA</strong> est un laboratoire de recherche qui lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu nunc pretium, finibus quam in, varius urna. Nunc vestibulum at nibh at egestas. Nulla interdum iaculis dui, quis varius lacus elementum id. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu imperdiet felis. Etiam hendrerit id libero quis ultricies. Nunc molestie tellus ultrices elit molestie tincidunt. Mauris id interdum turpis. Nullam fermentum ornare arcu, id vehicula leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus aliquam dignissim volutpat. Nunc sit amet varius risus. Curabitur ex libero, rhoncus tincidunt hendrerit et, feugiat ut purus.\nNunc id sodales odio, ut pretium tortor. Sed gravida semper est et finibus. Mauris vulputate fringilla nulla et pretium. Nulla facilisi. Maecenas scelerisque convallis dui tincidunt volutpat. Curabitur vitae feugiat tortor. Duis vitae turpis consequat, lacinia nisl vitae, lobortis nisi. Mauris aliquet, felis in blandit cursus, odio arcu suscipit sem, id blandit massa eros non nunc. Fusce ac sodales tellus, vel efficitur metus.\n In congue, justo at auctor consequat, dolor eros laoreet augue, sit amet molestie felis massa sed nunc. Curabitur at nibh et ipsum facilisis molestie. Donec dictum dapibus diam, sed fringilla tellus tincidunt ut. Nam porttitor in diam ut dapibus. Cras sit amet diam odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet eros quis sem imperdiet suscipit. Fusce luctus turpis ut metus convallis, ac ornare augue fermentum. Phasellus aliquet, elit eu tempus aliquam, odio est tristique quam, quis luctus augue lorem sit amet lorem. Quisque tellus sem, rutrum vitae hendrerit in, tempus vitae neque. Morbi blandit sagittis risus a placerat."
+
+mixin navButton(name, link)
+    li
+      a(href=link)= name
+
+mixin newsSection(feed)
+  section
+    if feed.type=="seminar"
+      img(src="./img/presentation-icon.png")
+    else 
+      img(src="./img/logo.png")
+    header
+      time(datetime="#")= feed.createdAt 
+      if feed.type=="seminar"
+        h1 Prochain seminaire !{feed.titre}
+    footer
+      p= feed.presentator
+    if feed.type=="seminar"
+      p= feed.date
+      p !{feed.location}
+    else
+      p !{feed.text}
+
+html
+  head
+    meta(charset="utf-8")
+  header
+    div
+      h1 Labo Semantic IA
+      p Intelligence Artificielle 
+      p Web sémantique
+      img(src="./img/logo-coding.png")
+    nav
+      ul
+        +navButton('Accueil', '#')
+        +navButton('Équipe', '#')
+        +navButton('Projets', '#')
+        +navButton('Publications', '#')
+        +navButton('Contact', '#')
+        select 
+          option(value="FR") FR
+          option(value="EN") EN
+  block content
+    div !{description}
+    article 
+      h1 Nouvelles
+      each feed in feeds
+        +newsSection(feed)
+  footer
+    p Site privé
+    p LOG4420 - Polytechnique Montréal, Québec

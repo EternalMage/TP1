@@ -1,3 +1,5 @@
+extends index.pug
+block content
   -
     const currentProjects = [
       {
@@ -73,4 +75,28 @@
     ]
 
     const pastProjects = []
+  
+  mixin projectView(p)
+    li= p.student
+          | , 
+          a(href="#")= p.title
+          p Supervisor: #{p.supervisor}
+          if p.cosupervisor
+           p Co-supervisor: #{p.cosupervisor}
+
+  article
+    h1 Current projects
+    ul
+      each project in currentProjects
+        +projectView(project)
+
+  article
+    h1 Projects
+    if pastProjects.length>0
+      ul
+        each project in pastProjects
+          +projectView(project)
+    else
+      p No pass project
+        
 

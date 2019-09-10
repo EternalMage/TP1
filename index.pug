@@ -38,7 +38,7 @@ mixin newsSection(feed)
     if feed.type=="seminar"
       img(src="./img/presentation-icon.png")
     else 
-      img(src="./img/logo.png")
+      i.fa.fa-window-close.fa-2x.close-button
     header
       time(datetime="#")= feed.createdAt 
       if feed.type=="seminar"

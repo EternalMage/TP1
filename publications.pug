@@ -1,6 +1,21 @@
 extends index.pug
 
 block content
+  mixin publication(publication)
+    section
+      tr
+        td
+          i.fa.fa-window-close.fa-2x.close-button
+        td
+          strong= publication.year
+          p= publication.month
+        td
+          h1= publication.title
+          footer
+            each author in publication.authors
+              span #{author}, #{" "}
+            p
+              em= publication.venue
   -
     const publications = [
       {
@@ -112,4 +127,67 @@ block content
       }
     ]
   
-  p BONJOUR !
+  article 
+    h1 Publications
+    div
+      button Add publication
+      i.fa.fa-window-close.fa-2x.close-button
+    section
+      h1 Create publication
+      form
+        div
+          label Year : 
+            input(type="number")
+        div 
+          label Month : 
+            select
+              option(value="1") January     
+              option(value="2") Febuary        
+              option(value="3") March        
+              option(value="4") April        
+              option(value="5") May        
+              option(value="6") June        
+              option(value="7") July        
+              option(value="8") August        
+              option(value="9") September      
+              option(value="10") October        
+              option(value="11") November        
+              option(value="12") December   
+        div
+          label Title : 
+            input(type="text")
+        div
+          label Authors : 
+            input(type="text")
+            i.fa.fa-plus.fa-3x
+        div
+          label Conference : 
+            input(type="text")
+        button(type="submit") Create
+    div
+      label Sort by :
+        select
+          option date
+    div
+      label Order by :
+        select
+          option descending
+          option ascending
+    table
+      each publication in publications
+        +publication(publication)
+    div
+      a(href="#") «
+      span 123 
+      a(href="#") »
+    div Afficher
+      select
+        option 10
+        option 100
+        option 1000
+      span  résultats par page
+
+
+      
+                
+

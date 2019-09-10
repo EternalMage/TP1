@@ -1,17 +1,19 @@
 extends index.pug
-
 mixin publication(publication)
-  li 
-    section
-      img(src="./img/logo.png")
-      strong= publication.year
-      p= publication.month
-      h1= publication.title
-      footer
-        each author in publication.authors
-          span #{author}, #{" "}
-        p
-          em= publication.venue
+  section
+    tr
+      td
+        i.fa.fa-window-close.fa-2x.close-button
+      td
+        strong= publication.year
+        p= publication.month
+      td
+        h1= publication.title
+        footer
+          each author in publication.authors
+            span #{author}, #{" "}
+          p
+            em= publication.venue
 
 block content
   -
@@ -72,5 +74,6 @@ block content
       p Co-supervisor(s): #{project.cosupervisor}
     article
       h1 Publications
-      each publication in publications
-        +publication(publication)
+      table
+        each publication in publications
+          +publication(publication)

@@ -1,237 +1,165 @@
-  -
-    const members = [
-        {
-            "lastname": "Anderson",
-            "firstname": "Patrick",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Beauchamps",
-            "firstname": "Alphonsine",
-            "email": "alphonsine.beauchamps@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "associateprofessor",
-                    "current": true
-                }
-            ],
-            "homepage": "https://www.polymtl.quebec/expertises/beauchamps-alphonsine",
-            "image": "/img/alphonsine_beauchamps.jpg"
-        },
-        {
-            "lastname": "Benjamin",
-            "firstname": "Rosamonde",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/rosamonde_benjamin.jpg"
-        },
-        {
-            "lastname": "Bourgoin",
-            "firstname": "Leonard",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Charron",
-            "firstname": "Aurore",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/aurore_charron.jpg"
-        },
-        {
-            "lastname": "De Chateaub",
-            "firstname": "Robert",
-            "email": "robert.dechateaub@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "phdstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/robert_de_chateaub.jpg"
-        },
-        {
-            "lastname": "Deniger",
-            "firstname": "Christophe",
-            "titles": [
-                {
-                    "title": "phdstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/christophe_deniger.jpg"
-        },
-        {
-            "lastname": "Deslauriers",
-            "firstname": "Michel",
-            "email": "michel.deslauriers@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "associateprofessor",
-                    "current": true
-                }
-            ],
-            "homepage": "https://www.polymtl.quebec/expertises/deslauriers-michel",
-            "image": "/img/michel_deslauriers.jpg"
-        },
-        {
-            "lastname": "Garand",
-            "firstname": "Zack",
-            "email": "zack.garand@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "phdstudent",
-                    "current": true
-                }
-            ]
-        },
-        {
-            "lastname": "Gélinas",
-            "firstname": "Joey",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Jutras",
-            "firstname": "Gustina",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Lacoste",
-            "firstname": "Granella",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Mailloux",
-            "firstname": "Capucine",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/capucine_mailloux.jpg"
-        },
-        {
-            "lastname": "Monty",
-            "firstname": "Clothilde",
-            "email": "clothilde.monty@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "phdstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/clothilde_monty.jpg"
-        },
-        {
-            "lastname": "Noël",
-            "firstname": "Damien",
-            "email": "damien.noel@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ]
-        },
-        {
-            "lastname": "Renaud",
-            "firstname": "Liodore",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ],
-            "image": "/img/liodore_renaud.jpg"
-        },
-        {
-            "lastname": "Rochefort",
-            "firstname": "Talbot",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/talbot_rochefort.jpg"
-        },
-        {
-            "lastname": "Rodrigue",
-            "firstname": "Christophe",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": true
-                }
-            ],
-            "image": "/img/christophe_rodrigue.jpg"
-        },
-        {
-            "lastname": "Simoneau",
-            "firstname": "Fleurilius",
-            "titles": [
-                {
-                    "title": "masterstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "St-Louis",
-            "firstname": "Xavier",
-            "email": "xavier.st-louis@polymtl.quebec",
-            "titles": [
-                {
-                    "title": "researchassociate",
-                    "current": true
-                },
-                {
-                    "title": "phdstudent",
-                    "current": false
-                }
-            ]
-        },
-        {
-            "lastname": "Trudel",
-            "firstname": "Hildège",
-            "titles": [
-                {
-                    "title": "phdstudent",
-                    "current": false
-                }
-            ]
-        }
-    ]
+-
+  const professors = [
+      {
+          "lastname": "Beauchamps",
+          "firstname": "Alphonsine",
+          "email": "alphonsine.beauchamps@polymtl.quebec",
+          "title": "associateprofessor",
+          "current": true,
+          "homepage": "https://www.polymtl.quebec/expertises/beauchamps-alphonsine",
+          "image": "/img/alphonsine_beauchamps.jpg"
+      },
+      {
+          "lastname": "Deslauriers",
+          "firstname": "Michel",
+          "email": "michel.deslauriers@polymtl.quebec",
+          "title": "associateprofessor",
+          "current": true,
+          "homepage": "https://www.polymtl.quebec/expertises/deslauriers-michel",
+          "image": "/img/michel_deslauriers.jpg"
+      }
+  ]
+
+  const researchassociates = [
+      {
+          "lastname": "St-Louis",
+          "firstname": "Xavier",
+          "email": "xavier.st-louis@polymtl.quebec",
+          "title": "researchassociate",
+          "current": true
+      },
+  ]
+
+  const phdStudents = [
+      {
+          "lastname": "De Chateaub",
+          "firstname": "Robert",
+          "email": "robert.dechateaub@polymtl.quebec",
+          "title": "phdstudent",
+          "current": true,
+          "image": "/img/robert_de_chateaub.jpg"
+      },
+      {
+          "lastname": "Deniger",
+          "firstname": "Christophe",
+          "title": "phdstudent",
+          "current": true,
+          "image": "/img/christophe_deniger.jpg"
+      },
+      {
+          "lastname": "Garand",
+          "firstname": "Zack",
+          "email": "zack.garand@polymtl.quebec",
+          "title": "phdstudent",
+          "current": true
+      },
+      {
+          "lastname": "Monty",
+          "firstname": "Clothilde",
+          "email": "clothilde.monty@polymtl.quebec",
+          "title": "phdstudent",
+          "current": true,
+          "image": "/img/clothilde_monty.jpg"
+      },
+      {
+          "lastname": "St-Louis",
+          "firstname": "Xavier",
+          "email": "xavier.st-louis@polymtl.quebec",
+          "title": "phdstudent",
+          "current": false
+      },
+      {
+          "lastname": "Trudel",
+          "firstname": "Hildège",
+          "title": "phdstudent",
+          "current": false
+      }
+  ]
+
+  const masterStudents = [
+      {
+          "lastname": "Anderson",
+          "firstname": "Patrick",
+          "title": "masterstudent",
+          "current": false
+      },
+      {
+          "lastname": "Benjamin",
+          "firstname": "Rosamonde",
+          "title": "masterstudent",
+          "current": true,
+          "image": "/img/rosamonde_benjamin.jpg"
+      },
+      {
+          "lastname": "Bourgoin",
+          "firstname": "Leonard",
+          "title": "masterstudent",
+          "current": false
+      },
+      {
+          "lastname": "Charron",
+          "firstname": "Aurore",
+          "title": "masterstudent",
+          "current": true,
+          "image": "/img/aurore_charron.jpg"
+      },
+      {
+          "lastname": "Gélinas",
+          "firstname": "Joey",
+          "title": "masterstudent",
+          "current": false
+      },
+      {
+          "lastname": "Jutras",
+          "firstname": "Gustina",
+          "title": "masterstudent",
+          "current": false
+      },
+      {
+          "lastname": "Lacoste",
+          "firstname": "Granella",
+          "title": "masterstudent",
+          "current": false
+      },
+      {
+          "lastname": "Mailloux",
+          "firstname": "Capucine",
+          "title": "masterstudent",
+          "current": true,
+          "image": "/img/capucine_mailloux.jpg"
+      },
+      {
+          "lastname": "Noël",
+          "firstname": "Damien",
+          "email": "damien.noel@polymtl.quebec",
+          "title": "masterstudent",
+          "current": true
+      },
+      {
+          "lastname": "Renaud",
+          "firstname": "Liodore",
+          "title": "masterstudent",
+          "current": false,
+          "image": "/img/liodore_renaud.jpg"
+      },
+      {
+          "lastname": "Rochefort",
+          "firstname": "Talbot",
+          "title": "masterstudent",
+          "current": true,
+          "image": "/img/talbot_rochefort.jpg"
+      },
+      {
+          "lastname": "Rodrigue",
+          "firstname": "Christophe",
+          "title": "masterstudent",
+          "current": true,
+          "image": "/img/christophe_rodrigue.jpg"
+      },
+      {
+          "lastname": "Simoneau",
+          "firstname": "Fleurilius",
+          "title": "masterstudent",
+          "current": false
+      }
+  ]

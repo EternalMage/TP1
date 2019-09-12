@@ -39,44 +39,48 @@ mixin newsSection(feed)
       img(src="./img/presentation-icon.png")
     else 
       i.fa.fa-window-close.fa-2x.close-button
-    header
-      time(datetime="#")= feed.createdAt 
+    div#newsInfos
+      header
+        time(datetime="#")= feed.createdAt 
+        if feed.type=="seminar"
+          h1 Prochain seminaire !{feed.titre}
+      footer
+        p= feed.presentator
       if feed.type=="seminar"
-        h1 Prochain seminaire !{feed.titre}
-    footer
-      p= feed.presentator
-    if feed.type=="seminar"
-      p= feed.date
-      p !{feed.location}
-    else
-      p !{feed.text}
+        p= feed.date
+        p !{feed.location}
+      else
+        p !{feed.text}
 
 html
   head
     meta(charset="utf-8")
     link(rel="stylesheet", href="/style.css")
-  header
-    div
-      h1 Labo Semantic IA
-      p Intelligence Artificielle 
-      p Web sémantique
-      img(src="./img/logo-coding.png")
-    nav
-      ul
-        +navButton('Accueil', '#')
-        +navButton('Équipe', '#')
-        +navButton('Projets', '#')
-        +navButton('Publications', '#')
-        +navButton('Contact', '#')
-        select 
-          option(value="FR") FR
-          option(value="EN") EN
-  block content
-    div !{description}
-    article 
-      h1 Nouvelles
-      each feed in feeds
-        +newsSection(feed)
-  footer
-    p Site privé
-    p LOG4420 - Polytechnique Montréal, Québec
+    link(rel="stylesheet", href="/styleTP1.css")
+  body
+    header
+      div#logo
+        div
+          h1 Labo Semantic IA
+          p Intelligence Artificielle 
+          p Web sémantique
+        img(src="./img/logo-coding.png")
+      nav
+        ul
+          +navButton('Accueil', '#')
+          +navButton('Équipe', '#')
+          +navButton('Projets', '#')
+          +navButton('Publications', '#')
+          +navButton('Contact', '#')
+          select 
+            option(value="FR") FR
+            option(value="EN") EN
+    block content
+      div#description !{description}
+      article#news
+        h1 Nouvelles
+        each feed in feeds
+          +newsSection(feed)
+    footer#pageFooter
+      p Site privé
+      p LOG4420 - Polytechnique Montréal, Québec

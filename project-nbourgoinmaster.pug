@@ -9,7 +9,7 @@ mixin publication(publication)
         p= publication.month
       td
         h1= publication.title
-        footer
+        footer#publicationFooter
           each author in publication.authors
             span #{author}, #{" "}
           p
@@ -66,9 +66,9 @@ block content
     ]
 
   
-  article
+  article#nbourgoin
     h1= project.title
-    footer
+    footer#titleFooter
       p Student: #{project.student}
       p Supervisor: #{project.supervisor}
       p Co-supervisor(s): #{project.cosupervisor}

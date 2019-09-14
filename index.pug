@@ -75,12 +75,14 @@ html
           select 
             option(value="FR") FR
             option(value="EN") EN
+    hr
     block content
       div#description !{description}
       article#news
         h1 Nouvelles
         each feed in feeds
           +newsSection(feed)
+    hr
     footer#pageFooter
       p Site privé
       p LOG4420 - Polytechnique Montréal, Québec

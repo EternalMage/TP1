@@ -1,3 +1,4 @@
+/*CSS for index.pug*/
 #pageFooter{
     text-align: center;  
 }
@@ -63,4 +64,44 @@ nav ul li{
 #news section #newsInfos {
     border: 1px solid magenta;
     display: inline-block;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: grey; 
+}
+
+#titleFooter{
+    border: 1px solid blue;
+    font-size: 8pt;
+    line-height: 0pt; 
+}
+
+/*CSS for project-maillouxmaster.pug*/
+#mailloux {
+    border: 1px solid red;
+}
+
+/*CSS for project-nbourgoinmaster.pug*/
+#nbourgoin {
+    border: 1px solid red;
+}
+
+#nbourgoin h1 {
+    font-weight:normal;
+    font-size: 12pt;
+    border: 1px solid blue;
+    margin: auto;
+}
+
+#publicationFooter{
+    border: 1px solid blue;
+    font-size: 10pt;
+    line-height: 0pt;
+    padding: 7px 0;
+}
+
+#nbourgoin table{
+    border: 1px solid blue;
 }

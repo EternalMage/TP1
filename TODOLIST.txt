@@ -3,3 +3,4 @@
 3- Index.pug: pas correctement bien alignee
 4- J'ai mis des HR apres NAV et avant FOOTER
 5- Texts overlapping when window size gets small
+6- Added footer projects.pug

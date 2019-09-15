@@ -80,17 +80,18 @@ block content
     li= p.student
           | , 
           a(href="#")= p.title
-          p Supervisor: #{p.supervisor}
-          if p.cosupervisor
-           p Co-supervisor: #{p.cosupervisor}
+          footer#projectFooter
+            p Supervisor: #{p.supervisor}
+            if p.cosupervisor
+            p Co-supervisor: #{p.cosupervisor}
 
-  article
+  article#projects
     h1 Current projects
     ul
       each project in currentProjects
         +projectView(project)
 
-  article
+  article#projects
     h1 Projects
     if pastProjects.length>0
       ul

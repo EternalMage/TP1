@@ -79,12 +79,12 @@ hr {
 }
 
 /*CSS for project-maillouxmaster.pug*/
-#mailloux {
+article#mailloux {
     border: 1px solid red;
 }
 
 /*CSS for project-nbourgoinmaster.pug*/
-#nbourgoin {
+article#nbourgoin {
     border: 1px solid red;
 }
 
@@ -104,4 +104,19 @@ hr {
 
 #nbourgoin table{
     border: 1px solid blue;
+}
+
+/*CSS for projects.pug*/
+article#projects {
+    border: 1px solid green;
+}
+
+article#projects ul li {
+    font-size: 11pt;
+}
+#projectFooter {
+    border: 1px solid blue;
+    color: grey;
+    font-size: 8pt;
+    line-height: 0pt;
 }

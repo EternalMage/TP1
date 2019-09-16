@@ -1,6 +1,7 @@
-1- Change logo in INDEXPUG
-2- How to make footer appear at the end of the page
-3- Index.pug: pas correctement bien alignee
-4- J'ai mis des HR apres NAV et avant FOOTER
-5- Texts overlapping when window size gets small
-6- Added footer projects.pug
+1-
+2- 
+3- Image lorsque rétrécie (index.pug).
+4- 
+5- 
+6- 
+7- Reconnaissance du \n.

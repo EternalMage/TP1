@@ -1,1 +1,66 @@
 @import "/font-awesome/css/font-awesome.css";
+
+:root {
+  /* Font initial pour tout le site web */
+  --my-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --my-font-size: 14px;
+  --my-font-color: #373a3c;
+
+  /* Couleur pour balises 'a' */
+  --link-text-color: #428bca;
+  --link-active-background-color: #007bff;
+  --link-active-color: #fff;
+
+  /* Font, couleur et taille pour le logo en haut à gauche du site web. */
+  --site-title-family: Georgia, serif;
+  --site-title-size: 25px;
+  --site-title-color: #FF6512;
+  --site-subtitle-size: 12px;
+  --site-subtitle-color: #333;
+  --logo-width: 64px;
+  --logo-height: 64px;
+
+  /*
+   * Barre horizontal de séparation entre le header et le contenu principal et
+   * entre le contenu principal et le footer.
+   */
+  --separator-border-size: 1px;
+  --separator-border-color: #e5e5e5;
+
+  /*
+   * Couleur des liens dans le menu de navigation.
+   */
+  --nav-lang-background-color: #f9f9f9;
+  --nav-lang-background-color-hover: #f1f1f1;
+  --nav-lang-background-color-active: #f1f1f1;
+  --nav-lang-color-active: #373a3c;
+
+  /* Arrière-plan de la description du site web dans la page d'accueil. */
+  --home-description-background-color: #eceeef;
+
+  /* Couleur de la date de publication + une couleur pour l'image produit par font-awesome */
+  --news-post-date-color: #888;
+  --news-icon-color: #bbb;
+
+  /* Couleur et taille d'un membre dans la page d'équipe. */
+  --member-name-size: 1.1rem;
+  --member-title-color: #888;
+  --member-title-size: 0.8rem;
+
+  /* Couleur et taille dans la page de publications */
+  --publication-top-border-color: #eceeef;
+  --publication-delete-icon-color: red;
+  --publication-pagination-link-color: black;
+  --publication-pagination-link-border-color: #ddd;
+  --publication-pagination-link-active-color: white;
+  --publication-pagination-link-active-background-color: #FF6512;
+  --publication-pagination-link-active-border-color: #FF6512;
+  --publication-pagination-link-notactive-hover-background-color: #ddd;
+  --publication-form-text-border-color: #ccc;
+
+  /* Couleur et taille des metadonnées de section du site. */
+  /* P.ex. le footer, les informations d'une publication, les personnes impliquées dans un projet, etc. */
+  --metadata-text-color: #777;
+  --metadata-text-size: .8em;
+}
+

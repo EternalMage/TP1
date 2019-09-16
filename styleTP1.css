@@ -1,16 +1,19 @@
 /*CSS for index.pug*/
-#pageFooter{
-    text-align: center;  
+
+#pageFooter {
+    text-align: center;
+    border-top: 1px solid lightgray;
 }
 
-body{
+body {
     border: 1px solid red;
     width: 80%;
     margin: 0 auto;
     font-family: sans-serif;
 }
 
-#logo, nav{
+#logo,
+nav {
     border: 1px solid green;
     width: 49%;
     box-sizing: border-box;
@@ -19,8 +22,8 @@ body{
     height: 52pt;
 }
 
-#logo div{
-    display:inline-block;
+#logo div {
+    display: inline-block;
     vertical-align: top;
 }
 
@@ -34,23 +37,35 @@ body{
     line-height: 0pt;
 }
 
-#logo img{
+#logo img {
     width: 50pt;
 }
 
-nav ul li{
+nav ul li {
     display: inline-block;
-    background-color: blue;
-    color: white;
+    color: blue;
     list-style-type: none;
     border-radius: 4px;
     font-size: 16px;
     padding: 4px 8px;
 }
 
+nav ul li:hover {
+    background-color: blue;
+}
+
+nav ul li a {
+    text-decoration: none;
+}
+
+nav ul li:hover a {
+    color: white;
+}
+
 #description {
     border: 1px solid yellow;
-    background-color:grey;
+    background-color: grey;
+    padding: 20pt;
 }
 
 #news {
@@ -61,52 +76,69 @@ nav ul li{
     font-size: 16pt;
 }
 
+#news section {
+    padding: 0 0 0 8pt;
+}
+
 #news section #newsInfos {
     border: 1px solid magenta;
     display: inline-block;
+    padding: 0 0 0 8pt;
 }
 
-hr {
-    border: none;
-    height: 1px;
-    background-color: grey; 
+#news section img,
+#news section i,
+section#publications i {
+    width: 4%;
+    text-align: center;
 }
 
-#titleFooter{
+#news section i::before,
+section#publications i::before {
+    font-size: 265%;
+}
+
+#titleFooter {
     border: 1px solid blue;
     font-size: 8pt;
-    line-height: 0pt; 
+    line-height: 0pt;
 }
 
+
 /*CSS for project-maillouxmaster.pug*/
+
 article#mailloux {
     border: 1px solid red;
 }
 
+
 /*CSS for project-nbourgoinmaster.pug*/
+
 article#nbourgoin {
     border: 1px solid red;
 }
 
 #nbourgoin h1 {
-    font-weight:normal;
+    font-weight: normal;
     font-size: 12pt;
     border: 1px solid blue;
     margin: auto;
 }
 
-#publicationFooter{
+#publicationFooter {
     border: 1px solid blue;
     font-size: 10pt;
     line-height: 0pt;
     padding: 7px 0;
 }
 
-#nbourgoin table{
+#nbourgoin table {
     border: 1px solid blue;
 }
 
+
 /*CSS for projects.pug*/
+
 article#projects {
     border: 1px solid green;
 }
@@ -114,9 +146,40 @@ article#projects {
 article#projects ul li {
     font-size: 11pt;
 }
+
 #projectFooter {
     border: 1px solid blue;
     color: grey;
     font-size: 8pt;
     line-height: 0pt;
+}
+
+#pageHeader {
+    border-bottom: 1px solid lightgray;
+}
+
+section#teamCrew img {
+    border-radius: 100pt;
+    display: inline-block;
+    width: 25%;
+}
+
+section#teamCrew li {
+    list-style: none;
+    display: inline-block;
+    width: 32%;
+}
+
+section#teamCrew #crewInfos {
+    display: inline-block;
+}
+
+section#teamCrew #crewInfos,
+section#teamCrew i,
+section#teamCrew img {
+    vertical-align: middle;
+}
+
+section#publications td.date p {
+    margin: 0;
 }

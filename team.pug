@@ -174,7 +174,7 @@ block content
 
 
     mixin teamCrew(name, members, past)
-        section
+        section#teamCrew
             h1= name
             ul
                 each member in members                     
@@ -185,11 +185,12 @@ block content
                                     img(src=member.image)
                                 else
                                     i.fa.fa-user-circle.fa-5x.img-circle
-                                +name(member.firstname, member.lastname, member.homepage)
-                                if member.title=="associateprofessor"
-                                    p Associate professor
-                                if member.email
-                                    a(href=member.email) #{member.email}
+                                div#crewInfos
+                                    +name(member.firstname, member.lastname, member.homepage)
+                                    if member.title=="associateprofessor"
+                                        p Associate professor
+                                    if member.email
+                                        a(href=member.email) #{member.email}
                     else
                         if !member.current
                             li

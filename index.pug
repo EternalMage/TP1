@@ -38,7 +38,7 @@ mixin newsSection(feed)
     if feed.type=="seminar"
       img(src="./img/presentation-icon.png")
     else 
-      i.fa.fa-window-close.fa-2x.close-button
+      i.fa.fa-file-text-o
     div#newsInfos
       header
         time(datetime="#")= feed.createdAt 
@@ -58,7 +58,7 @@ html
     link(rel="stylesheet", href="/style.css")
     link(rel="stylesheet", href="/styleTP1.css")
   body
-    header
+    header#pageHeader
       div#logo
         div
           h1 Labo Semantic IA
@@ -75,14 +75,12 @@ html
           select 
             option(value="FR") FR
             option(value="EN") EN
-    hr
     block content
       div#description !{description}
       article#news
         h1 Nouvelles
         each feed in feeds
           +newsSection(feed)
-    hr
     footer#pageFooter
       p Site privé
       p LOG4420 - Polytechnique Montréal, Québec

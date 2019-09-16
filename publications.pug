@@ -1,21 +1,20 @@
 extends index.pug
 
 block content
-  mixin publication(publication)
-    section
-      tr
-        td
-          i.fa.fa-window-close.fa-2x.close-button
-        td
-          strong= publication.year
-          p= publication.month
-        td
-          h1= publication.title
-          footer
-            each author in publication.authors
-              span #{author}, #{" "}
-            p
-              em= publication.venue
+  mixin publication(publication)    
+    tr
+      td
+        i.fa.fa-file-text-o
+      td.date
+        strong= publication.year
+        p= publication.month
+      td
+        h1= publication.title
+        footer
+          each author in publication.authors
+            span #{author}, #{" "}
+          p
+            em= publication.venue
   -
     const publications = [
       {
@@ -173,9 +172,10 @@ block content
         select
           option descending
           option ascending
-    table
-      each publication in publications
-        +publication(publication)
+    section#publications
+      table
+        each publication in publications
+          +publication(publication)
     div
       a(href="#") «
       span 123 

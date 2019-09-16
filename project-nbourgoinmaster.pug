@@ -1,10 +1,9 @@
 extends index.pug
 mixin publication(publication)
-  section
     tr
       td
-        i.fa.fa-window-close.fa-2x.close-button
-      td
+        i.fa.fa-file-text-o
+      td.date
         strong= publication.year
         p= publication.month
       td
@@ -74,6 +73,7 @@ block content
       p Co-supervisor(s): #{project.cosupervisor}
     article
       h1 Publications
-      table
-        each publication in publications
-          +publication(publication)
+      section#publications
+        table
+          each publication in publications
+            +publication(publication)

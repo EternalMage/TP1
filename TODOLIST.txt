@@ -5,3 +5,6 @@
 5- 
 6- 
 7- Reconnaissance du \n.
+
+
+fixed > absolute

@@ -76,7 +76,9 @@ html
             option(value="FR") FR
             option(value="EN") EN
     block content
-      div#description !{description}
+      div#description 
+        each desc in description.split('\n')
+          p !{desc}
       article#news
         h1 Nouvelles
         each feed in feeds

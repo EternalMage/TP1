@@ -63,13 +63,9 @@ nav ul li:hover a {
 }
 
 #description {
-    border: 1px solid yellow;
+    border-radius: 5px;
     background-color: grey;
     padding: 20pt;
-}
-
-#news {
-    border: 1px solid magenta;
 }
 
 #news h1 {
@@ -80,10 +76,28 @@ nav ul li:hover a {
     padding: 0 0 0 8pt;
 }
 
+section#feed {
+    margin: 30px 0;
+}
+
 #news section #newsInfos {
-    border: 1px solid magenta;
     display: inline-block;
     padding: 0 0 0 8pt;
+}
+
+#news section #newsInfos time{
+    font-weight: bold;
+    color: grey;    
+}
+
+#news section #newsInfos header h1 {
+    margin: 0px 0px;
+    font-size: 12pt;
+    font-weight: normal;
+}
+
+#news section #newsInfos p {
+    margin: 0px 0px;
 }
 
 #news section img,
@@ -91,6 +105,8 @@ nav ul li:hover a {
 section#publications i {
     width: 4%;
     text-align: center;
+    vertical-align: top;
+    padding: 15px 0;
 }
 
 #news section i::before,

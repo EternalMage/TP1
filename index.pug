@@ -34,7 +34,7 @@ mixin navButton(name, link)
       a(href=link)= name
 
 mixin newsSection(feed)
-  section
+  section#feed
     if feed.type=="seminar"
       img(src="./img/presentation-icon.png")
     else 
@@ -43,7 +43,8 @@ mixin newsSection(feed)
       header
         time(datetime="#")= feed.createdAt 
         if feed.type=="seminar"
-          h1 Prochain seminaire !{feed.titre}
+          h1 Prochain seminaire: 
+            a(href="#") !{feed.title}
       footer
         p= feed.presentator
       if feed.type=="seminar"

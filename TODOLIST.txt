@@ -1,5 +1,5 @@
 1- Fix les dropdown box CSS publications.pug
-2- 
+2- layout.pug????????
 3- Image lorsque rétrécie (index.pug).
 4- 
 5- 
@@ -7,4 +7,4 @@
 7-
 
 
-fixed > absolute
+fixed > absolute	

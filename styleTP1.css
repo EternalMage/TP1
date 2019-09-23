@@ -266,7 +266,7 @@ div#sortBy, div#orderBy {
 }
 
 section#publications table td{
-    padding: 15px 0 0 0;
+    padding: 15px 0;
     border-top: 1px solid #ddd;
 }
 

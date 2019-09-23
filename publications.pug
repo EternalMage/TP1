@@ -8,7 +8,7 @@ block content
       td.date
         strong= publication.year
         p= publication.month
-      td
+      td#pubInfos
         h1= publication.title
         footer
           each author in publication.authors
@@ -165,11 +165,11 @@ block content
             label Conference : 
               input(type="text")
           button(type="submit") Create
-    div
+    div#sortBy
       label Sort by :
         select
           option date
-    div
+    div#orderBy
       label Order by :
         select
           option descending
@@ -178,16 +178,16 @@ block content
       table
         each publication in publications
           +publication(publication)
-    div
-      a(href="#") «
-      span 123 
-      a(href="#") »
-    div Afficher
-      select
-        option 10
-        option 100
-        option 1000
-      span  résultats par page
+  div#nextPage
+    a(href="#") «
+    span 123 
+    a(href="#") »
+  div#showNumberPubs Afficher
+    select
+      option 10
+      option 100
+      option 1000
+    span  résultats par page
 
 
       

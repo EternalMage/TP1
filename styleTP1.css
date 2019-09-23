@@ -261,3 +261,49 @@ button#addPub{
     float:right;
 }
 
+div#sortBy, div#orderBy {
+    margin: 20px 0;
+}
+
+section#publications table td{
+    padding: 15px 0 0 0;
+    border-top: 1px solid #ddd;
+}
+
+section#publications table tbody tr td#pubInfos {
+    font-size: 11pt;
+    vertical-align: top;
+}
+
+section#publications table tbody tr td#pubInfos h1, section#publications table tbody tr td#pubInfos p{
+    font-weight:normal;
+    font-size: 11pt;
+    margin: 0px auto;
+}
+
+section#publications table tbody tr td .fa-file-text-o {
+    margin: 10px 25px;
+}
+
+section#publications table tbody tr td .fa-file-text-o:before {
+    font-size: 20pt;
+}
+
+section#publications table tbody tr td.date {
+    padding: 15px 25px 0px 0px;
+    vertical-align: top;
+    text-align: left;
+}
+
+section#publications table tbody tr td.date strong{
+    vertical-align: top
+}
+
+section#publications table tbody tr td.date strong{
+    vertical-align: top
+}
+
+div#nextPage, div#showNumberPubs {
+    text-align: center;
+    margin: 15px auto;
+}

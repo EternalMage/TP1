@@ -70,6 +70,17 @@ body {
     width: 80%;
     margin: 0 auto;
     font-family: var(--my-font-family);
+    font-size: var(--my-font-size);
+    color: var(--my-font-color);
+}
+
+a {
+    color: var( --link-text-color);
+}
+
+a:active {
+    background-color: var(--link-active-background-color);
+    color: var(--link-active-color);
 }
 
 #logo,
@@ -137,7 +148,7 @@ nav ul li:hover a {
 
 #description {
     border-radius: 5px;
-    background-color: grey;
+    background-color: var(--home-description-background-color);
     padding: 20pt;
     margin-top: 25px;
 }
@@ -161,7 +172,7 @@ section.feed {
 
 #news section .newsInfos time {
     font-weight: bold;
-    color: grey;
+    color: var(--news-post-date-color);
 }
 
 #news section .newsInfos header h1 {
@@ -181,6 +192,7 @@ section#publications i {
     text-align: center;
     vertical-align: top;
     padding: 15px 0;
+    color: var(--news-icon-color);
 }
 
 #news section i::before,
@@ -253,8 +265,6 @@ section.teamCrew img {
 
 section.teamCrew li {
     list-style: none;
-    display: inline-block;
-    width: inherit;
 }
 
 section.teamCrew .crewInfos {
@@ -265,6 +275,23 @@ section.teamCrew .crewInfos,
 section.teamCrew i,
 section.teamCrew img {
     vertical-align: middle;
+}
+
+article.teamPage h1 {
+    font-size: 1.8rem;
+}
+
+section.teamCrew h1 {
+    font-size: 1.4rem;
+}
+
+section.teamCrew .crewInfos p {
+    font-size: var(--member-name-size);
+}
+
+section.teamCrew .crewInfos p.title {
+    color: var(--member-title-color);
+    font-size: var(--member-title-size);
 }
 
 
@@ -438,8 +465,10 @@ header#pageHeader nav {
 
 ul.container {
     display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: 50% 50%;
+    grid-template-columns: 30% 30% 30%;
+    grid-column-gap: 5%;
+    grid-row-gap: 10%;
+    padding: 35px;
 }
 
 section.teamCrew i {

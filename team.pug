@@ -191,7 +191,7 @@ block content
                                 div.crewInfos
                                     +name(member.firstname, member.lastname, member.homepage)
                                     if member.title=="associateprofessor"
-                                        p Professeur associé
+                                        p.title Professeur associé
                                     if member.email
                                         a(href=member.email) #{member.email}
                     else
@@ -199,13 +199,13 @@ block content
                             li
                                 +name(member.firstname, member.lastname, member.homepage)
 
-    article
+    article.teamPage
         h1 Équipe
         +teamCrew("Professeurs", professors, false)
         +teamCrew("Associés de recherche", researchassociates, false)
         +teamCrew("Étudiants au doctorat", phdStudents, false)
         +teamCrew("Étudients à la maîtrise", masterStudents, false)
-    article
+    article.teamPage
         h1 Anciens membres
         +teamCrew("Étudiants au doctorat", phdStudents, true)
         +teamCrew("Étudients à la maîtrise", masterStudents, true)

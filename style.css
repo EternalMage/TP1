@@ -59,13 +59,17 @@
 
 #pageFooter {
     text-align: center;
-    border-top: 1px solid lightgray;
+    border-top-width: var(--separator-border-size);
+    border-top-color: var(--separator-border-color);
+    border-top-style: solid;
+    color: var(--metadata-text-color);
+    font-size: var(--metadata-text-size);
 }
 
 body {
     width: 80%;
     margin: 0 auto;
-    font-family: sans-serif;
+    font-family: var(--my-font-family);
 }
 
 #logo,
@@ -84,19 +88,22 @@ nav {
 }
 
 #logo div h1 {
-    font-size: 20pt;
+    font-size: var(--site-title-size);
     line-height: 0pt;
-    color: orange;
-    font-family: 'Times New Roman', Times, serif;
+    color: var(--site-title-color);
+    font-family: var(--site-title-family);
+    margin-bottom: 20px;
 }
 
 #logo div p {
-    font-size: 10pt;
+    font-size: var(---site-subtitle-size);
+    color: var(--site-subtitle-color);
     line-height: 0pt;
 }
 
 #logo img {
-    width: 50pt;
+    width: var(--logo-width);
+    height: var(--logo-height);
 }
 
 nav ul li {
@@ -108,17 +115,17 @@ nav ul li {
     padding: 4px 8px;
 }
 
-nav ul li:hover {
+/*nav ul li:hover {
     background-color: blue;
-}
+}*/
 
 nav ul li a {
     text-decoration: none;
 }
 
-nav ul li:hover a {
+/*nav ul li:hover a {
     color: white;
-}
+}*/
 
 #description {
     border-radius: 5px;
@@ -225,7 +232,9 @@ article.projects ul li {
 }
 
 #pageHeader {
-    border-bottom: 1px solid lightgray;
+    border-bottom-width: var(--separator-border-size);
+    border-bottom-color: var(--separator-border-color);
+    border-bottom-style: solid;
 }
 
 section.teamCrew img {
@@ -363,7 +372,7 @@ section#publications table tbody tr td .fa-trash-o {
 
 section#publications table tbody tr td .fa-trash-o:before {
     font-size: 30pt;
-    color: red;
+    color: var(--publication-delete-icon-color);
 }
 
 section#publications table tbody tr td.date {
@@ -384,10 +393,17 @@ div#nextPage,
 div#showNumberPubs {
     text-align: center;
     margin: 20px auto;
+    color: var(--publication-pagination-link-color);
 }
 
 div#nextPage a, div#nextPage span{
     padding: 10px 15px;
     margin: 5px 5px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
+}
+
+span#currentPage{
+    background-color: var(--publication-pagination-link-active-background-color);
+    border-color: var(--publication-pagination-link-active-border-color);
+    color: white;
 }

@@ -63,7 +63,6 @@
 }
 
 body {
-    border: 1px solid red;
     width: 80%;
     margin: 0 auto;
     font-family: sans-serif;
@@ -71,7 +70,6 @@ body {
 
 #logo,
 nav {
-    border: 1px solid green;
     width: 49%;
     box-sizing: border-box;
     display: inline-block;
@@ -123,6 +121,7 @@ nav ul li:hover a {
     border-radius: 5px;
     background-color: grey;
     padding: 20pt;
+    margin-top: 25px;
 }
 
 #news h1 {

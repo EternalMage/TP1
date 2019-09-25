@@ -1,66 +1,389 @@
 @import "/font-awesome/css/font-awesome.css";
-
 :root {
-  /* Font initial pour tout le site web */
-  --my-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --my-font-size: 14px;
-  --my-font-color: #373a3c;
-
-  /* Couleur pour balises 'a' */
-  --link-text-color: #428bca;
-  --link-active-background-color: #007bff;
-  --link-active-color: #fff;
-
-  /* Font, couleur et taille pour le logo en haut à gauche du site web. */
-  --site-title-family: Georgia, serif;
-  --site-title-size: 25px;
-  --site-title-color: #FF6512;
-  --site-subtitle-size: 12px;
-  --site-subtitle-color: #333;
-  --logo-width: 64px;
-  --logo-height: 64px;
-
-  /*
+    /* Font initial pour tout le site web */
+    --my-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --my-font-size: 14px;
+    --my-font-color: #373a3c;
+    /* Couleur pour balises 'a' */
+    --link-text-color: #428bca;
+    --link-active-background-color: #007bff;
+    --link-active-color: #fff;
+    /* Font, couleur et taille pour le logo en haut à gauche du site web. */
+    --site-title-family: Georgia, serif;
+    --site-title-size: 25px;
+    --site-title-color: #FF6512;
+    --site-subtitle-size: 12px;
+    --site-subtitle-color: #333;
+    --logo-width: 64px;
+    --logo-height: 64px;
+    /*
    * Barre horizontal de séparation entre le header et le contenu principal et
    * entre le contenu principal et le footer.
    */
-  --separator-border-size: 1px;
-  --separator-border-color: #e5e5e5;
-
-  /*
+    --separator-border-size: 1px;
+    --separator-border-color: #e5e5e5;
+    /*
    * Couleur des liens dans le menu de navigation.
    */
-  --nav-lang-background-color: #f9f9f9;
-  --nav-lang-background-color-hover: #f1f1f1;
-  --nav-lang-background-color-active: #f1f1f1;
-  --nav-lang-color-active: #373a3c;
-
-  /* Arrière-plan de la description du site web dans la page d'accueil. */
-  --home-description-background-color: #eceeef;
-
-  /* Couleur de la date de publication + une couleur pour l'image produit par font-awesome */
-  --news-post-date-color: #888;
-  --news-icon-color: #bbb;
-
-  /* Couleur et taille d'un membre dans la page d'équipe. */
-  --member-name-size: 1.1rem;
-  --member-title-color: #888;
-  --member-title-size: 0.8rem;
-
-  /* Couleur et taille dans la page de publications */
-  --publication-top-border-color: #eceeef;
-  --publication-delete-icon-color: red;
-  --publication-pagination-link-color: black;
-  --publication-pagination-link-border-color: #ddd;
-  --publication-pagination-link-active-color: white;
-  --publication-pagination-link-active-background-color: #FF6512;
-  --publication-pagination-link-active-border-color: #FF6512;
-  --publication-pagination-link-notactive-hover-background-color: #ddd;
-  --publication-form-text-border-color: #ccc;
-
-  /* Couleur et taille des metadonnées de section du site. */
-  /* P.ex. le footer, les informations d'une publication, les personnes impliquées dans un projet, etc. */
-  --metadata-text-color: #777;
-  --metadata-text-size: .8em;
+    --nav-lang-background-color: #f9f9f9;
+    --nav-lang-background-color-hover: #f1f1f1;
+    --nav-lang-background-color-active: #f1f1f1;
+    --nav-lang-color-active: #373a3c;
+    /* Arrière-plan de la description du site web dans la page d'accueil. */
+    --home-description-background-color: #eceeef;
+    /* Couleur de la date de publication + une couleur pour l'image produit par font-awesome */
+    --news-post-date-color: #888;
+    --news-icon-color: #bbb;
+    /* Couleur et taille d'un membre dans la page d'équipe. */
+    --member-name-size: 1.1rem;
+    --member-title-color: #888;
+    --member-title-size: 0.8rem;
+    /* Couleur et taille dans la page de publications */
+    --publication-top-border-color: #eceeef;
+    --publication-delete-icon-color: red;
+    --publication-pagination-link-color: black;
+    --publication-pagination-link-border-color: #ddd;
+    --publication-pagination-link-active-color: white;
+    --publication-pagination-link-active-background-color: #FF6512;
+    --publication-pagination-link-active-border-color: #FF6512;
+    --publication-pagination-link-notactive-hover-background-color: #ddd;
+    --publication-form-text-border-color: #ccc;
+    /* Couleur et taille des metadonnées de section du site. */
+    /* P.ex. le footer, les informations d'une publication, les personnes impliquées dans un projet, etc. */
+    --metadata-text-color: #777;
+    --metadata-text-size: .8em;
 }
 
+
+/*CSS for index.pug*/
+
+#pageFooter {
+    text-align: center;
+    border-top: 1px solid lightgray;
+}
+
+body {
+    border: 1px solid red;
+    width: 80%;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+#logo,
+nav {
+    border: 1px solid green;
+    width: 49%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    height: 52pt;
+}
+
+#logo div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#logo div h1 {
+    font-size: 16pt;
+    line-height: 0pt;
+}
+
+#logo div p {
+    font-size: 10pt;
+    line-height: 0pt;
+}
+
+#logo img {
+    width: 50pt;
+}
+
+nav ul li {
+    display: inline-block;
+    color: blue;
+    list-style-type: none;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 4px 8px;
+}
+
+nav ul li:hover {
+    background-color: blue;
+}
+
+nav ul li a {
+    text-decoration: none;
+}
+
+nav ul li:hover a {
+    color: white;
+}
+
+#description {
+    border-radius: 5px;
+    background-color: grey;
+    padding: 20pt;
+}
+
+#news h1 {
+    font-size: 16pt;
+}
+
+#news section {
+    padding: 0 0 0 8pt;
+}
+
+section#feed {
+    margin: 30px 0;
+}
+
+#news section #newsInfos {
+    display: inline-block;
+    padding: 0 0 0 8pt;
+}
+
+#news section #newsInfos time {
+    font-weight: bold;
+    color: grey;
+}
+
+#news section #newsInfos header h1 {
+    margin: 0px 0px;
+    font-size: 12pt;
+    font-weight: normal;
+}
+
+#news section #newsInfos p {
+    margin: 0px 0px;
+}
+
+#news section img,
+#news section i,
+section#publications i {
+    width: 4%;
+    text-align: center;
+    vertical-align: top;
+    padding: 15px 0;
+}
+
+#news section i::before,
+section#publications i::before {
+    font-size: 265%;
+}
+
+#titleFooter {
+    border: 1px solid blue;
+    font-size: 8pt;
+    line-height: 0pt;
+}
+
+
+/*CSS for project-maillouxmaster.pug*/
+
+article#mailloux {
+    border: 1px solid red;
+}
+
+
+/*CSS for project-nbourgoinmaster.pug*/
+
+article#nbourgoin {
+    border: 1px solid red;
+}
+
+#nbourgoin h1 {
+    font-weight: normal;
+    font-size: 12pt;
+    border: 1px solid blue;
+    margin: auto;
+}
+
+#publicationFooter {
+    border: 1px solid blue;
+    font-size: 10pt;
+    line-height: 0pt;
+    padding: 7px 0;
+}
+
+#nbourgoin table {
+    border: 1px solid blue;
+}
+
+
+/*CSS for projects.pug*/
+
+article#projects {
+    border: 1px solid green;
+}
+
+article#projects ul li {
+    font-size: 11pt;
+}
+
+#projectFooter {
+    border: 1px solid blue;
+    color: grey;
+    font-size: 8pt;
+    line-height: 0pt;
+}
+
+#pageHeader {
+    border-bottom: 1px solid lightgray;
+}
+
+section#teamCrew img {
+    border-radius: 100pt;
+    display: inline-block;
+    width: 25%;
+}
+
+section#teamCrew li {
+    list-style: none;
+    display: inline-block;
+    width: 32%;
+}
+
+section#teamCrew #crewInfos {
+    display: inline-block;
+}
+
+section#teamCrew #crewInfos,
+section#teamCrew i,
+section#teamCrew img {
+    vertical-align: middle;
+}
+
+
+/*CSS for publications.pug*/
+
+section#publications td.date p {
+    margin: 0;
+}
+
+div#modalBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+div#modalBox:target {
+    display: block;
+}
+
+section#createPub {
+    background-color: white;
+    width: 50%;
+    height: 65%;
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    overflow: scroll;
+    padding: 1% 2%;
+    border-radius: 5px;
+}
+
+article h1 {
+    font-size: 11pt;
+}
+
+section#createPub label {
+    font-size: 10pt;
+    margin: 6pt 0 0 0;
+    display: block;
+}
+
+section#createPub .close-button {
+    position: absolute;
+    right: 2%;
+}
+
+section#createPub .close-button::before {
+    font-size: 16pt;
+}
+
+section#createPub select,
+section#createPub input {
+    width: 100%;
+    height: 22pt;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
+
+section#createPub .fa-plus,
+section#createPub button[type=submit] {
+    margin: 6pt 0 0 0;
+    display: block;
+}
+
+section#createPub .fa-plus::before {
+    font-size: 22pt;
+}
+
+button#addPub a {
+    text-decoration: none;
+    color: black;
+}
+
+article #pubTitle,
+button#addPub {
+    display: inline-block;
+    margin: 20pt 0 0 0;
+}
+
+button#addPub {
+    float: right;
+}
+
+div#sortBy,
+div#orderBy {
+    margin: 20px 0;
+}
+
+section#publications table td {
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+}
+
+section#publications table tbody tr td#pubInfos {
+    font-size: 11pt;
+    vertical-align: top;
+}
+
+section#publications table tbody tr td#pubInfos h1,
+section#publications table tbody tr td#pubInfos p {
+    font-weight: normal;
+    font-size: 11pt;
+    margin: 0px auto;
+}
+
+section#publications table tbody tr td .fa-file-text-o {
+    margin: 10px 25px;
+}
+
+section#publications table tbody tr td .fa-file-text-o:before {
+    font-size: 20pt;
+}
+
+section#publications table tbody tr td.date {
+    padding: 15px 25px 0px 0px;
+    vertical-align: top;
+    text-align: left;
+}
+
+section#publications table tbody tr td.date strong {
+    vertical-align: top
+}
+
+section#publications table tbody tr td.date strong {
+    vertical-align: top
+}
+
+div#nextPage,
+div#showNumberPubs {
+    text-align: center;
+    margin: 15px auto;
+}

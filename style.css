@@ -63,7 +63,6 @@
 }
 
 body {
-    border: 1px solid red;
     width: 80%;
     margin: 0 auto;
     font-family: sans-serif;
@@ -71,7 +70,6 @@ body {
 
 #logo,
 nav {
-    border: 1px solid green;
     width: 49%;
     box-sizing: border-box;
     display: inline-block;
@@ -82,11 +80,14 @@ nav {
 #logo div {
     display: inline-block;
     vertical-align: top;
+    margin-right: 30px;
 }
 
 #logo div h1 {
-    font-size: 16pt;
+    font-size: 20pt;
     line-height: 0pt;
+    color: orange;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 #logo div p {
@@ -123,6 +124,7 @@ nav ul li:hover a {
     border-radius: 5px;
     background-color: grey;
     padding: 20pt;
+    margin-top: 25px;
 }
 
 #news h1 {
@@ -212,16 +214,11 @@ article#nbourgoin {
 
 /*CSS for projects.pug*/
 
-article.projects {
-    border: 1px solid green;
-}
-
 article.projects ul li {
     font-size: 11pt;
 }
 
 .projectFooter {
-    border: 1px solid blue;
     color: grey;
     font-size: 8pt;
     line-height: 0pt;
@@ -360,12 +357,13 @@ section#publications table tbody tr td.pubInfos p {
     margin: 0px auto;
 }
 
-section#publications table tbody tr td .fa-file-text-o {
+section#publications table tbody tr td .fa-trash-o {
     margin: 10px 25px;
 }
 
-section#publications table tbody tr td .fa-file-text-o:before {
-    font-size: 20pt;
+section#publications table tbody tr td .fa-trash-o:before {
+    font-size: 30pt;
+    color: red;
 }
 
 section#publications table tbody tr td.date {
@@ -385,5 +383,11 @@ section#publications table tbody tr td.date strong {
 div#nextPage,
 div#showNumberPubs {
     text-align: center;
-    margin: 15px auto;
+    margin: 20px auto;
+}
+
+div#nextPage a, div#nextPage span{
+    padding: 10px 15px;
+    margin: 5px 5px;
+    border: 1px solid grey;
 }

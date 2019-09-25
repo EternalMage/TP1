@@ -127,7 +127,7 @@ nav ul li {
 }
 
 nav ul li:first-child {
-    background-color: blue;
+    background-color: var(--link-active-background-color);
 }
 
 nav ul li:first-child a {
@@ -135,7 +135,7 @@ nav ul li:first-child a {
 }
 
 nav ul li:hover {
-    background-color: blue;
+    background-color:var(--link-active-background-color);
 }
 
 nav ul li a {

@@ -240,7 +240,7 @@ section.teamCrew img {
 section.teamCrew li {
     list-style: none;
     display: inline-block;
-    width: 32%;
+    width: inherit;
 }
 
 section.teamCrew .crewInfos {

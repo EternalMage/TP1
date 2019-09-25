@@ -179,7 +179,7 @@ block content
     mixin teamCrew(name, members, past)
         section.teamCrew
             h1= name
-            ul
+            ul.container
                 each member in members                     
                     if !past
                         if member.current

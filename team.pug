@@ -1,4 +1,7 @@
 extends index.pug
+block title
+  title Labo semantic IA - Équipe
+
 block content
     -
         const professors = [
@@ -174,7 +177,7 @@ block content
 
 
     mixin teamCrew(name, members, past)
-        section#teamCrew
+        section.teamCrew
             h1= name
             ul
                 each member in members                     
@@ -185,10 +188,10 @@ block content
                                     img(src=member.image)
                                 else
                                     i.fa.fa-user-circle.fa-5x.img-circle
-                                div#crewInfos
+                                div.crewInfos
                                     +name(member.firstname, member.lastname, member.homepage)
                                     if member.title=="associateprofessor"
-                                        p Associate professor
+                                        p Professeur associé
                                     if member.email
                                         a(href=member.email) #{member.email}
                     else
@@ -197,13 +200,13 @@ block content
                                 +name(member.firstname, member.lastname, member.homepage)
 
     article
-        h1 Team
-        +teamCrew("Professors", professors, false)
-        +teamCrew("Research associates", researchassociates, false)
-        +teamCrew("PhD students", phdStudents, false)
-        +teamCrew("Master students", masterStudents, false)
+        h1 Équipe
+        +teamCrew("Professeurs", professors, false)
+        +teamCrew("Associés de recherche", researchassociates, false)
+        +teamCrew("Étudiants au doctorat", phdStudents, false)
+        +teamCrew("Étudients à la maîtrise", masterStudents, false)
     article
-        h1 Past members
-        +teamCrew("PhD students", phdStudents, true)
-        +teamCrew("Master students", masterStudents, true)
+        h1 Anciens membres
+        +teamCrew("Étudiants au doctorat", phdStudents, true)
+        +teamCrew("Étudients à la maîtrise", masterStudents, true)
     

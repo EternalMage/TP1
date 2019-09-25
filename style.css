@@ -133,27 +133,27 @@ nav ul li:hover a {
     padding: 0 0 0 8pt;
 }
 
-section#feed {
+section.feed {
     margin: 30px 0;
 }
 
-#news section #newsInfos {
+#news section .newsInfos {
     display: inline-block;
     padding: 0 0 0 8pt;
 }
 
-#news section #newsInfos time {
+#news section .newsInfos time {
     font-weight: bold;
     color: grey;
 }
 
-#news section #newsInfos header h1 {
+#news section .newsInfos header h1 {
     margin: 0px 0px;
     font-size: 12pt;
     font-weight: normal;
 }
 
-#news section #newsInfos p {
+#news section .newsInfos p {
     margin: 0px 0px;
 }
 
@@ -212,15 +212,15 @@ article#nbourgoin {
 
 /*CSS for projects.pug*/
 
-article#projects {
+article.projects {
     border: 1px solid green;
 }
 
-article#projects ul li {
+article.projects ul li {
     font-size: 11pt;
 }
 
-#projectFooter {
+.projectFooter {
     border: 1px solid blue;
     color: grey;
     font-size: 8pt;
@@ -231,25 +231,25 @@ article#projects ul li {
     border-bottom: 1px solid lightgray;
 }
 
-section#teamCrew img {
+section.teamCrew img {
     border-radius: 100pt;
     display: inline-block;
     width: 25%;
 }
 
-section#teamCrew li {
+section.teamCrew li {
     list-style: none;
     display: inline-block;
     width: 32%;
 }
 
-section#teamCrew #crewInfos {
+section.teamCrew .crewInfos {
     display: inline-block;
 }
 
-section#teamCrew #crewInfos,
-section#teamCrew i,
-section#teamCrew img {
+section.teamCrew .crewInfos,
+section.teamCrew i,
+section.teamCrew img {
     vertical-align: middle;
 }
 
@@ -348,13 +348,13 @@ section#publications table td {
     border-top: 1px solid #ddd;
 }
 
-section#publications table tbody tr td#pubInfos {
+section#publications table tbody tr td.pubInfos {
     font-size: 11pt;
     vertical-align: top;
 }
 
-section#publications table tbody tr td#pubInfos h1,
-section#publications table tbody tr td#pubInfos p {
+section#publications table tbody tr td.pubInfos h1,
+section#publications table tbody tr td.pubInfos p {
     font-weight: normal;
     font-size: 11pt;
     margin: 0px auto;

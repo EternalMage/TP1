@@ -34,14 +34,14 @@ mixin navButton(name, link)
       a(href=link)= name
 
 mixin newsSection(feed)
-  section#feed
+  section.feed
     if feed.type=="seminar"
       img(src="./img/presentation-icon.png")
     else 
       i.fa.fa-file-text-o
-    div#newsInfos
+    div.newsInfos
       header
-        time(datetime="#")= feed.createdAt 
+        time= feed.createdAt 
         if feed.type=="seminar"
           h1 Prochain seminaire: 
             a(href="#") !{feed.title}
@@ -53,10 +53,12 @@ mixin newsSection(feed)
       else
         p !{feed.text}
 
-html
+html(lang="fr")
   head
     meta(charset="utf-8")
     link(rel="stylesheet", href="/style.css")
+    block title
+      title Labo semantic IA - Accueil
   body
     header#pageHeader
       div#logo

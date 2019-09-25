@@ -1,4 +1,6 @@
 extends index.pug
+block title
+  title Labo semantic IA - Projets
 block content
   -
     const currentProjects = [
@@ -18,7 +20,8 @@ block content
         "supervisor": "Alphonsine Beauchamnps",
         "cosupervisor": "Michel Deslauriers",
         "current": true,
-        "title": "Système de questions-réponses pour le Web Sémantique"
+        "title": "Système de questions-réponses pour le Web Sémantique",
+        "link": "/project-nbourgoinmaster.pug"
       },
       {
         "_id": "maillouxmaster",
@@ -26,7 +29,8 @@ block content
         "student": "Capucine Mailloux",
         "supervisor": "Alphonsine Beauchamnps",
         "current": true,
-        "title": "Amélioration des modèles de représentation des graphes de connaissance par le plongement de règles logiques"
+        "title": "Amélioration des modèles de représentation des graphes de connaissance par le plongement de règles logiques",
+        "link": "/project-maillouxmaster.pug"
       },
       {
         "_id": "rodriguemaster",
@@ -75,29 +79,29 @@ block content
     ]
 
     const pastProjects = []
-  
+
   mixin projectView(p)
     li= p.student
           | , 
-          a(href="#")= p.title
-          footer#projectFooter
+          a(href=p.link)= p.title
+          footer.projectFooter
             p Supervisor: #{p.supervisor}
             if p.cosupervisor
             p Co-supervisor: #{p.cosupervisor}
 
-  article#projects
-    h1 Current projects
+  article.projects
+    h1 Projets en cours
     ul
       each project in currentProjects
         +projectView(project)
 
-  article#projects
-    h1 Projects
+  article.projects
+    h1 Projets passés
     if pastProjects.length>0
       ul
         each project in pastProjects
           +projectView(project)
     else
-      p No pass project
+      p Aucun projet passé
         
 

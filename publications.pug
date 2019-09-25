@@ -1,14 +1,16 @@
 extends index.pug
 
+block title
+  title Labo semantic IA - Publications
 block content
   mixin publication(publication)    
     tr
       td
-        i.fa.fa-file-text-o
+        i.fa.fa-trash-o
       td.date
         strong= publication.year
         p= publication.month
-      td#pubInfos
+      td.pubInfos
         h1= publication.title
         footer
           each author in publication.authors
@@ -129,51 +131,51 @@ block content
   article 
     h1#pubTitle Publications
     button#addPub
-      a(href="#modalBox") Add publication
+      a(href="#modalBox") Ajouter une publication
     div#modalBox
       section#createPub
         a(href="#")
           i.fa.fa-window-close.fa-2x.close-button
-        h1 Create publication
+        h1 Création d'une publication
         form
           div
-            label Year : 
-              input(type="number")
+            label Année : 
+              input(type="number", required, min="1900", max="2099")
           div 
-            label Month : 
+            label Mois : 
               select
-                option(value="1") January     
-                option(value="2") Febuary        
-                option(value="3") March        
-                option(value="4") April        
-                option(value="5") May        
-                option(value="6") June        
-                option(value="7") July        
-                option(value="8") August        
-                option(value="9") September      
-                option(value="10") October        
-                option(value="11") November        
-                option(value="12") December   
+                option(value="1") Janvier     
+                option(value="2") Février        
+                option(value="3") Mars        
+                option(value="4") Avril        
+                option(value="5") Mai        
+                option(value="6") Juin        
+                option(value="7") Juillet        
+                option(value="8") Août        
+                option(value="9") Septembre      
+                option(value="10") Octobre        
+                option(value="11") Novembre        
+                option(value="12") Décembre   
           div
-            label Title : 
-              input(type="text")
+            label Titre : 
+              input(type="text", required)
           div
-            label Authors : 
-              input(type="text")
+            label Auteurs : 
+              input(type="text", required)
               i.fa.fa-plus.fa-3x
           div
-            label Conference : 
-              input(type="text")
-          button(type="submit") Create
+            label Conférence : 
+              input(type="text", required)
+          button(type="submit") Créer
     div#sortBy
-      label Sort by :
+      label Trié par :
         select
           option date
     div#orderBy
-      label Order by :
+      label Ordonné par :
         select
-          option descending
-          option ascending
+          option Décroissant
+          option Croissant
     section#publications
       table
         each publication in publications

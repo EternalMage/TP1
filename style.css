@@ -115,17 +115,25 @@ nav ul li {
     padding: 4px 8px;
 }
 
-/*nav ul li:hover {
+nav ul li:first-child {
     background-color: blue;
-}*/
+}
+
+nav ul li:first-child a {
+    color: white;
+}
+
+nav ul li:hover {
+    background-color: blue;
+}
 
 nav ul li a {
     text-decoration: none;
 }
 
-/*nav ul li:hover a {
+nav ul li:hover a {
     color: white;
-}*/
+}
 
 #description {
     border-radius: 5px;
@@ -403,7 +411,7 @@ div#nextPage span {
     border: 1px solid lightgrey;
 }
 
-span#currentPage{
+span#currentPage {
     background-color: var(--publication-pagination-link-active-background-color);
     border-color: var(--publication-pagination-link-active-border-color);
     color: white;
@@ -415,7 +423,7 @@ header#pageHeader {
 }
 
 header#pageHeader #logo {
-    flex-basis: 25%;
+    flex-basis: 40%;
     text-align: center;
 }
 
@@ -424,7 +432,7 @@ header#pageHeader #logo div {
 }
 
 header#pageHeader nav {
-    flex-basis: 75%;
+    flex-basis: 60%;
     text-align: center;
 }
 

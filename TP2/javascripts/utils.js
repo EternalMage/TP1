@@ -29,11 +29,11 @@ const genererCompteur = function (x) {
  */
 const charCounts = function(str) {
   let t = {}
-  str.split("").map(s => t[s] = (t[s] !== undefined) ? t[s] + 1 : 1)
+  // The "g" flag indicates that the regular expression should be tested against all possible matches in a string.
+  let strArray = str.toLowerCase().match(/[A-Za-z]/g)
+  strArray.map(s => t[s] = (t[s] !== undefined)? t[s] + 1 : 1)
   return t
 }
-
-console.log(charCounts('laval'))
 
 /**
  * Retourne un entier qui représente le nombre de jours restants jusqu'au prochain jour de Noël.
@@ -43,7 +43,19 @@ console.log(charCounts('laval'))
  * @param {Date} date - Objet de Date
  * @returns {number} Nombre de jours jusqu'à Noël prochain.
  */
-const daysToChristmas = undefined
+const daysToChristmas = function(date){
+/*var cmas=new Date(today.getFullYear(), 11, 25);
+if (today.getMonth()==11 && today.getDate()>25) 
+{
+cmas.setFullYear(cmas.getFullYear()+1); 
+}  
+var one_day=1000*60*60*24;
+console.log(Math.ceil((cmas.getTime()-today.getTime())/(one_day))+
+" days left until Christmas!");*/
+}
+
+let today = new Date()
+console.log(today)
 
 /**
  * Renvoie un tableau sans éléments dupliqués.

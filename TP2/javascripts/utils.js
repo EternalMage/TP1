@@ -91,8 +91,6 @@ const commonKeys = function(obj1, obj2){
   return a
 }
 
-commonKeys({ x: 1, y: 2}, { x: 2, z: 4 })
-
 /**
  * Renvoie un tableau trié selon le champ 'author' d'un objet. Si deux objets
  * ont la même valeur dans l'attribut 'author', alors on compare la valeur
@@ -103,7 +101,58 @@ commonKeys({ x: 1, y: 2}, { x: 2, z: 4 })
  * @param {Boolean} asc - True si on trie en ordre croissant. False pour décroissant
  * @returns {Array} Tableau trié
  */
-const sortByAuthorAndTitle = undefined
+const sortByAuthorAndTitle = function(arr, asc){
+  asc === undefined ? asc=true : null
+  let sortAsc = function( a, b ) {
+    // compare authors
+    if ( a.author < b.author ){
+      return -1;
+    }
+    if ( a.author > b.author ){
+      return 1;
+    }
+    
+    // else compare titles
+    if (a.title < b.title) { 
+        return -1;
+    } else if (a.title > b.title) {
+        return 1
+    } else {
+        return 0;
+    }
+  }
+
+  let sortDsc = function( a, b ) {
+    // compare authors
+    if ( b.author < a.author ){
+      return -1;
+    }
+    if ( b.author > a.author ){
+      return 1;
+    }
+    
+    // else compare titles
+    if (b.title < a.title) { 
+        return -1;
+    } else if (b.title > a.title) {
+        return 1
+    } else {
+        return 0;
+    }
+  }
+
+  asc ? arr.sort(sortAsc) : arr.sort(sortDsc)
+  return arr
+}
+
+/*let arr1 = [
+  { author: 'Michel Michaud', title: 'Sous la surface' },
+  { author: 'Patrick Sénécal', title: 'Les Sept Jours du talion' },
+  { author: 'Michel Michaud', title: 'Violence à l\'origine' },
+  { author: 'Michel David', title: 'Un bonheur si fragile' }
+]
+
+sortByAuthorAndTitle(arr1, true)*/
 
 /**
  * Convertit une fonction de trois paramètre non-currifiée vers une fonction currifiée de 3 paramètres.

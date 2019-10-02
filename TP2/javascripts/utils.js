@@ -145,15 +145,6 @@ const sortByAuthorAndTitle = function(arr, asc){
   return arr
 }
 
-/*let arr1 = [
-  { author: 'Michel Michaud', title: 'Sous la surface' },
-  { author: 'Patrick Sénécal', title: 'Les Sept Jours du talion' },
-  { author: 'Michel Michaud', title: 'Violence à l\'origine' },
-  { author: 'Michel David', title: 'Un bonheur si fragile' }
-]
-
-sortByAuthorAndTitle(arr1, true)*/
-
 /**
  * Convertit une fonction de trois paramètre non-currifiée vers une fonction currifiée de 3 paramètres.
  *
@@ -171,7 +162,15 @@ sortByAuthorAndTitle(arr1, true)*/
  * @param {any} z - 3e paramètre
  * @returns {Function} Fonction currifiée
  */
-const curry3 = undefined
+const curry3 = function (op) {
+  return (x) => {
+    return (y) => {
+      return (z) => {
+          return op(x, y, z)
+      }
+    }
+  }
+}
 
 /**
  * Applique une fonction de rappel sur chaque élément d'un tableau et retourne

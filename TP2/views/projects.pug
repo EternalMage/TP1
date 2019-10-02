@@ -1,0 +1,117 @@
+extends layout
+
+block content
+
+  mixin projectLine(project)
+    li
+      span
+        = project.student
+        | #{', '}
+      a(href="/project-" + project._id)
+        = project.title
+      footer.meta
+        p
+          | Directeur(e)
+          | #{': '}
+          = project.supervisor
+        if project.cosupervisor
+          p
+            | Co-directeur(e)
+            | #{': '}
+            = project.cosupervisor
+
+  -
+    const currentProjects = [
+      {
+        "_id": "garandphd",
+        "type": "phd",
+        "student": "Zack Garand",
+        "supervisor": "Michel Deslauriers",
+        "cosupervisor": "Zinedine Zidane, Bernard Geoffrion",
+        "current": true,
+        "title": "Apprentissage machine pour la classification de réponses à des questions ouvertes"
+      },
+      {
+        "_id": "nbourgoinmaster",
+        "type": "master",
+        "student": "Leonard Bourgoin",
+        "supervisor": "Alphonsine Beauchamnps",
+        "cosupervisor": "Michel Deslauriers",
+        "current": true,
+        "title": "Système de questions-réponses pour le Web Sémantique"
+      },
+      {
+        "_id": "maillouxmaster",
+        "type": "master",
+        "student": "Capucine Mailloux",
+        "supervisor": "Alphonsine Beauchamnps",
+        "current": true,
+        "title": "Amélioration des modèles de représentation des graphes de connaissance par le plongement de règles logiques"
+      },
+      {
+        "_id": "rodriguemaster",
+        "type": "master",
+        "student": "Christophe Rodrigue",
+        "supervisor": "Alphonsine Beauchamnps",
+        "current": true,
+        "title": "Question et réponse automatique avec réseau de neuronnes profonds"
+      },
+      {
+        "_id": "montyphd",
+        "type": "phd",
+        "student": "Clothide Monty",
+        "supervisor": "Alphonsine Beauchamnps",
+        "cosupervisor": "Mohammed Fellag",
+        "current": true,
+        "title": "Classement Automatique des Réponses Courtes"
+      },
+      {
+        "_id": "chateaubphd",
+        "type": "phd",
+        "student": "Robert de Chateaub",
+        "supervisor": "Alphonsine Beauchamnps",
+        "cosupervisor": "Michel Deslauriers",
+        "current": true,
+        "title": "Analyse de la littératie disciplinaire avec les méthodes du traitement de la langue naturelle et d’apprentissage profond"
+      },
+      {
+        "_id": "ldenigerphd",
+        "type": "phd",
+        "student": "Christophe Deniger",
+        "supervisor": "Michel Deslauriers",
+        "cosupervisor": "Alphonsine Beauchamnps",
+        "current": true,
+        "title": "Création d'un générateur de preuves à des problèmes de géométrie du secondaire simulant le modèle de pensée d'un élève, pour le logiciel tuteur QED-Tutrix."
+      },
+      {
+        "_id": "noelmaster",
+        "type": "master",
+        "student": "Damien Noël",
+        "supervisor": "Michel Deslauriers",
+        "cosupervisor": "Alphonsine Beauchamnps",
+        "current": true,
+        "title": "Extraction de relations de composition au sein de documents archéologiques"
+      }
+    ]
+    const pastProjects = []
+
+  article
+    h1 Projets en cours
+    if currentProjects.length === 0
+      p Aucun projet en cours
+    else
+      ul.projects
+        each project in currentProjects
+          +projectLine(project)
+
+  article
+    h1 Projets passés
+    if pastProjects.length === 0
+      p Aucun projet passé
+    else
+      ul.projects
+        each project in pastProjects
+          +projectLine(project)
+
+block script
+  script(src='/javascripts/projects.js')

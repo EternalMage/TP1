@@ -1,0 +1,575 @@
+:root {
+  /* Font initial pour tout le site web */
+  --my-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --my-font-size: 14px;
+  --my-font-color: #373a3c;
+
+  /* Couleur pour balises 'a' */
+  --link-text-color: #428bca;
+  --link-active-background-color: #007bff;
+  --link-active-color: #fff;
+
+  /* Font, couleur et taille pour le logo en haut à gauche du site web. */
+  --site-title-family: Georgia, serif;
+  --site-title-size: 25px;
+  --site-title-color: #FF6512;
+  --site-subtitle-size: 12px;
+  --site-subtitle-color: #333;
+  --logo-width: 64px;
+  --logo-height: 64px;
+
+  /*
+   * Barre horizontal de séparation entre le header et le contenu principal et
+   * entre le contenu principal et le footer.
+   */
+  --separator-border-size: 1px;
+  --separator-border-color: #e5e5e5;
+
+  /*
+   * Couleur des liens dans le menu de navigation.
+   */
+  --nav-lang-background-color: #f9f9f9;
+  --nav-lang-background-color-hover: #f1f1f1;
+  --nav-lang-background-color-active: #f1f1f1;
+  --nav-lang-color-active: #373a3c;
+
+  /* Arrière-plan de la description du site web dans la page d'accueil. */
+  --home-description-background-color: #eceeef;
+
+  /* Couleur de la date de publication + une couleur pour l'image produit par font-awesome */
+  --news-post-date-color: #888;
+  --news-icon-color: #bbb;
+
+  /* Couleur et taille d'un membre dans la page d'équipe. */
+  --member-name-size: 1.1rem;
+  --member-title-color: #888;
+  --member-title-size: 0.8rem;
+
+  /* Couleur et taille dans la page de publications */
+  --publication-top-border-color: #eceeef;
+  --publication-delete-icon-color: red;
+  --publication-pagination-link-color: black;
+  --publication-pagination-link-border-color: #ddd;
+  --publication-pagination-link-active-color: white;
+  --publication-pagination-link-active-background-color: #FF6512;
+  --publication-pagination-link-active-border-color: #FF6512;
+  --publication-pagination-link-notactive-hover-background-color: #ddd;
+  --publication-form-text-border-color: #ccc;
+
+  /* Couleur et taille des metadonnées de section du site. */
+  /* P.ex. le footer, les informations d'une publication, les personnes impliquées dans un projet, etc. */
+  --metadata-text-color: #777;
+  --metadata-text-size: .8em;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding-bottom: 10rem;
+  font-family: var(--my-font-family);
+  font-size: var(--my-font-size);
+  color: var(--my-font-color);
+}
+
+.hide {
+  display: none;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+main {
+  position: relative;
+}
+
+a {
+  color: var(--my-font-color);
+  text-decoration: none;
+  outline: none;
+}
+
+a[href]:not([href=""]) {
+  color: var(--link-text-color);
+}
+
+a[href]:not([href=""]):hover:not(.active) {
+  color: var(--my-font-color);
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+.date::first-letter, .news .date::first-letter {
+  text-transform: capitalize;
+}
+
+p {
+  text-align: justify;
+}
+
+#logo-container {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+}
+
+header div img#logo {
+  position: relative;
+  left: 240px;
+  bottom: 10px;
+  width: var(--logo-width);
+  height: var(--logo-height);
+}
+
+#hdr{
+  position: absolute;
+  top: -15px;
+  left: -30px;
+}
+
+#sitetitle, #subtitle {
+  margin: 0;
+}
+
+header #sitetitle {
+  font-family: var(--site-title-family);
+  font-size: var(--site-title-size);
+  font-weight: normal;
+  color: var(--site-title-color);
+}
+
+header #subtitle {
+  font-size: var(--site-subtitle-size);
+  color: var(--site-subtitle-color);
+  font-weight: normal;
+}
+
+/***********************
+ * Navigation
+ **********************/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding-top: 30px;
+  border-bottom: var(--separator-border-size) solid var(--separator-border-color);
+}
+
+nav {
+  margin: 0 auto;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  margin-left: 30px;
+  padding: 0;
+}
+
+nav ul li a {
+  display: block;
+  padding: .5rem .7rem;
+}
+
+nav .links .active {
+  background-color: var(--link-active-background-color);
+  color: var(--link-active-color);
+  border-radius: .25rem;
+}
+
+nav .links .dropdown .active {
+  background-color: var(--nav-lang-background-color-active);
+  color: var(--nav-lang-color-active);
+  border-radius: 0;
+}
+
+.dropbtn {
+  color: var(--link-text-color);
+  border-radius: .25rem;
+  padding: .5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn.language {
+  text-transform: uppercase;
+}
+
+.dropdown {
+  position: relative;
+  height: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--nav-lang-background-color);
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--nav-lang-background-color-hover);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/****************************
+ * Accueil
+ ****************************/
+.jumbotron {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 18px 2rem 10px;
+  background-color: var(--home-description-background-color);
+  border-radius: .3rem;
+}
+
+/****************************
+ * News
+ ****************************/
+.news {
+  list-style-type: none;
+  padding: 0;
+}
+
+.news li {
+  display: flex;
+  padding-bottom: 1.5rem;
+}
+
+.news .post-date {
+  color: var(--news-post-date-color);
+  font-weight: bold;
+  font-size: .8em;
+}
+
+.icon {
+  color: var(--news-icon-color);
+  font-size: 2em;
+  width: 4rem;
+  padding: 0 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.icon img {
+  width: 30px;
+  padding-top: 10px;
+  opacity: 0.3;
+}
+
+/****************************
+ * Team
+ ****************************/
+.current-people-container .people {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.current-people-container .people li {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.current-people-container .people .img-circle {
+  margin: 1rem;
+}
+
+.current-people-container .people li .person .bio {
+  color: var(--member-title-color);
+  font-size: var(--member-title-size);
+  margin-bottom: 0;
+}
+
+.current-people-container .people li .person .bio ~ .bio {
+  margin-top: 0;
+}
+
+.current-people-container .people .person a.name {
+  font-size: var(--member-name-size);
+  font-weight: bold;
+}
+
+.current-people-container .img-circle {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.oldpeopletitle {
+  margin-top: 6rem;
+}
+
+.oldpeople {
+  display: flex;
+  justify-content: space-around;
+}
+
+.oldpeople ul {
+  padding: 0;
+}
+
+.oldpeople li {
+  list-style-type: none;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.oldpeople h1 {
+  margin-top: 0;
+}
+
+/**********************
+ * Publications
+ **********************/
+table.publications tr td {
+  padding: .75rem;
+  border-top: 1px solid var(--publication-top-border-color);
+  vertical-align: top;
+}
+
+table.publications tr td .del-icon {
+  margin-top: 10px;
+  opacity: 0.5;
+  color: var(--publication-delete-icon-color);
+  cursor: pointer;
+}
+
+table.publications tr td .del-icon i {
+  z-index: 1;
+}
+
+table.publications .publication p {
+  margin: 0;
+}
+
+table.publications .annee {
+  font-weight: bold;
+}
+
+table.publications .pubtitle img {
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+table.publications .mois {
+  text-transform: capitalize;
+}
+
+.errors {
+  background-color: #BB0000;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.errors ul {
+  padding-left: 15px;
+}
+
+.pagination {
+  text-align: center;
+  height: 50px;
+  margin: 40px 0;
+}
+
+.pagination p {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.pagination a.pagination-link {
+  color: var(--publication-pagination-link-color);
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid var(--publication-pagination-link-border-color);
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.pagination a.pagination-link.active {
+  color: var(--publication-pagination-link-active-color);
+  background-color: var(--publication-pagination-link-active-background-color);
+  border: 1px solid var(--publication-pagination-link-active-border-color);
+}
+
+.pagination a.pagination-link:hover:not(.active) {
+  background-color: var(--publication-pagination-link-notactive-hover-background-color);
+}
+
+.pagination p select {
+  margin: 0 5px;
+}
+
+.trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: none;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 50%;
+  max-height: 80%;
+  overflow: scroll;
+  border-radius: 0.5rem;
+  z-index: 2;
+}
+
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
+}
+
+.close-button:hover {
+  background-color: darkgray;
+}
+
+#modal-pubform:target {
+  opacity: 1;
+  display: block;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+form input[type=text], form input[type=number], form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--publication-form-text-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+form .author-input {
+  display: inline-block;
+  width: 90%;
+}
+
+form .remove-author {
+  display: inline-block;
+  margin-bottom: 16px;
+  width: 5%;
+  margin-left: 10px;
+  margin-top: 15px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+form .add-author {
+  margin-top: 0;
+  margin-left: 0;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+/**********************
+ * Projets
+ **********************/
+.projects li {
+  margin-bottom: 5px;
+}
+
+.projects h1 {
+  margin-bottom: 0;
+}
+
+.projects h1 + h1 {
+  margin-top: 50px;
+}
+
+.projects p {
+  margin: 0;
+  margin-top: 5px;
+}
+
+footer.meta {
+  border: 0;
+  padding: 0;
+}
+
+footer.meta p {
+  margin: 0;
+  text-align: left;
+}
+
+/**********************
+ * Footer
+ **********************/
+footer {
+  color: var(--metadata-text-color);
+  font-size: var(--metadata-text-size);
+}
+
+.container > footer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: var(--separator-border-size) solid var(--separator-border-color);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.container > footer p {
+  text-align: center;
+}
+

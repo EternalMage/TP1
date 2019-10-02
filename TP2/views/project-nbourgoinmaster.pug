@@ -1,0 +1,58 @@
+extends layout
+
+include mixins/project
+
+block content
+  -
+    const project = {
+      "_id": "nbourgoinmaster",
+      "type": "master",
+      "student": "Leonard Bourgoin",
+      "supervisor": "Alphonsine Beauchamnps",
+      "cosupervisor": "Michel Deslauriers",
+      "current": true,
+      "title": "Système de QR pour le Web Sémantique",
+    }
+
+    const publications = [
+      {
+        "_id": "5d67d442a5c77bebf633a11f",
+        "year": 2018,
+        "month": "juin",
+        "authors": [
+          "Leonard Bourgoin",
+          "Alphonsine Beauchamps",
+          "Michel Deslauriers"
+        ],
+        "title": "LAMA: a language adaptive method for question answering",
+        "venue": "Scalable Question Answering over Linked Data Challenge (SQA2018), Heraklion, Greece"
+      },
+      {
+        "_id": "5d67d442a5c77bebf633a121",
+        "year": 2017,
+        "authors": [
+          "Leonard Bourgoin",
+          "Michel Deslauriers",
+          "Alphonsine Beauchamps"
+        ],
+        "title": "Answering Natural Language Questions on RDF Knowledge base in French",
+        "venue": "Question Answering over Linked Data Challenge. (1st place of QALD 2017 – Question answering in French)"
+      },
+      {
+        "_id": "5d67d442a5c77bebf633a122",
+        "year": 2017,
+        "month": "octobre",
+        "authors": [
+          "Leonard Bourgoin",
+          "Michel Deslauriers",
+          "Alphonsine Beauchamps"
+        ],
+        "title": "AMAL: Answering French Natural Language Questions using DBpedia",
+        "venue": "ESWC 2017 Semantic Web Challenges, Springer"
+      }
+    ]
+
+  +projectsection(project, publications)
+
+block script
+  script(src='/javascripts/projects.js')

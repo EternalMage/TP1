@@ -1,0 +1,28 @@
+mixin projectsection(project, publications)
+  section
+    h1= project.title
+    footer.meta
+      p
+        | Étudiant:
+        | #{': '}
+        = project.student
+      p
+        | Directeur(e):
+        | #{': '}
+        = project.supervisor
+      if project.cosupervisor
+        p
+          | Co-directeur(e)(s)
+          | #{': '}
+          = project.cosupervisor
+
+    if project.description
+      each paragraph in project.description.split("\n")
+        p= paragraph
+
+  include pubtable
+
+  if publications.length > 0
+    h2 Publications
+    +pubtable(publications)
+

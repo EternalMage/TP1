@@ -1,0 +1,22 @@
+extends layout
+
+include mixins/project
+
+block content
+  -
+    const project = {
+      "_id": "maillouxmaster",
+      "type": "master",
+      "student": "Capucine Mailloux",
+      "supervisor": "Alphonsine Beauchamnps",
+      "current": true,
+      "title": "Amélioration des modèles de représentation des graphes de connaissance par le plongement de règles logiques ",
+      "description": "La plupart des modèles de plongement pour les graphes de connaissance, comme TransE et ses dérivés, s'appuient uniquement sur les instances (entités et relations) contenues dans le graphe et laissent de côté les ontologies et axiomes qui définissent la structure même de ces graphes.\nDans ce travail, on cherche au contraire à intégrer les axiomes issus de la logique descriptive dans ces modèles de plongement. En particulier, il s'agit de construire un modèle d'embedding capable de construire des représentations vectorielles à la fois pour les entités et pour les axiomes logiques, de telle sorte que les propriétés logiques entre éléments se traduisent par des propriétés géométriques de leurs embeddings.",
+    }
+
+    const publications = []
+
+  +projectsection(project, publications)
+
+block script
+  script(src='/javascripts/projects.js')

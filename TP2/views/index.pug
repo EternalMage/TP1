@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  -
+    let feeds = [
+      { title: 'Déception machine et Hallucinations profondes d\'Érudits: Pourquoi Repère ? Pourquoi maintenant ?',
+        presentator: 'Olivier Spéciel',
+        date: 'jeudi 12 novembre 2020 05:00',
+        createdAt: '22 décembre 2020',
+        location: 'Salle M-1022 <a href=\'https://www.openstreetmap.org/way/24150964\'>au pavillon Lassonde à Polytechnique Montréal</a>',
+        type: 'seminar'
+      },
+      { title: 'OntoMic, une ontologie pour les laboratoires de microbiologie clinique',
+        presentator: 'Jean-Guy Levreault',
+        date: 'mardi 12 novembre 2019 05:00',
+        createdAt: '13 décembre 2019',
+        location: 'Salle 3195, Pavillon André-Aisenstadt',
+        type: 'seminar'
+      },
+      { title: 'SC-LSTM: Learning Task-Specific Representations in Multi-Task Learning for Sequence Labeling',
+        presentator: 'Peng Lu',
+        date: 'mardi 12 novembre 2019 05:00',
+        createdAt: '12 décembre 2019',
+        location: 'Salle 3195, Pavillon André-Aisenstadt',
+        type: 'seminar'
+      },
+      { createdAt: '12 novembre 2019',
+        text: 'Le travail de <a href="">Marc Jacques</a> est disponible sur <a href="http://scholar.google.com/">Google Scholar</a>.\n',
+        type: 'news'
+      }
+    ]
+
+  .jumbotron
+
+  article
+    h1 Nouvelles
+    ul.news
+      each feed in feeds
+        if feed.type === 'seminar'
+          li
+            .icon #[img(src="/img/presentation-icon.png")]
+            .text
+              .post-date= feed.createdAt
+              .title
+                | Prochain séminaire
+                | #{': '}
+                a(href="#")= feed.title
+              .presentator= feed.presentator
+              .date= feed.date
+              .location !{feed.location}
+        else if feed.type === 'news'
+          li
+            .icon #[i.fa.fa-file-text-o]
+            .text
+              .post-date= feed.createdAt
+              .title !{feed.text}
+
+block append script
+  script(src="/javascripts/home.js")

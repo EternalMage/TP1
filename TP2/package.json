@@ -1,0 +1,28 @@
+{
+  "name": "tp2",
+  "version": "1.0.0",
+  "description": "TP2 de LOG4420",
+  "scripts": {
+    "start": "node pug-server.js",
+    "pug2html": "pug *.pug",
+    "test": "mocha -C --require babel-register ./tests/test.js",
+    "e2e": "nightwatch --config ./tests/nightwatch.conf.js --env firefox"
+  },
+  "author": "Konstantinos Lambrou-Latreille",
+  "devDependencies": {
+    "node-static": "^0.7.11",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nightwatch": "^0.9.16",
+    "nightwatch-custom-commands-assertions": "^1.1.0"
+  },
+  "dependencies": {
+    "chromedriver": "^77.0.0",
+    "geckodriver": "^1.18.0",
+    "selenium-server": "^3.141.59"
+  }
+}

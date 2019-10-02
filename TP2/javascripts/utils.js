@@ -53,11 +53,6 @@ const daysToChristmas = function(date){
   return Math.ceil((christmasDate-date)/(1000*60*60*24))
 }
 
-let today = new Date(2018, 11, 25)
-daysToChristmas(today)
-let today2 = new Date(2018, 8, 1)
-daysToChristmas(today2)
-
 /**
  * Renvoie un tableau sans éléments dupliqués.
  *
@@ -69,7 +64,14 @@ daysToChristmas(today2)
  * @param {Array} arr - Tableau avec potentiellement des éléments dupliqués
  * @returns {Array} Tableau sans éléments dupliqués
  */
-const distinct = undefined
+const distinct = function(array) {
+  // reduce: takes accumulator (which starts at []), parse through array (current value), execute func
+  var distinctArr = array.reduce(function(a,b){
+    if (a.indexOf(b) < 0 ) a.push(b)
+    return a
+  },[])
+  return distinctArr
+}
 
 /**
  * Renvoie un tableau qui contient les clés partagées entre deux objets Javascript.

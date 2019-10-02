@@ -2,7 +2,6 @@
 > tp2@1.0.0 test C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP2
 > mocha -C --require babel-register ./tests/test.js
 
-Employee name=Marc,salary=123
 
 
   Exercices de préparation en Javascript (Langage)
@@ -33,17 +32,18 @@ Employee name=Marc,salary=123
     fold
       1) devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur
     Employee
-      2) devrait représenter un livre selon le titre, l'auteur et des étiquettes
-      3) devrait pas pouvoir modifié l'attribut id et salaire
-      4) devrait avoir une méthode toString()
+      √ devrait représenter un livre selon le titre, l'auteur et des étiquettes
+      2) devrait pas pouvoir modifié l'attribut id et salaire
+Employee name=Konstantinos,salary=50000
+      3) devrait avoir une méthode toString()
     Chercheur
-      5) devrait surcharger la méthode de salaire pour ajouter un bonus
+      4) devrait surcharger la méthode de salaire pour ajouter un bonus
       √ devrait avoir accès à l'attribut bonus
-      6) devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
+      5) devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
 
 
-  16 passing (49ms)
-  6 failing
+  17 passing (48ms)
+  5 failing
 
   1) Exercices de préparation en Javascript (Langage)
        fold
@@ -53,35 +53,29 @@ Employee name=Marc,salary=123
 
   2) Exercices de préparation en Javascript (Langage)
        Employee
-         devrait représenter un livre selon le titre, l'auteur et des étiquettes:
-     AssertionError: expected undefined to equal 1
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:136:23)
-
-  3) Exercices de préparation en Javascript (Langage)
-       Employee
          devrait pas pouvoir modifié l'attribut id et salaire:
      AssertionError: expected [Function] to throw an error
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:142:7)
 
-  4) Exercices de préparation en Javascript (Langage)
+  3) Exercices de préparation en Javascript (Langage)
        Employee
          devrait avoir une méthode toString():
 
-      AssertionError: expected 'Employee name=Konstantinos,salary=undefined' to equal 'Employee name=Marc,salary=50000'
+      AssertionError: expected 'Employee name=Konstantinos,salary=50000' to equal 'Employee name=Marc,salary=50000'
       + expected - actual
 
-      -Employee name=Konstantinos,salary=undefined
+      -Employee name=Konstantinos,salary=50000
       +Employee name=Marc,salary=50000
       
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:148:31)
+      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:149:31)
 
-  5) Exercices de préparation en Javascript (Langage)
+  4) Exercices de préparation en Javascript (Langage)
        Chercheur
          devrait surcharger la méthode de salaire pour ajouter un bonus:
      AssertionError: expected undefined to be a number
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:160:30)
+      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:161:30)
 
-  6) Exercices de préparation en Javascript (Langage)
+  5) Exercices de préparation en Javascript (Langage)
        Chercheur
          devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus:
 
@@ -91,7 +85,7 @@ Employee name=Marc,salary=123
       -[object Object]
       +Employee name=Konstantinos,salary=50000,bonus=10
       
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:168:31)
+      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:169:31)
 
 
 

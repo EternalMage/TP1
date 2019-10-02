@@ -262,9 +262,9 @@ function fold(arr, init, op) {
  */
 class Employee {
   constructor(id, name, salary) {
-    var id = id
+    this.id = id
     this.name = name
-    var salary = salary
+    this.salary = salary
   }
 
   // setters & getters
@@ -279,11 +279,6 @@ class Employee {
     return 'Employee name=' + this.name + ',salary=' + this.salary
   }
 }
-
-const e = new Employee(1, 'Konstantinos', 50000)
-e.name = 'Marc'
-e.salary = 123
-console.log(e.toString())
 
 /**
  * Classe Chercheur représentée par 4 attributs: id, name, salary, bonus.

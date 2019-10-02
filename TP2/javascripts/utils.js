@@ -209,7 +209,8 @@ function map(arr, callback) {
  * @returns {Array}
  */
 function find(arr, predicate) {
-  return undefined
+  let value = arr.find(predicate)
+  return value !== undefined ? value : null
 }
 
 /**
@@ -260,7 +261,29 @@ function fold(arr, init, op) {
  * e.toString() // Renvoie 'Employee name=Konstantinos,salary=50000
  */
 class Employee {
+  constructor(id, name, salary) {
+    var id = id
+    this.name = name
+    var salary = salary
+  }
+
+  // setters & getters
+  setName(name) { name = name; }
+  getName() { return name; }
+  setId(id) { id = id; }
+  getId() { return id; }
+  setSalary(salary) { salary = salary; }
+  getSalary() { return salary; }
+
+  toString() {
+    return 'Employee name=' + this.name + ',salary=' + this.salary
+  }
 }
+
+const e = new Employee(1, 'Konstantinos', 50000)
+e.name = 'Marc'
+e.salary = 123
+console.log(e.toString())
 
 /**
  * Classe Chercheur représentée par 4 attributs: id, name, salary, bonus.

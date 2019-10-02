@@ -44,18 +44,19 @@ const charCounts = function(str) {
  * @returns {number} Nombre de jours jusqu'à Noël prochain.
  */
 const daysToChristmas = function(date){
-/*var cmas=new Date(today.getFullYear(), 11, 25);
-if (today.getMonth()==11 && today.getDate()>25) 
-{
-cmas.setFullYear(cmas.getFullYear()+1); 
-}  
-var one_day=1000*60*60*24;
-console.log(Math.ceil((cmas.getTime()-today.getTime())/(one_day))+
-" days left until Christmas!");*/
+  var christmasDate=new Date(date.getFullYear(), 11, 25); // 11 for december
+  // christmasDate - date given = number of milliseconds before Christmas
+  if (christmasDate-date < 0){
+    christmasDate=new Date(date.getFullYear() + 1, 11, 25);
+  }
+  // convertir milliseconds result to number of days 1000mil x 60s x 60min x 24h
+  return Math.ceil((christmasDate-date)/(1000*60*60*24))
 }
 
-let today = new Date()
-console.log(today)
+let today = new Date(2018, 11, 25)
+daysToChristmas(today)
+let today2 = new Date(2018, 8, 1)
+daysToChristmas(today2)
 
 /**
  * Renvoie un tableau sans éléments dupliqués.

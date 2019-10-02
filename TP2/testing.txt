@@ -2,7 +2,6 @@
 > tp2@1.0.0 test C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP2
 > mocha -C --require babel-register ./tests/test.js
 
-2019-10-02T18:35:17.272Z
 
 
   Exercices de préparation en Javascript (Langage)
@@ -13,123 +12,111 @@
       √ devrait compter uniquement les lettres de l'alphabeth
       √ devrait changer les lettres en minuscules
     daysToChristmas
-      1) devrait retourner le nombre de jours avant le 25 décembre
-      2) devrait gérer le cas où on se trouve en fin décembre
+      √ devrait retourner le nombre de jours avant le 25 décembre
+      √ devrait gérer le cas où on se trouve en fin décembre
     commonKeys
-      3) devrait donner les clés partagées par deux objets
+      1) devrait donner les clés partagées par deux objets
     distinct
-      4) devrait retirer les éléments dupliqués d'un tableau Javascript
+      2) devrait retirer les éléments dupliqués d'un tableau Javascript
     sortByAuthorAndTitle
-      5) devrait trier un tableau d'objets selon l'attribut author et title
-      6) devrait être capable de trier en ordre décroissant
+      3) devrait trier un tableau d'objets selon l'attribut author et title
+      4) devrait être capable de trier en ordre décroissant
     curry3
-      7) devrait convertir une fonction de 3 paramètre en une fonction de 3 paramètres currifiée
-      8) devrait conservé l'ordre des paramètres lors de la currification
+      5) devrait convertir une fonction de 3 paramètre en une fonction de 3 paramètres currifiée
+      6) devrait conservé l'ordre des paramètres lors de la currification
     map
-      9) devrait transformer chaque élément d'un tableau selon une fonction callback
+      7) devrait transformer chaque élément d'un tableau selon une fonction callback
     find
-      10) devrait trouver le premier élément d'un tableau qui satisfait un prédicat
-      11) devrait renvoyer null si aucun élément satisfait le prédicat
+      8) devrait trouver le premier élément d'un tableau qui satisfait un prédicat
+      9) devrait renvoyer null si aucun élément satisfait le prédicat
     fold
-      12) devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur
+      10) devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur
     Employee
-      13) devrait représenter un livre selon le titre, l'auteur et des étiquettes
-      14) devrait pas pouvoir modifié l'attribut id et salaire
-      15) devrait avoir une méthode toString()
+      11) devrait représenter un livre selon le titre, l'auteur et des étiquettes
+      12) devrait pas pouvoir modifié l'attribut id et salaire
+      13) devrait avoir une méthode toString()
     Chercheur
-      16) devrait surcharger la méthode de salaire pour ajouter un bonus
+      14) devrait surcharger la méthode de salaire pour ajouter un bonus
       √ devrait avoir accès à l'attribut bonus
-      17) devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
+      15) devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
 
 
-  5 passing (51ms)
-  17 failing
+  7 passing (68ms)
+  15 failing
 
   1) Exercices de préparation en Javascript (Langage)
-       daysToChristmas
-         devrait retourner le nombre de jours avant le 25 décembre:
-     AssertionError: expected undefined to equal 0
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:41:40)
-
-  2) Exercices de préparation en Javascript (Langage)
-       daysToChristmas
-         devrait gérer le cas où on se trouve en fin décembre:
-     AssertionError: expected undefined to equal 359
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:49:47)
-
-  3) Exercices de préparation en Javascript (Langage)
        commonKeys
          devrait donner les clés partagées par deux objets:
      TypeError: (0 , _utils.commonKeys) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:55:14)
 
-  4) Exercices de préparation en Javascript (Langage)
+  2) Exercices de préparation en Javascript (Langage)
        distinct
          devrait retirer les éléments dupliqués d'un tableau Javascript:
      TypeError: (0 , _utils.distinct) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:62:14)
 
-  5) Exercices de préparation en Javascript (Langage)
+  3) Exercices de préparation en Javascript (Langage)
        sortByAuthorAndTitle
          devrait trier un tableau d'objets selon l'attribut author et title:
      TypeError: (0 , _utils.sortByAuthorAndTitle) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:76:14)
 
-  6) Exercices de préparation en Javascript (Langage)
+  4) Exercices de préparation en Javascript (Langage)
        sortByAuthorAndTitle
          devrait être capable de trier en ordre décroissant:
      TypeError: (0 , _utils.sortByAuthorAndTitle) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:89:14)
 
-  7) Exercices de préparation en Javascript (Langage)
+  5) Exercices de préparation en Javascript (Langage)
        curry3
          devrait convertir une fonction de 3 paramètre en une fonction de 3 paramètres currifiée:
      TypeError: (0 , _utils.curry3) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:96:14)
 
-  8) Exercices de préparation en Javascript (Langage)
+  6) Exercices de préparation en Javascript (Langage)
        curry3
          devrait conservé l'ordre des paramètres lors de la currification:
      TypeError: (0 , _utils.curry3) is not a function
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:101:14)
 
-  9) Exercices de préparation en Javascript (Langage)
+  7) Exercices de préparation en Javascript (Langage)
        map
          devrait transformer chaque élément d'un tableau selon une fonction callback:
      AssertionError: expected undefined to deeply equal [ 2, 4, 6 ]
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:107:50)
 
-  10) Exercices de préparation en Javascript (Langage)
+  8) Exercices de préparation en Javascript (Langage)
        find
          devrait trouver le premier élément d'un tableau qui satisfait un prédicat:
      AssertionError: expected undefined to equal 4
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:114:46)
 
-  11) Exercices de préparation en Javascript (Langage)
+  9) Exercices de préparation en Javascript (Langage)
        find
          devrait renvoyer null si aucun élément satisfait le prédicat:
      AssertionError: expected undefined to equal null
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:118:46)
 
-  12) Exercices de préparation en Javascript (Langage)
+  10) Exercices de préparation en Javascript (Langage)
        fold
          devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur:
      AssertionError: expected undefined to equal 15
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:124:64)
 
-  13) Exercices de préparation en Javascript (Langage)
+  11) Exercices de préparation en Javascript (Langage)
        Employee
          devrait représenter un livre selon le titre, l'auteur et des étiquettes:
      AssertionError: expected undefined to equal 1
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:136:23)
 
-  14) Exercices de préparation en Javascript (Langage)
+  12) Exercices de préparation en Javascript (Langage)
        Employee
          devrait pas pouvoir modifié l'attribut id et salaire:
      AssertionError: expected [Function] to throw an error
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:142:7)
 
-  15) Exercices de préparation en Javascript (Langage)
+  13) Exercices de préparation en Javascript (Langage)
        Employee
          devrait avoir une méthode toString():
 
@@ -141,13 +128,13 @@
       
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:148:31)
 
-  16) Exercices de préparation en Javascript (Langage)
+  14) Exercices de préparation en Javascript (Langage)
        Chercheur
          devrait surcharger la méthode de salaire pour ajouter un bonus:
      AssertionError: expected undefined to be a number
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:160:30)
 
-  17) Exercices de préparation en Javascript (Langage)
+  15) Exercices de préparation en Javascript (Langage)
        Chercheur
          devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus:
 

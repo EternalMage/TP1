@@ -64,9 +64,9 @@ const daysToChristmas = function(date){
  * @param {Array} arr - Tableau avec potentiellement des éléments dupliqués
  * @returns {Array} Tableau sans éléments dupliqués
  */
-const distinct = function(array) {
-  // reduce: takes accumulator (which starts at []), parse through array (current value), execute func
-  var distinctArr = array.reduce(function(a,b){
+const distinct = function(arr) {
+  // reduce: takes accumulator a (which starts at []), parse through array (current value b), execute func
+  var distinctArr = arr.reduce(function(a,b){
     if (a.indexOf(b) < 0 ) a.push(b)
     return a
   },[])
@@ -85,7 +85,13 @@ const distinct = function(array) {
  * @param {Object} obj2 - Deuxième objet
  * @returns {Array} Tableau qui contient les cléfs partagées entre deux objets
  */
-const commonKeys = undefined
+const commonKeys = function(obj1, obj2){
+  let a = []
+  a = Object.keys(obj1).filter(value => Object.keys(obj2).indexOf(value) !== -1)
+  return a
+}
+
+commonKeys({ x: 1, y: 2}, { x: 2, z: 4 })
 
 /**
  * Renvoie un tableau trié selon le champ 'author' d'un objet. Si deux objets

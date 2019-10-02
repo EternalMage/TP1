@@ -189,7 +189,7 @@ const curry3 = function (op) {
  * @returns {Array}
  */
 function map(arr, callback) {
-  return undefined
+  return arr.map(callback)
 }
 
 /**

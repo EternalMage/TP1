@@ -262,21 +262,21 @@ function fold(arr, init, op) {
  */
 class Employee {
   constructor(id, name, salary) {
-    this.id = id
-    this.name = name
-    this.salary = salary
+    this._id = id
+    this._name = name
+    this._salary = salary
   }
 
   // setters & getters
-  setName(name) { name = name; }
-  getName() { return name; }
-  setId(id) { id = id; }
-  getId() { return id; }
-  setSalary(salary) { salary = salary; }
-  getSalary() { return salary; }
+  set name(name) { this._name = name; }
+  get name() { return this._name; }
+  /*set id(id) { this._id = id; }*/
+  get id() { return this._id; }
+  /*set salary(salary) { this._salary = salary; }*/
+  get salary() { return this._salary; }
 
   toString() {
-    return 'Employee name=' + this.name + ',salary=' + this.salary
+    return 'Employee name=' + this._name + ',salary=' + this._salary
   }
 }
 
@@ -291,8 +291,22 @@ class Employee {
  * const e = new Chercheur(1, 'Konstantinos', 50000, 10)
  * e.toString() // Renvoie 'Employee name=Konstantinos,salary=50000,bonus=10
  */
-class Chercheur {
+class Chercheur extends Employee {
+  constructor(id, name, salary, bonus) {
+    super(id, name, salary)
+    this._bonus = bonus
+  }
+
+  get salary() {
+    return this._salary + (this._salary * this._bonus / 100)
+  }
+  toString() {
+    return 'Employee name=' + this._name + ',salary=' + this._salary + ',bonus=' + this._bonus
+  }
 }
+
+//const c = new Chercheur(1, 'Konstantinos', 50000, 10)
+//console.log(c.toString()) // Renvoie 'Employee name=Konstantinos,salary=50000,bonus=10
 
 export {
   genererCompteur,

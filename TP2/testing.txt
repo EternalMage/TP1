@@ -33,59 +33,22 @@
       1) devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur
     Employee
       √ devrait représenter un livre selon le titre, l'auteur et des étiquettes
-      2) devrait pas pouvoir modifié l'attribut id et salaire
-Employee name=Konstantinos,salary=50000
-      3) devrait avoir une méthode toString()
+      √ devrait pas pouvoir modifié l'attribut id et salaire
+      √ devrait avoir une méthode toString()
     Chercheur
-      4) devrait surcharger la méthode de salaire pour ajouter un bonus
+      √ devrait surcharger la méthode de salaire pour ajouter un bonus
       √ devrait avoir accès à l'attribut bonus
-      5) devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
+      √ devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus
 
 
-  17 passing (48ms)
-  5 failing
+  21 passing (44ms)
+  1 failing
 
   1) Exercices de préparation en Javascript (Langage)
        fold
          devrait appliquer une fonction sur chaque élément d'un tableau et de récupérer le résutlats dans un accumulateur:
      AssertionError: expected undefined to equal 15
       at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:124:64)
-
-  2) Exercices de préparation en Javascript (Langage)
-       Employee
-         devrait pas pouvoir modifié l'attribut id et salaire:
-     AssertionError: expected [Function] to throw an error
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:142:7)
-
-  3) Exercices de préparation en Javascript (Langage)
-       Employee
-         devrait avoir une méthode toString():
-
-      AssertionError: expected 'Employee name=Konstantinos,salary=50000' to equal 'Employee name=Marc,salary=50000'
-      + expected - actual
-
-      -Employee name=Konstantinos,salary=50000
-      +Employee name=Marc,salary=50000
-      
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:149:31)
-
-  4) Exercices de préparation en Javascript (Langage)
-       Chercheur
-         devrait surcharger la méthode de salaire pour ajouter un bonus:
-     AssertionError: expected undefined to be a number
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:161:30)
-
-  5) Exercices de préparation en Javascript (Langage)
-       Chercheur
-         devrait avoir une méthode toString qui étend la méthode toString de la classe parente et qui ajoute l'attribut bonus:
-
-      AssertionError: expected '[object Object]' to equal 'Employee name=Konstantinos,salary=50000,bonus=10'
-      + expected - actual
-
-      -[object Object]
-      +Employee name=Konstantinos,salary=50000,bonus=10
-      
-      at Context.<anonymous> (C:/Users/Thoai-Vi Le/Desktop/Poly/A19/LOG4420/LOG4420_TP1/TP2/tests/test.js:169:31)
 
 
 

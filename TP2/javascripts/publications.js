@@ -21,21 +21,54 @@ $(document).ready(() => {
 
 
     /* 3.3.3. */
-    const order_by = ['desc', 'asc']
-    const sort_by = ['date', 'title']
-    const limit = [10, 20, 30, 50, 100]
-    const defaultParam = { order_by: order_by[0], sort_by: sort_by[0], limit: limit[0] }
+    const month_order = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+    const order_by_desc = 'desc'
+    const order_by_asc = 'asc'
+    const sort_by_title = 'title'
+    const sort_by_date = 'date'
+    const defaultParam = { order_by: order_by_desc, sort_by: sort_by_date, limit: 10 }
 
-    const setPublications = (param = defaultParam) => {
+    const setPublicationOrder = (sort_by, order_by) => {
+        const orderedPublications = []
+        $.map($('.publications tbody tr'), (p) => {
+            const currentYear = $(p).find('.annee').text()
+            const currentMonth = $(p).find('.mois').text()
+
+            orderedPublications.push({ element: p, year: currentYear, month: currentMonth })
+        })
+
+        orderedPublications.sort((a, b) => {
+            if (a.year - b.year === 0) {
+                return month_order.indexOf(a.month) - month_order.indexOf(b.month);
+            }
+
+            return a.year - b.year;
+        })
+
+        if (order_by === order_by_desc) {
+            orderedPublications.reverse()
+        }
+
+        console.log(orderedPublications)
+        $('.publications tbody').empty()
+        orderedPublications.map(p => $('.publications tbody').append(p.element))
+
+    }
+
+    const setPublicationLimit = (limit) => {
         let acc = 0;
 
         $.map($('.publications tbody tr'), (p) => {
             acc++
-            if (acc > 10) {
-                alert(acc)
+            if (acc > limit) {
                 $(p).remove()
             }
         })
+    }
+
+    const setPublications = (param = defaultParam) => {
+        setPublicationOrder(param.sort_by, param.order_by)
+        setPublicationLimit(defaultParam.limit)
     }
 
     setPublications()

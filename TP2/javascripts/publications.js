@@ -36,22 +36,42 @@ $(document).ready(() => {
         $('.publications tbody').append(defaultElements.clone())
     }
 
-    const setPublicationOrder = (sort_by, order_by) => {
-        const orderedPublications = []
+    const getPubOrderedByTitle = () => {
+        const publications = []
+        $.map($('.publications tbody tr'), (p) => {
+            const currentTitle = $(p).find('.pubtitle').text()
+
+            publications.push({ element: p, title: currentTitle })
+        })
+
+        return publications.sort((a, b) => { return a.title > b.title ? 1 : -1; })
+    }
+    const getPubOrderedByDate = () => {
+        const publications = []
+
         $.map($('.publications tbody tr'), (p) => {
             const currentYear = $(p).find('.annee').text()
             const currentMonth = $(p).find('.mois').text()
 
-            orderedPublications.push({ element: p, year: currentYear, month: currentMonth })
+            publications.push({ element: p, year: currentYear, month: currentMonth })
         })
 
-        orderedPublications.sort((a, b) => {
+        return publications.sort((a, b) => {
             if (a.year - b.year === 0) {
                 return month_order.indexOf(a.month) - month_order.indexOf(b.month);
             }
 
             return a.year - b.year;
         })
+    }
+    const setPublicationOrder = (sort_by, order_by) => {
+        let orderedPublications = []
+
+        if (sort_by === sort_by_date) {
+            orderedPublications = getPubOrderedByDate()
+        } else {
+            orderedPublications = getPubOrderedByTitle()
+        }
 
         if (order_by === order_by_desc) {
             orderedPublications.reverse()
@@ -79,6 +99,10 @@ $(document).ready(() => {
         setPublicationLimit(param.limit)
     }
 
+    const setEvemtSort = () => $('#fieldFilterSection').change((e) => {
+        currentValue.sort_by = e.target.value
+        setPublications()
+    })
     const setEventOrder = () => $('#filterAscValueSection').change((e) => {
         currentValue.order_by = e.target.value
         setPublications()
@@ -87,7 +111,7 @@ $(document).ready(() => {
         currentValue.limit = e.target.value
         setPublications()
     })
-
+    setEvemtSort()
     setEventOrder()
     setEventLimit()
     setPublications()

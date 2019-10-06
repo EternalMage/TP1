@@ -97,6 +97,7 @@ $(document).ready(() => {
         resetPublicationsDisplay()
         setPublicationOrder(param.sort_by, param.order_by)
         setPublicationLimit(param.limit)
+        setTrashEvent()
     }
 
     const setEvemtSort = () => $('#fieldFilterSection').change((e) => {

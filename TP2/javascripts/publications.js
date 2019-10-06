@@ -29,6 +29,8 @@ $(document).ready(() => {
     const defaultParam = { order_by: order_by_desc, sort_by: sort_by_date, limit: 10 }
     const defaultElements = $('.publications tbody tr').clone()
 
+    let currentValue = Object.assign({}, defaultParam)
+
     const resetPublicationsDisplay = () => {
         $('.publications tbody').empty()
         $('.publications tbody').append(defaultElements.clone())
@@ -71,14 +73,22 @@ $(document).ready(() => {
         })
     }
 
-    const setPublications = (param = defaultParam) => {
+    const setPublications = (param = currentValue) => {
         resetPublicationsDisplay()
         setPublicationOrder(param.sort_by, param.order_by)
         setPublicationLimit(param.limit)
     }
 
-    const setEventLimit = () => $('#elementsPerPageSection').change((e) => setPublications({ order_by: defaultParam.order_by, sort_by: defaultParam.sort_by, limit: e.target.value }))
+    const setEventOrder = () => $('#filterAscValueSection').change((e) => {
+        currentValue.order_by = e.target.value
+        setPublications()
+    })
+    const setEventLimit = () => $('#elementsPerPageSection').change((e) => {
+        currentValue.limit = e.target.value
+        setPublications()
+    })
 
+    setEventOrder()
     setEventLimit()
     setPublications()
 

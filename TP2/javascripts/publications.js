@@ -27,6 +27,12 @@ $(document).ready(() => {
     const sort_by_title = 'title'
     const sort_by_date = 'date'
     const defaultParam = { order_by: order_by_desc, sort_by: sort_by_date, limit: 10 }
+    const defaultElements = $('.publications tbody tr').clone()
+
+    const resetPublicationsDisplay = () => {
+        $('.publications tbody').empty()
+        $('.publications tbody').append(defaultElements.clone())
+    }
 
     const setPublicationOrder = (sort_by, order_by) => {
         const orderedPublications = []
@@ -49,7 +55,6 @@ $(document).ready(() => {
             orderedPublications.reverse()
         }
 
-        console.log(orderedPublications)
         $('.publications tbody').empty()
         orderedPublications.map(p => $('.publications tbody').append(p.element))
 
@@ -67,10 +72,17 @@ $(document).ready(() => {
     }
 
     const setPublications = (param = defaultParam) => {
+        resetPublicationsDisplay()
         setPublicationOrder(param.sort_by, param.order_by)
-        setPublicationLimit(defaultParam.limit)
+        setPublicationLimit(param.limit)
     }
 
+    const setEventLimit = () => $('#elementsPerPageSection').change((e) => setPublications({ order_by: defaultParam.order_by, sort_by: defaultParam.sort_by, limit: e.target.value }))
+
+    setEventLimit()
     setPublications()
+
+
+
 
 })

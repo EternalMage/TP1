@@ -81,12 +81,12 @@ $(document).ready(() => {
             document.getElementById("fieldFilterSection").selectedIndex = 0;
         }
 
-        if (order_by === order_by_desc) {
-            orderedPublications.reverse()
-            document.getElementById("filterAscValueSection").selectedIndex = 0;
+        if (order_by === order_by_asc) {
+            document.getElementById("filterAscValueSection").selectedIndex = 1;
         }
         else{
-            document.getElementById("filterAscValueSection").selectedIndex = 1;
+            orderedPublications.reverse()
+            document.getElementById("filterAscValueSection").selectedIndex = 0;
         }
 
         $('.publications tbody').empty()
@@ -137,6 +137,7 @@ $(document).ready(() => {
         document.location.href = url
         //setPublications()
     })
+
 
     setEventSort()
     setEventOrder()

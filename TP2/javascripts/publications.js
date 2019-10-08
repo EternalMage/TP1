@@ -96,6 +96,9 @@ $(document).ready(() => {
 
     const setPublicationLimit = (limit) => {
         let acc = 0;
+        let limitToIndexArr = {10: 0, 20: 1, 30: 2, 50: 3, 100: 4}
+        let elementId = document.getElementById("elementsPerPageSection")
+        limitToIndexArr[limit] !== undefined ? elementId.selectedIndex = limitToIndexArr[limit] : elementId.selectedIndex = 1;
 
         $.map($('.publications tbody tr'), (p) => {
             acc++

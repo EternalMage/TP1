@@ -26,13 +26,13 @@ $(document).ready(() => {
     const url_order_param = search_params.get('order_by')
     const url_sort_param = search_params.get('sort_by')
     const url_limit_param = search_params.get('limit')
-    
+
     const month_order = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
     const order_by_desc = 'desc'
     const order_by_asc = 'asc'
     const sort_by_title = 'title'
     const sort_by_date = 'date'
-    const defaultParam = { order_by: url_order_param, sort_by: url_sort_param, limit: url_limit_param !== null ? url_limit_param : 10 }
+    const defaultParam = { order_by: url_order_param !== null ? url_order_param : order_by_desc, sort_by: url_sort_param !== null ? url_sort_param : sort_by_date, limit: url_limit_param !== null ? url_limit_param : 10 }
     const defaultElements = $('.publications tbody tr').clone()
 
     let currentValue = Object.assign({}, defaultParam)
@@ -73,20 +73,14 @@ $(document).ready(() => {
     const setPublicationOrder = (sort_by, order_by) => {
         let orderedPublications = []
 
-        if (sort_by === sort_by_title) {
-            orderedPublications = getPubOrderedByTitle()
-            document.getElementById("fieldFilterSection").selectedIndex = 1;
-        } else {
+        if (sort_by === sort_by_date) {
             orderedPublications = getPubOrderedByDate()
-            document.getElementById("fieldFilterSection").selectedIndex = 0;
+        } else {
+            orderedPublications = getPubOrderedByTitle()
         }
 
         if (order_by === order_by_desc) {
             orderedPublications.reverse()
-            document.getElementById("filterAscValueSection").selectedIndex = 0;
-        }
-        else{
-            document.getElementById("filterAscValueSection").selectedIndex = 1;
         }
 
         $('.publications tbody').empty()
@@ -116,30 +110,26 @@ $(document).ready(() => {
         currentValue.sort_by = e.target.value
         search_params.set('sort_by', e.target.value)
         url.search=search_params
-        document.location.href = url
-        //setPublications()
+        setPublications()
     })
     const setEventOrder = () => $('#filterAscValueSection').change((e) => {
         currentValue.order_by = e.target.value
         search_params.set('order_by', e.target.value)
         url.search=search_params
         document.location.href = url
-        //setPublications()
+        setPublications()
     })
     const setEventLimit = () => $('#elementsPerPageSection').change((e) => {
-        currentValue.limit = e.target.value
         currentValue.limit = e.target.value
         search_params.set('limit', e.target.value)
         url.search=search_params
         document.location.href = url
-        //setPublications()
+        setPublications()
     })
-
     setEventSort()
     setEventOrder()
     setEventLimit()
     setPublications()
-
 
 
 

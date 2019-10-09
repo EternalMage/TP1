@@ -26,13 +26,14 @@ $(document).ready(() => {
     const url_order_param = search_params.get('order_by')
     const url_sort_param = search_params.get('sort_by')
     const url_limit_param = search_params.get('limit')
+    const url_page_param = search_params.get('page')
     
     const month_order = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
     const order_by_desc = 'desc'
     const order_by_asc = 'asc'
     const sort_by_title = 'title'
     const sort_by_date = 'date'
-    const defaultParam = { order_by: url_order_param, sort_by: url_sort_param, limit: url_limit_param !== null ? url_limit_param : 10 }
+    const defaultParam = { order_by: url_order_param, sort_by: url_sort_param, limit: url_limit_param !== null ? url_limit_param : 10 , page: url_page_param !== null ? url_page_param : 1}
     const defaultElements = $('.publications tbody tr').clone()
 
     let currentValue = Object.assign({}, defaultParam)
@@ -94,11 +95,22 @@ $(document).ready(() => {
 
     }
 
-    const setPublicationLimit = (limit) => {
+    const setPublicationLimit = (limit, currentPage) => {
         let acc = 0;
         let limitToIndexArr = {10: 0, 20: 1, 30: 2, 50: 3, 100: 4}
         let elementId = document.getElementById("elementsPerPageSection")
         limitToIndexArr[limit] !== undefined ? elementId.selectedIndex = limitToIndexArr[limit] : elementId.selectedIndex = 1;
+
+        const k = 1 // currentPage - k = number of pages before currentPage. Ex: If I'm on page 4. 3 pages (4-k) before the 4th page.
+        let elementToSkip = (currentPage - k) * limit
+        let elemSkipped = 0
+
+        $.map($('.publications tbody tr'), (p) => {
+            if (elemSkipped < elementToSkip) {
+                $(p).remove()
+                elemSkipped++
+            }
+        })
 
         $.map($('.publications tbody tr'), (p) => {
             acc++
@@ -106,12 +118,14 @@ $(document).ready(() => {
                 $(p).remove()
             }
         })
+
+        alert($('.publications tbody').size())
     }
 
     const setPublications = (param = currentValue) => {
         resetPublicationsDisplay()
         setPublicationOrder(param.sort_by, param.order_by)
-        setPublicationLimit(param.limit)
+        setPublicationLimit(param.limit, param.page)
         setTrashEvent()
     }
 
@@ -131,20 +145,32 @@ $(document).ready(() => {
     })
     const setEventLimit = () => $('#elementsPerPageSection').change((e) => {
         currentValue.limit = e.target.value
-        currentValue.limit = e.target.value
         search_params.set('limit', e.target.value)
         url.search=search_params
         document.location.href = url
         //setPublications()
     })
 
+    const setEventPage = () => $('.pagination-link').click((e) => {
+        if (e.target.getAttribute('class') === 'pagination-link previous'){
+            currentValue.page = parseInt(currentValue.page) - 1
+        }
+        else if (e.target.getAttribute('class') === 'pagination-link next'){
+            currentValue.page = parseInt(currentValue.page) + 1
+        }
+        else {
+            currentValue.page = e.target.getAttribute('data-pagenumber')
+        }
+        search_params.set('page', currentValue.page)
+        url.search=search_params
+        document.location.href = url
+    })
+
 
     setEventSort()
     setEventOrder()
     setEventLimit()
+    setEventPage()
     setPublications()
-
-
-
 
 })

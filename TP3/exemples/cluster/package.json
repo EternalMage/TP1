@@ -1,0 +1,21 @@
+{
+  "name": "exemplecluster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "PORT=3001 nodemon app.js",
+    "startCluster": "PORT=3001 nodemon clusterapp.js",
+    "startReverseProxy": "PORT=3000 nodemon reverseproxyserver.js",
+    "benchmark": "node_modules/artillery/bin/artillery quick --count 50 -n 40 http://localhost:3000?max=100000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-proxy": "^1.17.0"
+  },
+  "devDependencies": {
+    "artillery": "^1.6.0-24"
+  }
+}

@@ -1,0 +1,15 @@
+doctype html
+
+header
+   title Liste d'attractions
+   script(src='/scripts/jquery-1.11.1.min.js')
+   script(src='/scripts/main.js')
+   link(rel='stylesheet',href='/styles/main.css')
+body
+   h1 Liste des attractions
+   table 
+     each d in data
+       tr 
+         td(class='item',id='#{d.id}') #{d.name}
+         td(class='retirer')
+           button Retirer

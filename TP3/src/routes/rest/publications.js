@@ -27,13 +27,13 @@ module.exports = servicePublication => {
 
     servicePublication.getPublications(pagingOpts)((err, publications) => {
       if (err) {
-        if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['MEMBERS_ERROR'] === undefined) {
+        if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUBS_ERROR'] === undefined) {
           res.status(500).json({
             'errors': [err.message]
           });
         } else {
           res.status(500).json({
-            'errors': [req.app.locals.t['ERRORS']['MEMBERS_ERROR']]
+            'errors': [req.app.locals.t['ERRORS']['PUBS_ERROR']]
           });
         }
       }

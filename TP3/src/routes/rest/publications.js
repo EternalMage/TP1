@@ -92,6 +92,7 @@ module.exports = servicePublication => {
         'errors': ERRORS
       });
     } else {
+
       const publicationBody = {
         title: req.body.title,
         year: req.body.year,
@@ -116,6 +117,37 @@ module.exports = servicePublication => {
         }
       })
     }
+  });
+
+  router.delete('/:id', (req, res, next) => {
+    servicePublication.removePublication(req.params.id)((err) => {
+      if (err) {
+        if (err.name === 'NOT_FOUND') {
+          if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_NOT_FOUND_ERROR'] === undefined) {
+            res.status(404).json({
+              'errors': [err.message]
+            });
+          } else {
+            res.status(500).json({
+              'errors': [req.app.locals.t['ERRORS']['PUB_NOT_FOUND_ERROR']]
+            });
+          }
+        }
+        else{
+          if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_DELETE_ERROR'] === undefined) {
+            res.status(404).json({
+              'errors': [err.message]
+            });
+          } else {
+            res.status(500).json({
+              'errors': [req.app.locals.t['ERRORS']['PUB_DELETE_ERROR']]
+            });
+          }
+        }
+      } else {
+        res.status(200).json('PUBLICATION DELETED (id = ' + req.params.id + ')');
+      }
+    });
   });
 
   return router

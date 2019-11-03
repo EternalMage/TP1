@@ -31,7 +31,7 @@ module.exports = (serviceProjects, servicePublication) => {
 
     serviceProjects.getProjectById(translationObj)(language)(id)((err, projects) => {
       if (err) {
-        console.log(err)
+        //console.log(err)
         if (err.name === 'NOT_FOUND') {
           if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PROJECT_NOT_FOUND_ERROR'] === undefined) {
             res.status(404).json({

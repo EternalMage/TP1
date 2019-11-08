@@ -47,6 +47,19 @@ router.post('/', (req, res, next) => {
         }
     })
 })
+router.delete('/', (req, res, next) => {
+    const limit = req.query.limit ? req.query.limit : 10
+    const page = req.query.page ? req.query.page : 1
+    const sort_by = req.query.sort_by ? req.query.sort_by : 'date'
+    const order_by = req.query.order_by ? req.query.order_by : 'desc'
+    request.delete(base_url, (error, response, body) => {
+        if (error) {
+            throw error
+        } else {
+            renderPubs(res, body, limit, sort_by, order_by, page)
+        }
+    })
+})
 router.get('/', (req, res, next) => {
     const limit = req.query.limit ? req.query.limit : 10
     const page = req.query.page ? req.query.page : 1

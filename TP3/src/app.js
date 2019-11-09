@@ -16,7 +16,7 @@ const config = require('./config.json')
 const MongoClient = require('mongodb').MongoClient
 const client = new MongoClient(config.dbUrl, { useNewUrlParser: true })
 console.log("Connecting to MongoDB ...")
-client.connect(err => {
+client.connect(async err => {
     if (err) {
         // Be sure that your IP address has been whitelisted in the firewall host of the MongoDB.
         throw err
@@ -25,21 +25,93 @@ client.connect(err => {
     const db = client.db(config.dbName)
 
     console.log("CONNECTED TO MONGODB")
-    insertDefaultDBData()
-
-
-    client.close()
+    await insertDefaultDBData(db)
+        //client.close()
 });
 
-const insertDefaultDBData = async() => {
+const collections = [
+    { name: "news", collection: undefined },
+    { name: "seminars", collection: undefined },
+    { name: "members", collection: undefined },
+    { name: "publications", collection: undefined },
+    { name: "projects", collection: undefined }
+]
+
+const findCollection = (name) => {
+    return collections[collections.findIndex(c => c.name === name)]
+}
+
+const deleteCollection = async(name, db) => {
+    try {
+        const collection = await db.collection(name)
+        await collection.drop()
+        console.log("===> Collection " + name + " deleted")
+    } catch (err) {
+        if (err.message === "ns not found") {
+            console.log("===> No collection by the name " + name + " in the DB.")
+        } else {
+            console.log("===> Error during collection deletion of " + name + " : " + err.message)
+        }
+
+    }
+}
+
+const createCollection = async(name, db) => {
+    try {
+        const collection = await db.createCollection(name)
+        console.log("===> Collection " + name + " created")
+        return collection
+    } catch (err) {
+        console.log("===> Error during collection creation of " + name + " : " + err.message)
+    }
+}
+
+const deleteCollections = db => {
+    let count = 0;
+    return new Promise((resolve) => {
+        collections.map(async(c, index) => {
+            await deleteCollection(c.name, db)
+            count++
+            if (count === collections.length) {
+                resolve();
+                console.log("resolve");
+            }
+        })
+    })
+}
+
+const createCollections = db => {
+    let count = 0;
+    return new Promise(resolve => {
+        collections.map(async(c) => {
+            c.collection = await createCollection(c.name, db)
+            count++
+            if (count === collections.length) {
+                resolve();
+                console.log("resolve");
+            }
+        })
+    })
+}
+
+const insertDefaultDBData = async(db) => {
+
+
 
     // DELETE COLLECTIONS
-    console.log("===> Deleting collections ...")
-        // console.log("===> Collections deleted ...")
+    console.log("===> Deleting Collections ...")
+    await deleteCollections(db)
+    console.log("===> Collections Deleted.")
+
+    // CREATING COLLECTIONS
+    console.log("===> Creating Collections ...")
+    await createCollections(db)
+    console.log("===> Collections Created.")
+
 
     // data/news.yml into news collection
-    // console.log("===> Creating News ...")
-    // console.log("===> News Created ...")
+    console.log("===> Inserting News ...")
+
 
     // data/seminars.yml into seminars collection
     // console.log("===> Creating Seminars ...")

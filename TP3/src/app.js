@@ -15,6 +15,15 @@ const directory = require('serve-index')
 const formatter = require('./helpers/formatter')
 
 const config = require('./config.json')
+
+const collections = [
+    { name: "news", collection: undefined },
+    { name: "seminars", collection: undefined },
+    { name: "members", collection: undefined },
+    { name: "publications", collection: undefined },
+    { name: "projects", collection: undefined }
+]
+
 const MongoClient = require('mongodb').MongoClient
 const client = new MongoClient(config.dbUrl, { useNewUrlParser: true })
 
@@ -28,20 +37,50 @@ client.connect(async err => {
     const db = client.db(config.dbName)
 
     console.log("===> CONNECTED TO MONGODB")
-    await insertDefaultDBData(db)
-        //client.close()
+    await populateDB(db)
+    startServer()
 });
 
-const collections = [
-    { name: "news", collection: undefined },
-    { name: "seminars", collection: undefined },
-    { name: "members", collection: undefined },
-    { name: "publications", collection: undefined },
-    { name: "projects", collection: undefined }
-]
+const populateDB = async(db) => {
+    // DELETE COLLECTIONS
+    console.log("===> Deleting Collections ...")
+    await deleteCollections(db)
+    console.log("===> Collections Deleted.")
 
-const findCollection = (name) => {
-    return collections[collections.findIndex(c => c.name === name)]
+    // CREATING COLLECTIONS
+    console.log("===> Creating Collections ...")
+    await createCollections(db)
+    console.log("===> Collections Created.")
+
+    // data/news.yml into news collection
+    console.log("===> Inserting News ...")
+    const news = await obtainNews()
+    await db.collection('news').insertMany(news)
+    console.log("===> News Inserted ...")
+
+    // data/seminars.yml into seminars collection
+    console.log("===> Inserting Seminars ...")
+    const seminars = await obtainSeminars()
+    await db.collection('seminars').insertMany(seminars)
+    console.log("===> Seminars Inserted ...")
+
+    // data/team.yml into members collection
+    console.log("===> Inserting Members ...")
+    const team = await obtainTeam()
+    await db.collection('members').insertMany(team)
+    console.log("===> Members Inserted ...")
+
+    // data/publications.yml into publications collection
+    console.log("===> Inserting Publications ...")
+    const publications = await obtainPublications()
+    await db.collection('publications').insertMany(publications)
+    console.log("===> Publications Inserted ...")
+
+    // data/projects.yml into projects collection (with _id of MongoDB)
+    console.log("===> Inserting Projects ...")
+    const projects = await obtainProjects()
+    await db.collection('projects').insertMany(projects)
+    console.log("===> Projects Inserted ...")
 }
 
 const deleteCollection = async(name, db) => {
@@ -77,7 +116,6 @@ const deleteCollections = db => {
             count++
             if (count === collections.length) {
                 resolve();
-                console.log("resolve");
             }
         })
     })
@@ -91,7 +129,6 @@ const createCollections = db => {
             count++
             if (count === collections.length) {
                 resolve();
-                console.log("resolve");
             }
         })
     })
@@ -101,7 +138,7 @@ const obtainNews = async => {
     return new Promise((resolve, reject) => {
         fs.readFile('./data/news.yml', 'utf8', (err, content) => {
             if (err) {
-                callback(err, null)
+                reject(err)
             } else {
                 const yamlContentOpt = yaml.safeLoad(content)
                 const news = ((yamlContentOpt === null) ? [] : yamlContentOpt)
@@ -126,7 +163,7 @@ const obtainSeminars = async => {
     return new Promise((resolve, reject) => {
         fs.readFile('./data/seminars.yml', 'utf8', (err, content) => {
             if (err) {
-                callback(err, null)
+                reject(err)
             } else {
                 const yamlContentOpt = yaml.safeLoad(content)
                 const seminars = ((yamlContentOpt === null) ? [] : yamlContentOpt)
@@ -173,120 +210,127 @@ const obtainTeam = async => {
     })
 }
 
+const obtainPublications = async => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./data/publications.yml', 'utf8', (err, content) => {
+            if (err) {
+                reject(err)
+            } else {
+                const yamlContentOpt = yaml.safeLoad(content)
+                const publications = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                    .map(publication => {
+                        delete publication.key
+                        return {
+                            ...publication,
+                            month: (publication.month === undefined) ? undefined : moment().month(publication.month - 1).format('MMMM')
+                        }
+                    })
+                resolve(publications)
+            }
+        })
+    })
 
-const insertDefaultDBData = async(db) => {
-    // DELETE COLLECTIONS
-    console.log("===> Deleting Collections ...")
-    await deleteCollections(db)
-    console.log("===> Collections Deleted.")
-
-    // CREATING COLLECTIONS
-    console.log("===> Creating Collections ...")
-    await createCollections(db)
-    console.log("===> Collections Created.")
-
-
-    // data/news.yml into news collection
-    console.log("===> Inserting News ...")
-    const news = await obtainNews()
-    await db.collection('news').insertMany(news)
-    console.log("===> News Inserted ...")
-
-    // data/seminars.yml into seminars collection
-    console.log("===> Inserting Seminars ...")
-    const seminars = await obtainSeminars()
-    await db.collection('seminars').insertMany(seminars)
-    console.log("===> Seminars Inserted ...")
-
-    // data/team.yml into members collection
-    console.log("===> Creating Members ...")
-    const team = await obtainTeam()
-    await db.collection('members').insertMany(team)
-    console.log("===> Members Created ...")
-
-    // data/publications.yml into publications collection
-    console.log("===> Creating Publications ...")
-
-    //  console.log("===> Publications Created ...")
-
-    // data/projects.yml into projects collection (with _id of MongoDB)
-    // console.log("===> Creating Projects ...")
-    // console.log("===> Projects Created ...")
 }
 
+const obtainProjects = async => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./data/projects.yml', 'utf8', (err, content) => {
+            if (err) {
+                reject(err)
+            } else {
+                const yamlContentOpt = yaml.safeLoad(content)
+                const projects = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                    .map(project => {
+                        const translatedTitle_fr = getTranslation('fr', project.title)
+                        const translatedDescription_fr = getTranslation('fr', project.description)
+                        const translatedTitle_en = getTranslation('en', project.title)
+                        const translatedDescription_en = getTranslation('en', project.description)
+                        return {
+                            ...project,
+                            title: { fr: translatedTitle_fr, en: translatedTitle_en },
+                            description: { fr: translatedDescription_fr, en: translatedDescription_en },
+                            publications: (project.publications === undefined) ? [] : project.publications
+                        }
+                    })
+                resolve(projects)
+            }
+        })
+    })
+}
 
+const startServer = () => {
+    // Possibilité de spécifier le numéro de port par ligne de commande.
+    const port = process.env.PORT || 3000
 
-// Possibilité de spécifier le numéro de port par ligne de commande.
-const port = process.env.PORT || 3000
+    // Initialisation de l'engin de la vue Pug
+    app.set('views', path.join(__dirname, '/views'))
+    app.engine('pug', require('pug').__express)
+    app.set('view engine', 'pug')
 
-// Initialisation de l'engin de la vue Pug
-app.set('views', path.join(__dirname, '/views'))
-app.engine('pug', require('pug').__express)
-app.set('view engine', 'pug')
+    // Initialisation des fichiers statiques
+    app.use(express.static(path.join(__dirname, '/public')))
 
-// Initialisation des fichiers statiques
-app.use(express.static(path.join(__dirname, '/public')))
+    // Initialisation du bodyParser pour être capable de récupérer le contenu JSON
+    // d'un corpus de requête HTTP.
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
 
-// Initialisation du bodyParser pour être capable de récupérer le contenu JSON
-// d'un corpus de requête HTTP.
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+    // Initialisation de express-session pour être capable de l'utiliser
+    app.use(cookieParser())
+    app.use(session({
+        secret: 'log4420',
+        resave: true,
+        saveUninitialized: true,
+        cookie: { maxAge: 60000 }
+    }))
 
-// Initialisation de express-session pour être capable de l'utiliser
-app.use(cookieParser())
-app.use(session({
-    secret: 'log4420',
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
-}))
+    // Initialisation de l'internationalisation
+    app.use(i18n({
+        translationsPath: path.join(__dirname, 'locales'),
+        browserEnable: false,
+        defaultLang: 'fr',
+        siteLangs: ['fr', 'en'],
+        cookieLangName: 'ulang',
+        textsVarName: 't'
+    }))
 
-// Initialisation de l'internationalisation
-app.use(i18n({
-    translationsPath: path.join(__dirname, 'locales'),
-    browserEnable: false,
-    defaultLang: 'fr',
-    siteLangs: ['fr', 'en'],
-    cookieLangName: 'ulang',
-    textsVarName: 't'
-}))
+    // Initialisation de la langue de momentjs
+    moment.locale(['fr', 'en'])
+    app.locals.formatter = formatter
 
-// Initialisation de la langue de momentjs
-moment.locale(['fr', 'en'])
-app.locals.formatter = formatter
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*')
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+        next()
+    })
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-    next()
-})
+    // Fichier de définitions des routes de l'applications
+    app.use(require('./routes'))
+    app.use('/api', require('./routes/rest'))
 
-// Fichier de définitions des routes de l'applications
-app.use(require('./routes'))
-app.use('/api', require('./routes/rest'))
+    // Si l'URL n'a pas pu être traité par les middlewares précédents, on envoie
+    // une page d'erreur 404.
+    app.use((req, res, next) => {
+        next(createError(404))
+    })
 
-// Si l'URL n'a pas pu être traité par les middlewares précédents, on envoie
-// une page d'erreur 404.
-app.use((req, res, next) => {
-    next(createError(404))
-})
+    // error handler
+    app.use((err, req, res, next) => {
+        // set locals, only providing error in development
+        res.locals.message = err.message
+        res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-// error handler
-app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message
-    res.locals.error = req.app.get('env') === 'development' ? err : {}
+        // render the error page
+        res.status(err.status || 500)
+        res.render('error')
+    })
 
-    // render the error page
-    res.status(err.status || 500)
-    res.render('error')
-})
-
-// Amorçage de l'application web avec la base de données
-// À COMPLÉTER
-app.listen(port, function() {
-    console.log('Listening on port ' + port)
-})
+    // Amorçage de l'application web avec la base de données
+    // À COMPLÉTER
+    app.listen(port, function() {
+        console.log('Listening on port ' + port)
+    })
+}
 
 module.exports = app

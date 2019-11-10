@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const { getTranslation } = require('./services/utils')
 const path = require('path')
 const createError = require('http-errors')
 const bodyParser = require('body-parser')
@@ -8,6 +8,8 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const moment = require('moment')
 const i18n = require('i18n-express')
+const fs = require('fs')
+const yaml = require('js-yaml')
 const directory = require('serve-index')
 
 const formatter = require('./helpers/formatter')
@@ -94,10 +96,33 @@ const createCollections = db => {
     })
 }
 
+const obtainNews = async => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./data/news.yml', 'utf8', (err, content) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                const yamlContentOpt = yaml.safeLoad(content)
+                const news = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                    .map(s => {
+                        const text_fr = getTranslation('fr', s.text)
+                        const text_en = getTranslation('en', s.text)
+                        const newCreatedAtDate = moment(s.createdAt, 'YYYY-MM-DD HH:mm:ss').toDate()
+                        return {
+                            ...s,
+                            text: { fr: text_fr, en: text_en },
+                            type: 'news',
+                            createdAt: newCreatedAtDate
+                        }
+                    })
+                resolve(news)
+            }
+        })
+    })
+}
+
+
 const insertDefaultDBData = async(db) => {
-
-
-
     // DELETE COLLECTIONS
     console.log("===> Deleting Collections ...")
     await deleteCollections(db)
@@ -111,7 +136,9 @@ const insertDefaultDBData = async(db) => {
 
     // data/news.yml into news collection
     console.log("===> Inserting News ...")
-
+    const news = await obtainNews()
+    await db.collection('news').insertMany(news)
+    console.log("===> News Inserted ...")
 
     // data/seminars.yml into seminars collection
     // console.log("===> Creating Seminars ...")

@@ -17,7 +17,8 @@ const formatter = require('./helpers/formatter')
 const config = require('./config.json')
 const MongoClient = require('mongodb').MongoClient
 const client = new MongoClient(config.dbUrl, { useNewUrlParser: true })
-console.log("Connecting to MongoDB ...")
+
+console.log("===> Connecting to MongoDB ...")
 client.connect(async err => {
     if (err) {
         // Be sure that your IP address has been whitelisted in the firewall host of the MongoDB.
@@ -26,7 +27,7 @@ client.connect(async err => {
 
     const db = client.db(config.dbName)
 
-    console.log("CONNECTED TO MONGODB")
+    console.log("===> CONNECTED TO MONGODB")
     await insertDefaultDBData(db)
         //client.close()
 });
@@ -121,6 +122,57 @@ const obtainNews = async => {
     })
 }
 
+const obtainSeminars = async => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./data/seminars.yml', 'utf8', (err, content) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                const yamlContentOpt = yaml.safeLoad(content)
+                const seminars = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                    .map(s => {
+                        const translatedTitle_fr = getTranslation('fr', s.title)
+                        const translatedDescription_fr = getTranslation('fr', s.description)
+                        const translatedTitle_en = getTranslation('en', s.title)
+                        const translatedDescription_en = getTranslation('en', s.description)
+                        const newDate = moment(s.date, 'YYYY-MM-DD HH:mm:ss').toDate()
+                        const newCreatedAtDate = moment(s.createdAt, 'YYYY-MM-DD HH:mm:ss').toDate()
+                        return {
+                            ...s,
+                            title: { fr: translatedTitle_fr, en: translatedTitle_en },
+                            description: { fr: translatedDescription_fr, en: translatedDescription_en },
+                            type: 'seminar',
+                            date: newDate,
+                            createdAt: newCreatedAtDate
+                        }
+                    })
+                resolve(seminars)
+            }
+        })
+    })
+}
+
+const obtainTeam = async => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./data/team.yml', 'utf8', (err, content) => {
+            if (err) {
+                reject(err)
+            } else {
+                const yamlContentOpt = yaml.safeLoad(content)
+                const team = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                    .sort((m1, m2) => {
+                        if (m1.lastname === m2.lastname) {
+                            return (m1.firstname < m2.firstname) ? -1 : (m1.firstname > m2.firstname) ? 1 : 0
+                        } else {
+                            return (m1.lastname < m2.lastname) ? -1 : 1
+                        }
+                    })
+                resolve(team)
+            }
+        })
+    })
+}
+
 
 const insertDefaultDBData = async(db) => {
     // DELETE COLLECTIONS
@@ -141,16 +193,21 @@ const insertDefaultDBData = async(db) => {
     console.log("===> News Inserted ...")
 
     // data/seminars.yml into seminars collection
-    // console.log("===> Creating Seminars ...")
-    // console.log("===> Seminars Created ...")
+    console.log("===> Inserting Seminars ...")
+    const seminars = await obtainSeminars()
+    await db.collection('seminars').insertMany(seminars)
+    console.log("===> Seminars Inserted ...")
 
     // data/team.yml into members collection
-    // console.log("===> Creating Members ...")
-    // console.log("===> Members Created ...")
+    console.log("===> Creating Members ...")
+    const team = await obtainTeam()
+    await db.collection('members').insertMany(team)
+    console.log("===> Members Created ...")
 
     // data/publications.yml into publications collection
-    // console.log("===> Creating Publications ...")
-    // console.log("===> Publications Created ...")
+    console.log("===> Creating Publications ...")
+
+    //  console.log("===> Publications Created ...")
 
     // data/projects.yml into projects collection (with _id of MongoDB)
     // console.log("===> Creating Projects ...")

@@ -1,5 +1,7 @@
 const moment = require('moment')
-const { getTranslation } = require('../utils')
+const {
+  getTranslation
+} = require('../utils')
 
 /**
  * Fonction de rappel pour récupérer les séminaires
@@ -20,7 +22,27 @@ const { getTranslation } = require('../utils')
  */
 const getSeminars = db => query => language => callback => {
   // À COMPLÉTER
-  callback(null, [])
+  // .find({}) = findAll = SELECT
+  db.collection("seminars").find({}).toArray(function (err, result) {
+    console.log('GET SEMINARS FROM DATABASE');
+    if (err) callback(err, []);
+    //console.log(result);
+    const seminars = result.map(seminar => {
+      const translatedTitle = getTranslation(language, seminar.title)
+      const translatedDescription = getTranslation(language, seminar.description)
+      const newDate = moment(seminar.date, 'YYYY-MM-DD HH:mm:ss').toDate()
+      const newCreatedAtDate = moment(seminar.createdAt, 'YYYY-MM-DD HH:mm:ss').toDate()
+      return {
+        ...seminar,
+        title: translatedTitle,
+        description: translatedDescription,
+        type: 'seminar',
+        date: newDate,
+        createdAt: newCreatedAtDate
+      }
+    })
+    callback(null, seminars);
+  });
 }
 
 module.exports = db => {

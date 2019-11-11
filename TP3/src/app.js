@@ -220,6 +220,7 @@ const obtainPublications = async => {
                 const yamlContentOpt = yaml.safeLoad(content)
                 const publications = ((yamlContentOpt === null) ? [] : yamlContentOpt)
                     .map(publication => {
+                        publication._id = publication.key
                         delete publication.key
                         return {
                             ...publication,

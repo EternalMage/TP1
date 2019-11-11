@@ -1,5 +1,5 @@
 const {
-  getTranslation
+    getTranslation
 } = require('../utils')
 const ObjectId = require('mongodb').ObjectId
 
@@ -19,23 +19,25 @@ const ObjectId = require('mongodb').ObjectId
  *  @param {projectsCallback} callback - Fonction de rappel pour obtenir le résultat
  */
 const getProjects = db => language => callback => {
-  // À COMPLÉTER
-  // .find({}) = findAll = SELECT
-  db.collection("projects").find({}).toArray(function (err, result) {
-    console.log('GET PROJECTS FROM DATABASE');
-    if (err) callback(err, []);
-    const projects = result.map(project => {
-      const translatedTitle = getTranslation(language, project.title)
-      const translatedDescription = getTranslation(language, project.description)
-      return {
-        ...project,
-        title: translatedTitle,
-        description: translatedDescription,
-        publications: (project.publications === undefined) ? [] : project.publications
-      }
-    })
-    callback(null, projects);
-  });
+    // À COMPLÉTER
+    // .find({}) = findAll = SELECT
+    db.collection("projects").find({}).toArray(function(err, result) {
+        console.log('GET PROJECTS FROM DATABASE');
+        if (err) callback(err, []);
+        const projects = result.map(project => {
+            const translatedTitle = getTranslation(language, project.title)
+            const translatedDescription = getTranslation(language, project.description)
+            console.log('===> PUBLICATIONS : ' + JSON.stringify(project.publications));
+
+            return {
+                ...project,
+                title: translatedTitle,
+                description: translatedDescription,
+                publications: (project.publications === undefined) ? [] : project.publications
+            }
+        })
+        callback(null, projects);
+    });
 }
 
 /**
@@ -56,27 +58,37 @@ const getProjects = db => language => callback => {
  *  @param {projectCallback} callback - Fonction de rappel pour obtenir le résultat
  */
 const getProjectById = db => translationObj => language => id => callback => {
-  // À COMPLÉTER
-  let query = {
-    "_id": id
-  }
-  db.collection("projects").find({}, query).toArray(function (err, result) {
-    console.log('GET PROJECTS BY ID FROM DATABASE');
-    if (err) {
-      const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS' ['PROJECT_NOT_FOUND_MSG']]
-      const error = new Error(errorMsg)
-      error.name = 'NOT_FOUND';
-      callback(error, []);
-    }
-    callback(null, result);
-  });
+    // À COMPLÉTER
+    getProjects(db)(language)((err, projects) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            console.log("PROJECTS => " +
+                JSON.stringify(projects))
+            const projectOpt = projects.find(p => p._id === id)
+            db.collection("publications").find({ "_id": { $in: projectOpt.publications } }).toArray((error, result) => {
+                if (err) {
 
-  //callback()
+                } else {
+                    projectOpt.publications = result
+                    if (projectOpt) {
+                        callback(null, projectOpt)
+                    } else {
+                        const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS' ['PROJECT_NOT_FOUND_MSG']]
+                        const error = new Error(errorMsg)
+                        error.name = 'NOT_FOUND'
+                        callback(error, null)
+                    }
+                }
+
+            })
+        }
+    })
 }
 
 module.exports = db => {
-  return {
-    getProjects: getProjects(db),
-    getProjectById: getProjectById(db)
-  }
+    return {
+        getProjects: getProjects(db),
+        getProjectById: getProjectById(db)
+    }
 }

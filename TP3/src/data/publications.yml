@@ -104,7 +104,7 @@ Knowledge base in French"
   title: "Assessing the Quality of Domain Concepts Descriptions in DBpedia"
   venue: "12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"
 
-- key: deniger2015
+- key: deniger2015-2
   year: 2015
   month: 11
   authors: [Christophe Deniger, Alphonsine Beauchamps, Michel Deslauriers]
@@ -137,7 +137,7 @@ Knowledge base in French"
   title: "Improving Entity Linking using Surface Form Refinement"
   venue: "9th edition of the Language Resources and Evaluation Conference,  Reykjavik, Iceland"
 
-- key: paquin2014
+- key: paquin2014-3
   year: 2014
   authors: [Laurent Paquin, Catherine Levac, Jean-Marc Parent, Michel Deslauriers]
   title: "Using Collaborative Tagging for Text Classification to Opinion Mining"
@@ -245,13 +245,13 @@ Knowledge base in French"
   title: "Didactic and theoretical-based perspectives in the experimental development of an intelligent tutorial system for the learning of geometry"
   venue: "ZDM, The International Journal on Mathematics Education, vol.43, no.3, p.425-439"
 
-- key: paquin2011
+- key: paquin2011-2
   year: 2011
   authors: [Laurent Paquin, Michel Deslauriers, Mike Ward]
   title: "Automatic Semantic Web annotation of named entities"
   venue: "Canadian Conference on Artificial Intelligence 2011, St. John's, Newfoundland and Labrador"
 
-- key: paquin2011
+- key: paquin2011-3
   year: 2011
   authors: [Laurent Paquin, Michel Deslauriers, Mike Ward]
   title: "Génération automatique de motifs de détection d’entités nommées en utilisant des contenus encyclopédiques"

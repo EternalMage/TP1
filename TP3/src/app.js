@@ -35,6 +35,7 @@ client.connect(async err => {
     }
 
     const db = client.db(config.dbName)
+    app.db = db // Create a db variable that reference mongodb in app.js, so it can be accessible req.app.db
 
     console.log("===> CONNECTED TO MONGODB")
     await populateDB(db)

@@ -39,7 +39,9 @@ router.post('/', (req, res, next) => {
     const page = req.query.page ? req.query.page : 1
     const sort_by = req.query.sort_by ? req.query.sort_by : 'date'
     const order_by = req.query.order_by ? req.query.order_by : 'desc'
-    request.post(base_url, (error, response, body) => {
+    console.log("SEND TO API -> " + req.body)
+    console.log(JSON.stringify(req.body))
+    request.post(base_url, { form: req.body }, (error, response, body) => {
         if (error) {
             throw error
         } else {

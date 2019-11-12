@@ -116,8 +116,13 @@ const createPublication = db => publication => callback => {
     publication._id = publication.key
     delete publication.key
     db.collection('publications').insert(publication, (err, publication_id) => {
-        console.log("===> Publication Created. " + publication_id)
-        callback()
+        if (err) {
+            console.log("===> Error when trying to create publication. " + err.message)
+            callback(err, null)
+        } else {
+            console.log("===> Publication Created. " + publication_id)
+            callback()
+        }
     })
 }
 
@@ -130,7 +135,15 @@ const createPublication = db => publication => callback => {
  */
 const removePublication = db => id => callback => {
     // À COMPLÉTER
-    callback()
+    db.collection('publications').remove({ "_id": id }, (err, publication) => {
+        if (err) {
+            console.log("===> Error when trying to delete publication. " + err.message)
+            callback(err, null)
+        } else {
+            console.log("===> Publication Deleted. ")
+            callback()
+        }
+    })
 }
 
 /**

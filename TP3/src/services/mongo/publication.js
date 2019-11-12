@@ -113,7 +113,12 @@ const comparePublications = pagingOpts => (p1, p2) => {
  */
 const createPublication = db => publication => callback => {
     // À COMPLÉTER
-    callback()
+    publication._id = publication.key
+    delete publication.key
+    db.collection('publications').insert(publication, (err, publication_id) => {
+        console.log("===> Publication Created. " + publication_id)
+        callback()
+    })
 }
 
 /**

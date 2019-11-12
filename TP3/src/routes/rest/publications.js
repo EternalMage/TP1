@@ -6,7 +6,6 @@ module.exports = servicePublication => {
 
     // À COMPLÉTER
     router.get('/', (req, res, next) => {
-
         // url params verification, if true, set variables to given value, else, set to default value
         // GET /something?color1=red&color2=blue => use req.query.color1
         // GET sample/:id => use req.params.id
@@ -44,7 +43,9 @@ module.exports = servicePublication => {
     });
 
     router.post('/', (req, res, next) => {
-        // Publication body rules
+        console.log(req.body.year)
+        console.log("===> Requesting Publication Creation..." + req.body)
+            // Publication body rules
         const TITLE_CHAR_MIN = 5;
         const MONTH_MIN = 0;
         const MONTH_MAX = 11;
@@ -101,7 +102,7 @@ module.exports = servicePublication => {
                 authors: req.body.authors,
                 venue: req.body.venue
             };
-
+            console.log("===> Creating Publication..." + JSON.stringify(publicationBody))
             servicePublication.createPublication(publicationBody)((err) => {
                 if (err) {
                     if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_CREATE_ERROR'] === undefined) {

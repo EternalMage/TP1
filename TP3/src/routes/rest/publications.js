@@ -64,7 +64,6 @@ module.exports = servicePublication => {
         }
 
         // Check if body is empty
-        console.log("===> Content BODY : " + JSON.stringify(Object.keys(req.body)))
         if (Object.keys(req.body).length === 0) {
             pushError('PUB_CREATE_ERROR')
         }
@@ -75,22 +74,22 @@ module.exports = servicePublication => {
         }
 
         // Check is year is >=0
-        console.log("===> Number ? : " + typeof Number(req.body.year) + " | value " + req.body.year + " | " + Number(req.body.year))
         if (req.body.year < 0 || req.body.year === undefined || isNaN(Number(req.body.year))) {
             pushError('YEAR_NOT_INT_FORM');
         }
 
         // Check if MONTH_MIN =< month =< MONTH_MAX
-        if (req.body.month < MONTH_MIN || req.body.month > MONTH_MAX) {
+        if (req.body.month < MONTH_MIN || req.body.month > MONTH_MAX || req.body.month === undefined || isNaN(Number(req.body.month))) {
             pushError('MONTH_ERROR_FORM');
         }
 
         // Check if title.length >= 5
-        if (req.body.title.length < TITLE_CHAR_MIN) {
+        //console.log("===> Title ? : " + req.body.title)
+        if (req.body.title === undefined || req.body.title.length < TITLE_CHAR_MIN) {
             pushError('PUB_AT_LEAST_5_CHAR_FORM');
         }
 
-        if (req.body.venue.length < VENUE_CHAR_MIN) {
+        if (req.body.venue === undefined || req.body.venue.length < VENUE_CHAR_MIN ) {
             pushError('VENUE_AT_LEAST_5_CHAR_FORM');
         }
 
@@ -108,7 +107,7 @@ module.exports = servicePublication => {
                 venue: req.body.venue
             };
             console.log("===> Creating Publication..." + JSON.stringify(publicationBody))
-            servicePublication.createPublication(publicationBody)((err) => {
+            servicePublication.createPublication(publicationBody)((err, result) => {
                 if (err) {
                     if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_CREATE_ERROR'] === undefined) {
                         res.status(500).json({
@@ -120,14 +119,14 @@ module.exports = servicePublication => {
                         });
                     }
                 } else {
-                    res.status(201).json('PUBLICATION CREATED');
+                    res.status(201).json(result);
                 }
             })
         }
     });
 
     router.delete('/:id', (req, res, next) => {
-        servicePublication.removePublication(req.params.id)((err) => {
+        servicePublication.removePublication(req.params.id)((err, result) => {
             if (err) {
                 if (err.name === 'NOT_FOUND') {
                     if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_NOT_FOUND_ERROR'] === undefined) {
@@ -151,7 +150,7 @@ module.exports = servicePublication => {
                     }
                 }
             } else {
-                res.status(200).json('PUBLICATION DELETED (id = ' + req.params.id + ')');
+                res.status(200).send('done');
             }
         });
     });

@@ -1,0 +1,221 @@
+
+> TP3-LOG4420@0.0.1 test C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src
+> npm run setup && node node_modules/nyc/bin/nyc --reporter=html --reporter=text node_modules/mocha/bin/mocha --recursive --reporter=spec --color=false tests
+
+
+> TP3-LOG4420@0.0.1 setup C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src
+> node setup.js
+
+
+
+  GET /api/feed
+    √ should get feeds
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+
+  GET /api/members
+    √ should get members
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+
+  GET /api/projects
+    √ should get projects
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+===> projects : {"publications":[]}
+    √ should get specific project
+    √ should send 404 if project not found
+    √ should handle errors in fetching specific project
+    √ should send default error in fetching specific project
+
+  GET /api/publications
+    √ should get publications (477ms)
+    √ should handle errors in fetching data
+    √ should send default error message if not defined (54ms)
+
+  POST /api/publications
+2000
+===> Requesting Publication Creation...[object Object]
+===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
+    √ should send error if cannot create publication (66ms)
+    1) should send error if no publication is sent
+    2) should send error if empty publication is sent
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if no author is defined
+undefined
+===> Requesting Publication Creation...[object Object]
+    √ should send error if no year is defined
+ab
+===> Requesting Publication Creation...[object Object]
+    √ should send error if year is not an int
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if no month is defined
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if month is not an int
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if month is not between 0 and 11
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if no title is defined
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if title has less than 5 characters
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if no venue is defined
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send error if venue has less than 5 characters
+2000
+===> Requesting Publication Creation...[object Object]
+    √ should send cascading errors if errors in publication creation
+2000
+===> Requesting Publication Creation...[object Object]
+===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
+    √ should create publication if body is valid
+
+  DELETE /api/publications
+    √ should remove publication by id
+    √ should handle errors in fetching data
+    3) should return 404 if project does not exist
+
+  Feeds service
+    getFeeds
+      √ should send error if one of services send error
+      √ should combination of news and seminars services sorted by creation date
+
+  News service
+    √ should load news from yaml file
+    √ should send error if file does not exist
+    √ should send empty array if file is empty
+
+  Projects service
+    getProjects
+      √ should load projects from yaml file
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+      √ should put empty array for undefined publications in yaml file
+    getProjectsById
+      √ should send error if file does not exist
+      √ should get specific project by id
+      √ should return null for non-existant project
+
+  Publication service
+    getPublications
+      √ should load publications from yaml content with year/month parsed date
+      √ should send error if file does not exist
+      √ should load publications from yaml content with year only if month not provided
+    getPublicationsByIds
+      √ should load publications related to given project
+      √ should load empty publications if project does not have publications
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+    getNumberOfPublications
+      √ should find number of publications
+      √ should return 0 if file is empty
+
+  Seminars service
+    getSeminars
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+      √ without query should load all seminars from yaml file
+      √ should filter seminars before specified date using from query
+      √ should sort seminars by date field and ascending order
+      √ should sort seminars by date field and descending order
+
+  Team service
+    √ should load members from yaml file
+    √ should send error if file does not exist
+    √ should send empty array if file is empty
+    √ should sort members by lastname if they are not equal
+    √ should sort members by firstname if lastname is equal
+
+  utils.getTranslation
+    √ should provide translation for field in given language
+    √ should return empty string for undefined field
+    √ should default in fr language if not existing
+
+
+  66 passing (845ms)
+  3 failing
+
+  1) POST /api/publications should send error if no publication is sent:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  2) POST /api/publications should send error if empty publication is sent:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  3) DELETE /api/publications should return 404 if project does not exist:
+
+      Error: expected { errors: [ 'Aie... Erreur...' ] } response body, got { errors: [ 'Erreur' ] }
+      + expected - actual
+
+       {
+         "errors": [
+      -    "Erreur"
+      +    "Aie... Erreur..."
+         ]
+       }
+      
+      at error (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:301:13)
+      at Test._assertBody (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:205:14)
+      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+
+
+------------------|----------|----------|----------|----------|-------------------|
+File              |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------------|----------|----------|----------|----------|-------------------|
+All files         |    52.08 |    51.95 |    49.16 |    52.35 |                   |
+ helpers          |        0 |      100 |        0 |        0 |                   |
+  formatter.js    |        0 |      100 |        0 |        0 |           1,3,4,5 |
+ routes           |        0 |        0 |        0 |        0 |                   |
+  home.js         |        0 |        0 |        0 |        0 |... 16,19,20,22,29 |
+  index.js        |        0 |      100 |        0 |        0 |  1,2,4,5,6,7,8,10 |
+  projects.js     |        0 |        0 |        0 |        0 |... 35,39,40,42,49 |
+  publications.js |        0 |        0 |        0 |        0 |... 71,72,73,75,80 |
+  team.js         |        0 |        0 |        0 |        0 |... 14,17,18,20,27 |
+ routes/rest      |    86.29 |    89.32 |       95 |    86.29 |                   |
+  feed.js         |      100 |      100 |      100 |      100 |                   |
+  index.js        |        0 |      100 |        0 |        0 |... 10,11,12,13,15 |
+  members.js      |    90.91 |    85.71 |      100 |    90.91 |                20 |
+  projects.js     |    96.43 |    95.24 |      100 |    96.43 |                37 |
+  publications.js |    91.94 |    86.76 |      100 |    91.94 | 60,68,113,137,143 |
+ services         |      100 |      100 |      100 |      100 |                   |
+  feed.js         |      100 |      100 |      100 |      100 |                   |
+  utils.js        |      100 |      100 |      100 |      100 |                   |
+ services/mongo   |    17.53 |        0 |        0 |    21.77 |                   |
+  factory.js      |        0 |      100 |        0 |        0 |               1,2 |
+  news.js         |       25 |        0 |        0 |    30.77 |... 28,29,30,37,42 |
+  projects.js     |     11.9 |        0 |        0 |    15.15 |... 84,85,89,90,97 |
+  publication.js  |    14.29 |        0 |        0 |    17.65 |... 67,168,170,176 |
+  seminar.js      |    21.05 |        0 |        0 |    26.67 |... 33,34,35,44,49 |
+  team.js         |    41.67 |        0 |        0 |       50 |    18,19,20,22,27 |
+ services/yaml    |    87.65 |    69.66 |    87.88 |    86.92 |                   |
+  factory.js      |        0 |      100 |        0 |        0 |               1,2 |
+  news.js         |      100 |      100 |      100 |      100 |                   |
+  projects.js     |      100 |       80 |      100 |      100 |                68 |
+  publication.js  |    67.92 |    41.94 |    70.83 |    65.85 |... 92,93,94,95,97 |
+  seminar.js      |    97.73 |    77.78 |      100 |    97.06 |               103 |
+  team.js         |      100 |      100 |      100 |      100 |                   |
+------------------|----------|----------|----------|----------|-------------------|

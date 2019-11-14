@@ -76,7 +76,7 @@ module.exports = servicePublication => {
 
         // Check is year is >=0
         console.log("===> Number ? : " + typeof Number(req.body.year) + " | value " + req.body.year + " | " + Number(req.body.year))
-        if (req.body.year < 0 || req.body.year === undefined || typeof Number(req.body.year) !== 'number') {
+        if (req.body.year < 0 || req.body.year === undefined || isNaN(Number(req.body.year))) {
             pushError('YEAR_NOT_INT_FORM');
         }
 

@@ -6,3 +6,981 @@
 > TP3-LOG4420@0.0.1 setup C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src
 > node setup.js
 
+
+
+  GET /api/feed
+    √ should get feeds (175ms)
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+
+  GET /api/members
+    √ should get members
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+
+  GET /api/projects
+    √ should get projects
+    √ should handle errors in fetching data
+    √ should send default error message if not defined
+===> projects : {"publications":[]}
+    √ should get specific project
+    √ should send 404 if project not found
+    √ should handle errors in fetching specific project
+    √ should send default error in fetching specific project
+
+  GET /api/publications
+    √ should get publications (846ms)
+    √ should handle errors in fetching data
+    √ should send default error message if not defined (75ms)
+
+  POST /api/publications
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
+    √ should send error if cannot create publication (259ms)
+    1) should send error if no publication is sent
+    2) should send error if empty publication is sent
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","month","year"]
+===> Number ? : number | value 2000 | 2000
+    √ should send error if no author is defined
+undefined
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month"]
+===> Number ? : number | value undefined | NaN
+    √ should send error if no year is defined (80ms)
+ab
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value ab | NaN
+    √ should send error if year is not an int
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","year"]
+===> Number ? : number | value 2000 | 2000
+===> Creating Publication...{"title":"Mon titre","year":2000,"authors":["Auteur"],"venue":"Ma conference"}
+    3) should send error if no month is defined
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+===> Creating Publication...{"title":"Mon titre","year":2000,"month":"ab","authors":["Auteur"],"venue":"Ma conference"}
+    4) should send error if month is not an int
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    √ should send error if month is not between 0 and 11
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    5) should send error if no title is defined
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    √ should send error if title has less than 5 characters
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    6) should send error if no venue is defined
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    √ should send error if venue has less than 5 characters
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+    7) should send cascading errors if errors in publication creation
+2000
+===> Requesting Publication Creation...[object Object]
+===> Content BODY : ["title","venue","authors","month","year"]
+===> Number ? : number | value 2000 | 2000
+===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
+    8) should create publication if body is valid
+
+  DELETE /api/publications
+    9) should remove publication by id
+    √ should handle errors in fetching data
+    10) should return 404 if project does not exist
+
+  Feeds service
+    getFeeds
+      √ should send error if one of services send error
+      √ should combination of news and seminars services sorted by creation date
+
+  News service
+    √ should load news from yaml file
+    √ should send error if file does not exist
+    √ should send empty array if file is empty
+
+  Projects service
+    getProjects
+      √ should load projects from yaml file
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+      √ should put empty array for undefined publications in yaml file
+    getProjectsById
+      √ should send error if file does not exist
+      √ should get specific project by id
+      √ should return null for non-existant project
+
+  Publication service
+    getPublications
+      √ should load publications from yaml content with year/month parsed date
+      √ should send error if file does not exist
+      √ should load publications from yaml content with year only if month not provided
+    getPublicationsByIds
+      √ should load publications related to given project
+      √ should load empty publications if project does not have publications
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+    getNumberOfPublications
+      √ should find number of publications
+      √ should return 0 if file is empty
+
+  Seminars service
+    getSeminars
+      √ should send error if file does not exist
+      √ should send empty array if file is empty
+      √ without query should load all seminars from yaml file
+      √ should filter seminars before specified date using from query
+      √ should sort seminars by date field and ascending order
+      √ should sort seminars by date field and descending order
+
+  Team service
+    √ should load members from yaml file
+    √ should send error if file does not exist
+    √ should send empty array if file is empty
+    √ should sort members by lastname if they are not equal
+    √ should sort members by firstname if lastname is equal
+
+  utils.getTranslation
+    √ should provide translation for field in given language
+    √ should return empty string for undefined field
+    √ should default in fr language if not existing
+
+  News mongo service
+GET NEWS FROM DATABASE
+    √ should load news from mongo db in french (78ms)
+GET NEWS FROM DATABASE
+    √ should load news from mongo db in english (52ms)
+
+  Seminar mongo service
+GET SEMINARS FROM DATABASE
+    √ should load seminars wthout specific query from mongo db (59ms)
+GET SEMINARS FROM DATABASE
+    11) should load seminars from date
+GET SEMINARS FROM DATABASE
+    12) should load seminars sorted by field descending order
+GET SEMINARS FROM DATABASE
+    13) should load seminars sorted by field ascending order
+GET SEMINARS FROM DATABASE
+    14) should load seminars in english
+
+  Team mongo service
+GET TEAM MEMBERS FROM DATABASE
+    √ should load members from mongo db (48ms)
+
+  Publications mongo service
+    15) should load publications from mongo db
+    16) should limit number of publications to load
+    √ should sort publications (59ms)
+    √ should provide paging for publications (62ms)
+    √ should get number of publications from db (78ms)
+===> Publication Created. [object Object]
+    √ should add publication to db (155ms)
+===> Publication Deleted. 
+    17) should remove publication from db
+    18) should get publications by ids
+
+  Projects mongo service
+GET PROJECTS FROM DATABASE
+    √ should load projects from mongo db in french (166ms)
+GET PROJECTS FROM DATABASE
+    √ should load projects from mongo db in english (64ms)
+GET PROJECTS FROM DATABASE
+GET PROJECTS FROM DATABASE
+GET SPECIFIC PROJECT FROM DATABASE
+===> FOUND_PROJECT : {"projects":{"_id":"ldenigermaster","type":"master","student":"Christophe Deniger","supervisor":"Alphonsine Beauchamps","cosupervisor":"Michel Deslauriers","current":false,"year":2016,"title":"Évaluation et amélioration de la qualité de DBpedia pour la représentation de la connaissance du domaine","description":"\"L’évolution récente du Web sémantique, tant par la quantité d’information offerte que par la multiplicité des usages possibles, rend indispensable l’évaluation de la qualité des divers ensembles de données (datasets) disponibles. Le Web sémantique étant basé sur la syntaxe RDF, i.e. des triplets <sujet, relation, objet> (par exemple <Montréal, est une ville de, Québec>), on peut le voir comme un immense graphe, où un triplet relie un nœud « sujet » et un nœud « objet » par une arête « relation ». Chaque dataset représente ainsi un sous-graphe. Dans cette représentation, DBpedia, un des datasets majeurs du Web sémantique, en est souvent considéré comme le nœud central. En effet, DBpedia a pour vocation, à terme, de pouvoir représenter toute l’information présente dans Wikipedia, et couvre donc une très grande variété de sujets, permettant de faire le lien avec tous les autres datasets, incluant les plus spécialisés. C’est de cette multiplicité des sujets couverts qu’apparait un point fondamental de ce projet : la notion de « domaine ». Informellement, nous considérons un domaine comme étant un ensemble de sujets reliés par une thématique commune. Par exemple, le domaine Mathématiques contient plusieurs sujets, comme algèbre, fonction ou addition. Formellement, nous considérons un domaine comme un sous-graphe de DBpedia, où l’on ne conserve que les nœuds représentant des concepts liés à ce domaine.\nEn l’état actuel, les méthodes d’extraction de données de DBpedia sont généralement beaucoup moins efficaces lorsque le sujet est abstrait, conceptuel, que lorsqu’il s’agit d’une entité nommée, par exemple une personne, ville ou compagnie. Par conséquent, notre première hypothèse est que l’information disponible sur DBpedia liée à un domaine est souvent pauvre, car nos domaines sont essentiellement constitués de concepts abstraits. La première étape de ce travail de recherche fournit une évaluation de la qualité de l’information conceptuelle d’un ensemble de 17 domaines choisis semi-aléatoirement, et confirme cette hypothèse. Pour cela, nous identifions plusieurs axes permettant de chiffrer la « qualité » d’un domaine : 1 - nombre de liens entrants et sortants pour chaque concept, 2 - nombre de liens reliant deux concepts du domaine par rapport aux liens reliant le domaine au reste de DBpedia, 3 - nombre de concepts typés (i.e. représentant l’instance d’une classe, par exemple Addition est une instance de la classe Opération mathématique : le concept Addition est donc typé si la relation <addition, instance de, opération mathématique> apparait dans DBpedia). Nous arrivons à la conclusion que l’information conceptuelle contenue dans DBpedia est effectivement incomplète, et ce selon les trois axes.\nLa seconde partie de ce travail de recherche est de tenter de répondre au problème posé dans la première partie. Pour cela, nous proposons deux approches possibles. La première permet de fournir des classes potentielles, répondant en partie à la problématique de la quantité de concepts typés. La seconde utilise des systèmes d’extraction de relations à partir de texte (ORE – Open Relation Extraction) sur l’ABSTRACT (i.e. premier paragraphe de la page Wikipedia) de chaque concept. En classifiant les relations extraites, cela nous permet 1) de proposer des relations inédites entre concepts d’un domaine, 2) de proposer des classes potentielles, comme dans la première approche. Ces deux approches ne sont, en l’état, qu’un début de solution, mais nos résultats préliminaires sont très encourageants, et indiquent qu’il s’agit sans aucun doute de solutions pertinentes pour aider à corriger les problèmes démontrés dans la première partie.\"\n","thesisUrl":"https://publications.polymtl.ca/2409/","publications":[{"_id":"deniger2015","year":2015,"month":"November","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing the Quality of Domain Concepts Descriptions in DBpedia","venue":"12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"},{"_id":"deniger2017","year":2017,"month":"January","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing and Improving Domain Knowledge Representation in DBpedia","venue":"Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"},{"_id":"gelinas2016","year":2016,"month":"May","authors":["Joey Gelinas","Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Entity Typing and Linking using SPARQL Patterns and DBpedia","venue":"ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"}]},"publications":[{"_id":"deniger2015","year":2015,"month":"November","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing the Quality of Domain Concepts Descriptions in DBpedia","venue":"12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"},{"_id":"deniger2017","year":2017,"month":"January","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing and Improving Domain Knowledge Representation in DBpedia","venue":"Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"},{"_id":"gelinas2016","year":2016,"month":"May","authors":["Joey Gelinas","Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Entity Typing and Linking using SPARQL Patterns and DBpedia","venue":"ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"}]}
+    19) should get specific project from mongo db by id in french
+GET PROJECTS FROM DATABASE
+GET PROJECTS FROM DATABASE
+GET SPECIFIC PROJECT FROM DATABASE
+===> FOUND_PROJECT : {"projects":{"_id":"ldenigermaster","type":"master","student":"Christophe Deniger","supervisor":"Alphonsine Beauchamps","cosupervisor":"Michel Deslauriers","current":false,"year":2016,"title":"Evaluation and enhancement of DBpedia quality for representing domain knowledge","description":"\"In the current state of the semantic web, the quantity of available data and the multiplicity of its uses impose the continuous evaluation of the quality of this data, on the various Linked Open Data (LOD) datasets. These datasets are based on the RDF syntax, i.e. <subject, relation, object> triples, such as <Montréal, is a city of, Québec>. As a consequence, the LOD cloud can be represented as a huge graph, where every triple links the two nodes “subject” and “object”, by an edge “relation”. In this representation, each dataset is a sub-graph. DBpedia, one of the major datasets, is colloquially considered to be the central hub of this cloud. Indeed, the ultimate purpose of DBpedia is to provide all the information present in Wikipedia, “translated” into RDF, and therefore covers a wide range of domains, allowing a linkage with every other LOD dataset, including the most specialized. From this wide coverage arises one of the fundamental concepts of this project: the notion of “domain”. Informally, a domain is a set of subjects with a common thematic. For instance, the domain Mathematics contains several subjects such as algebra, function or addition. More formally, a domain is a sub-graph of DBpedia, where the nodes represent domain-related concepts.\nCurrently, the automatic extraction methods for DBpedia are usually far less efficient when the target subject is conceptual than when it is a named entity (such as a person, city or company). Hence our first hypothesis: the domain-related information available on DBpedia is often poor, since domains are constituted of concepts. In the first part of this research project, we confirm this hypothesis by evaluating the quality of domain-related knowledge in DBpedia for 17 domains chosen semi-randomly. This evaluation is based on three numerical aspects of the “quality” of a domain: 1 – number of inbound and outbound links for each concepts, 2 – number of links between two domain concepts compared to the number of links between the domain and the rest of DBpedia, 3- number of typed concepts (i.e. representing the instance of a class : for example, Addition is an instance of the class Mathematical operation : the concept Addition is typed if the relation <addition, type, mathematical operation> appears in DBpedia). We reach the conclusion that the domain-related, conceptual information present in DBpedia is indeed poor on the three axis.\nIn the second half of this work, we give two solutions to the quality problem highlighted in the first half. The first one allows to propose potential classes that could be added in DBpedia, addressing the 3rd quality aspect: number of typed concepts. The second one uses an Open Relation Extraction (ORE) system that allows to detect relations in a text. By using this system on the abstract (i.e. the first paragraph of the Wikipedia page) of each concept, and classifying the extracted relation depending on their semantic meaning, we can 1) propose novel relations between domain concepts, and 2) propose additional potential classes. These two methods currently only represent the first step, but the preliminary results we obtain are very encouraging, and seem to indicate that they are absolutely relevant to help correcting the issues highlighted in the first part.\"\n","thesisUrl":"https://publications.polymtl.ca/2409/","publications":[{"_id":"deniger2015","year":2015,"month":"November","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing the Quality of Domain Concepts Descriptions in DBpedia","venue":"12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"},{"_id":"deniger2017","year":2017,"month":"January","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing and Improving Domain Knowledge Representation in DBpedia","venue":"Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"},{"_id":"gelinas2016","year":2016,"month":"May","authors":["Joey Gelinas","Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Entity Typing and Linking using SPARQL Patterns and DBpedia","venue":"ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"}]},"publications":[{"_id":"deniger2015","year":2015,"month":"November","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing the Quality of Domain Concepts Descriptions in DBpedia","venue":"12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"},{"_id":"deniger2017","year":2017,"month":"January","authors":["Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Assessing and Improving Domain Knowledge Representation in DBpedia","venue":"Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"},{"_id":"gelinas2016","year":2016,"month":"May","authors":["Joey Gelinas","Christophe Deniger","Alphonsine Beauchamps","Michel Deslauriers"],"title":"Entity Typing and Linking using SPARQL Patterns and DBpedia","venue":"ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"}]}
+    20) should get specific project from mongo db by id in english
+GET PROJECTS FROM DATABASE
+===> project NOT_FOUND 
+===> FOUND_PROJECT : {"projects":[],"publications":[]}
+    21) should return error if project is not found
+
+
+  69 passing (4s)
+  21 failing
+
+  1) POST /api/publications should send error if no publication is sent:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  2) POST /api/publications should send error if empty publication is sent:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  3) POST /api/publications should send error if no month is defined:
+     Error: expected 400 "Bad Request", got 201 "Created"
+      at Test._assertStatus (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:268:12)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  4) POST /api/publications should send error if month is not an int:
+     Error: expected 400 "Bad Request", got 201 "Created"
+      at Test._assertStatus (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:268:12)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  5) POST /api/publications should send error if no title is defined:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  6) POST /api/publications should send error if no venue is defined:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  7) POST /api/publications should send cascading errors if errors in publication creation:
+     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  8) POST /api/publications should create publication if body is valid:
+     Error: expected { insertedId: 10 } response body, got 'PUBLICATION CREATED'
+      at error (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:301:13)
+      at Test._assertBody (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:205:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  9) DELETE /api/publications should remove publication by id:
+     Error: expected "Content-Type" matching /text/, got "application/json; charset=utf-8"
+      at Test._assertHeader (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:245:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  10) DELETE /api/publications should return 404 if project does not exist:
+
+      Error: expected { errors: [ 'Aie... Erreur...' ] } response body, got { errors: [ 'Erreur' ] }
+      + expected - actual
+
+       {
+         "errors": [
+      -    "Erreur"
+      +    "Aie... Erreur..."
+         ]
+       }
+      
+      at error (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:301:13)
+      at Test._assertBody (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:205:14)
+      at Test._assertFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:283:11)
+      at Test.assert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:173:18)
+      at Server.localAssert (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\supertest\lib\test.js:131:12)
+      at emitCloseNT (net.js:1618:8)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+  11) Seminar mongo service should load seminars from date:
+
+      Uncaught AssertionError: expected 8 to deeply equal 4
+      + expected - actual
+
+      -8
+      +4
+      
+      at seminarService.getSeminars (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\seminars-mongo.spec.js:53:36)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\seminar.js:18:643
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  12) Seminar mongo service should load seminars sorted by field descending order:
+
+      Uncaught AssertionError: expected 8 to deeply equal 4
+      + expected - actual
+
+      -8
+      +4
+      
+      at seminarService.getSeminars (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\seminars-mongo.spec.js:65:36)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\seminar.js:18:643
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  13) Seminar mongo service should load seminars sorted by field ascending order:
+
+      Uncaught AssertionError: expected 8 to deeply equal 4
+      + expected - actual
+
+      -8
+      +4
+      
+      at seminarService.getSeminars (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\seminars-mongo.spec.js:79:36)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\seminar.js:18:643
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  14) Seminar mongo service should load seminars in english:
+
+      Uncaught AssertionError: expected '' to deeply equal 'SC-LSTM: Learning Task-Specific Representations in Multi-Task Learning for Sequence Labeling'
+      + expected - actual
+
+      +SC-LSTM: Learning Task-Specific Representations in Multi-Task Learning for Sequence Labeling
+      
+      at seminarService.getSeminars (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\seminars-mongo.spec.js:92:38)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\seminar.js:18:643
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  15) Publications mongo service should load publications from mongo db:
+     Uncaught TypeError: Cannot read property 'reduce' of undefined
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:39:198
+      at Array.sort (native)
+      at db.collection.find.toArray (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:31:563)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  16) Publications mongo service should limit number of publications to load:
+     Uncaught TypeError: Cannot read property 'reduce' of undefined
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:39:198
+      at Array.sort (native)
+      at db.collection.find.toArray (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:31:563)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  17) Publications mongo service should remove publication from db:
+     Uncaught AssertionError: expected undefined to equal null
+      at pubsService.removePublication (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\publications-mongo.spec.js:107:26)
+      at db.collection.remove (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:59:408)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at session.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:398:11)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:395:17)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at coll.s.topology.remove (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\collection_ops.js:1259:5)
+      at handler (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\topologies\replset.js:1155:22)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  18) Publications mongo service should get publications by ids:
+     Uncaught TypeError: Cannot read property 'reduce' of undefined
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:39:198
+      at Array.sort (native)
+      at db.collection.find.toArray (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\publication.js:31:563)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  19) Projects mongo service should get specific project from mongo db by id in french:
+
+      Uncaught AssertionError: expected { Object (_id, type, ...) } to deeply equal { Object (projects, publications) }
+      + expected - actual
+
+       {
+      -  "_id": "ldenigermaster"
+      -  "cosupervisor": "Michel Deslauriers"
+      -  "current": false
+      -  "description": "\"L’évolution récente du Web sémantique, tant par la quantité d’information offerte que par la multiplicité des usages possibles, rend indispensable l’évaluation de la qualité des divers ensembles de données (datasets) disponibles. Le Web sémantique étant basé sur la syntaxe RDF, i.e. des triplets <sujet, relation, objet> (par exemple <Montréal, est une ville de, Québec>), on peut le voir comme un immense graphe, où un triplet relie un nœud « sujet » et un nœud « objet » par une arête « relation ». Chaque dataset représente ainsi un sous-graphe. Dans cette représentation, DBpedia, un des datasets majeurs du Web sémantique, en est souvent considéré comme le nœud central. En effet, DBpedia a pour vocation, à terme, de pouvoir représenter toute l’information présente dans Wikipedia, et couvre donc une très grande variété de sujets, permettant de faire le lien avec tous les autres datasets, incluant les plus spécialisés. C’est de cette multiplicité des sujets couverts qu’apparait un point fondamental de ce projet : la notion de « domaine ». Informellement, nous considérons un domaine comme étant un ensemble de sujets reliés par une thématique commune. Par exemple, le domaine Mathématiques contient plusieurs sujets, comme algèbre, fonction ou addition. Formellement, nous considérons un domaine comme un sous-graphe de DBpedia, où l’on ne conserve que les nœuds représentant des concepts liés à ce domaine.\nEn l’état actuel, les méthodes d’extraction de données de DBpedia sont généralement beaucoup moins efficaces lorsque le sujet est abstrait, conceptuel, que lorsqu’il s’agit d’une entité nommée, par exemple une personne, ville ou compagnie. Par conséquent, notre première hypothèse est que l’information disponible sur DBpedia liée à un domaine est souvent pauvre, car nos domaines sont essentiellement constitués de concepts abstraits. La première étape de ce travail de recherche fournit une évaluation de la qualité de l’information conceptuelle d’un ensemble de 17 domaines choisis semi-aléatoirement, et confirme cette hypothèse. Pour cela, nous identifions plusieurs axes permettant de chiffrer la « qualité » d’un domaine : 1 - nombre de liens entrants et sortants pour chaque concept, 2 - nombre de liens reliant deux concepts du domaine par rapport aux liens reliant le domaine au reste de DBpedia, 3 - nombre de concepts typés (i.e. représentant l’instance d’une classe, par exemple Addition est une instance de la classe Opération mathématique : le concept Addition est donc typé si la relation <addition, instance de, opération mathématique> apparait dans DBpedia). Nous arrivons à la conclusion que l’information conceptuelle contenue dans DBpedia est effectivement incomplète, et ce selon les trois axes.\nLa seconde partie de ce travail de recherche est de tenter de répondre au problème posé dans la première partie. Pour cela, nous proposons deux approches possibles. La première permet de fournir des classes potentielles, répondant en partie à la problématique de la quantité de concepts typés. La seconde utilise des systèmes d’extraction de relations à partir de texte (ORE – Open Relation Extraction) sur l’ABSTRACT (i.e. premier paragraphe de la page Wikipedia) de chaque concept. En classifiant les relations extraites, cela nous permet 1) de proposer des relations inédites entre concepts d’un domaine, 2) de proposer des classes potentielles, comme dans la première approche. Ces deux approches ne sont, en l’état, qu’un début de solution, mais nos résultats préliminaires sont très encourageants, et indiquent qu’il s’agit sans aucun doute de solutions pertinentes pour aider à corriger les problèmes démontrés dans la première partie.\"\n"
+      +  "projects": {
+      +    "_id": "ldenigermaster"
+      +    "cosupervisor": "Michel Deslauriers"
+      +    "current": false
+      +    "description": "\"L’évolution récente du Web sémantique, tant par la quantité d’information offerte que par la multiplicité des usages possibles, rend indispensable l’évaluation de la qualité des divers ensembles de données (datasets) disponibles. Le Web sémantique étant basé sur la syntaxe RDF, i.e. des triplets <sujet, relation, objet> (par exemple <Montréal, est une ville de, Québec>), on peut le voir comme un immense graphe, où un triplet relie un nœud « sujet » et un nœud « objet » par une arête « relation ». Chaque dataset représente ainsi un sous-graphe. Dans cette représentation, DBpedia, un des datasets majeurs du Web sémantique, en est souvent considéré comme le nœud central. En effet, DBpedia a pour vocation, à terme, de pouvoir représenter toute l’information présente dans Wikipedia, et couvre donc une très grande variété de sujets, permettant de faire le lien avec tous les autres datasets, incluant les plus spécialisés. C’est de cette multiplicité des sujets couverts qu’apparait un point fondamental de ce projet : la notion de « domaine ». Informellement, nous considérons un domaine comme étant un ensemble de sujets reliés par une thématique commune. Par exemple, le domaine Mathématiques contient plusieurs sujets, comme algèbre, fonction ou addition. Formellement, nous considérons un domaine comme un sous-graphe de DBpedia, où l’on ne conserve que les nœuds représentant des concepts liés à ce domaine.\nEn l’état actuel, les méthodes d’extraction de données de DBpedia sont généralement beaucoup moins efficaces lorsque le sujet est abstrait, conceptuel, que lorsqu’il s’agit d’une entité nommée, par exemple une personne, ville ou compagnie. Par conséquent, notre première hypothèse est que l’information disponible sur DBpedia liée à un domaine est souvent pauvre, car nos domaines sont essentiellement constitués de concepts abstraits. La première étape de ce travail de recherche fournit une évaluation de la qualité de l’information conceptuelle d’un ensemble de 17 domaines choisis semi-aléatoirement, et confirme cette hypothèse. Pour cela, nous identifions plusieurs axes permettant de chiffrer la « qualité » d’un domaine : 1 - nombre de liens entrants et sortants pour chaque concept, 2 - nombre de liens reliant deux concepts du domaine par rapport aux liens reliant le domaine au reste de DBpedia, 3 - nombre de concepts typés (i.e. représentant l’instance d’une classe, par exemple Addition est une instance de la classe Opération mathématique : le concept Addition est donc typé si la relation <addition, instance de, opération mathématique> apparait dans DBpedia). Nous arrivons à la conclusion que l’information conceptuelle contenue dans DBpedia est effectivement incomplète, et ce selon les trois axes.\nLa seconde partie de ce travail de recherche est de tenter de répondre au problème posé dans la première partie. Pour cela, nous proposons deux approches possibles. La première permet de fournir des classes potentielles, répondant en partie à la problématique de la quantité de concepts typés. La seconde utilise des systèmes d’extraction de relations à partir de texte (ORE – Open Relation Extraction) sur l’ABSTRACT (i.e. premier paragraphe de la page Wikipedia) de chaque concept. En classifiant les relations extraites, cela nous permet 1) de proposer des relations inédites entre concepts d’un domaine, 2) de proposer des classes potentielles, comme dans la première approche. Ces deux approches ne sont, en l’état, qu’un début de solution, mais nos résultats préliminaires sont très encourageants, et indiquent qu’il s’agit sans aucun doute de solutions pertinentes pour aider à corriger les problèmes démontrés dans la première partie.\"\n"
+      +    "publications": [
+      +      {
+      +        "_id": "deniger2015"
+      +        "authors": [
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "November"
+      +        "title": "Assessing the Quality of Domain Concepts Descriptions in DBpedia"
+      +        "venue": "12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"
+      +        "year": 2015
+      +      }
+      +      {
+      +        "_id": "deniger2017"
+      +        "authors": [
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "January"
+      +        "title": "Assessing and Improving Domain Knowledge Representation in DBpedia"
+      +        "venue": "Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"
+      +        "year": 2017
+      +      }
+      +      {
+      +        "_id": "gelinas2016"
+      +        "authors": [
+      +          "Joey Gelinas"
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "May"
+      +        "title": "Entity Typing and Linking using SPARQL Patterns and DBpedia"
+      +        "venue": "ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"
+      +        "year": 2016
+      +      }
+      +    ]
+      +    "student": "Christophe Deniger"
+      +    "supervisor": "Alphonsine Beauchamps"
+      +    "thesisUrl": "https://publications.polymtl.ca/2409/"
+      +    "title": "Évaluation et amélioration de la qualité de DBpedia pour la représentation de la connaissance du domaine"
+      +    "type": "master"
+      +    "year": 2016
+      +  }
+         "publications": [
+      -    "deniger2017"
+      -    "gelinas2016"
+      -    "deniger2015"
+      +    {
+      +      "_id": "deniger2015"
+      +      "authors": [
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "November"
+      +      "title": "Assessing the Quality of Domain Concepts Descriptions in DBpedia"
+      +      "venue": "12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"
+      +      "year": 2015
+      +    }
+      +    {
+      +      "_id": "deniger2017"
+      +      "authors": [
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "January"
+      +      "title": "Assessing and Improving Domain Knowledge Representation in DBpedia"
+      +      "venue": "Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"
+      +      "year": 2017
+      +    }
+      +    {
+      +      "_id": "gelinas2016"
+      +      "authors": [
+      +        "Joey Gelinas"
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "May"
+      +      "title": "Entity Typing and Linking using SPARQL Patterns and DBpedia"
+      +      "venue": "ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"
+      +      "year": 2016
+      +    }
+         ]
+      -  "student": "Christophe Deniger"
+      -  "supervisor": "Alphonsine Beauchamps"
+      -  "thesisUrl": "https://publications.polymtl.ca/2409/"
+      -  "title": "Évaluation et amélioration de la qualité de DBpedia pour la représentation de la connaissance du domaine"
+      -  "type": "master"
+      -  "year": 2016
+       }
+      
+      at projectsService.getProjectById (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\projects-mongo.spec.js:63:30)
+      at db.collection.find.toArray (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\projects.js:30:1104)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  20) Projects mongo service should get specific project from mongo db by id in english:
+
+      Uncaught AssertionError: expected { Object (_id, type, ...) } to deeply equal { Object (projects, publications) }
+      + expected - actual
+
+       {
+      -  "_id": "ldenigermaster"
+      -  "cosupervisor": "Michel Deslauriers"
+      -  "current": false
+      -  "description": "\"In the current state of the semantic web, the quantity of available data and the multiplicity of its uses impose the continuous evaluation of the quality of this data, on the various Linked Open Data (LOD) datasets. These datasets are based on the RDF syntax, i.e. <subject, relation, object> triples, such as <Montréal, is a city of, Québec>. As a consequence, the LOD cloud can be represented as a huge graph, where every triple links the two nodes “subject” and “object”, by an edge “relation”. In this representation, each dataset is a sub-graph. DBpedia, one of the major datasets, is colloquially considered to be the central hub of this cloud. Indeed, the ultimate purpose of DBpedia is to provide all the information present in Wikipedia, “translated” into RDF, and therefore covers a wide range of domains, allowing a linkage with every other LOD dataset, including the most specialized. From this wide coverage arises one of the fundamental concepts of this project: the notion of “domain”. Informally, a domain is a set of subjects with a common thematic. For instance, the domain Mathematics contains several subjects such as algebra, function or addition. More formally, a domain is a sub-graph of DBpedia, where the nodes represent domain-related concepts.\nCurrently, the automatic extraction methods for DBpedia are usually far less efficient when the target subject is conceptual than when it is a named entity (such as a person, city or company). Hence our first hypothesis: the domain-related information available on DBpedia is often poor, since domains are constituted of concepts. In the first part of this research project, we confirm this hypothesis by evaluating the quality of domain-related knowledge in DBpedia for 17 domains chosen semi-randomly. This evaluation is based on three numerical aspects of the “quality” of a domain: 1 – number of inbound and outbound links for each concepts, 2 – number of links between two domain concepts compared to the number of links between the domain and the rest of DBpedia, 3- number of typed concepts (i.e. representing the instance of a class : for example, Addition is an instance of the class Mathematical operation : the concept Addition is typed if the relation <addition, type, mathematical operation> appears in DBpedia). We reach the conclusion that the domain-related, conceptual information present in DBpedia is indeed poor on the three axis.\nIn the second half of this work, we give two solutions to the quality problem highlighted in the first half. The first one allows to propose potential classes that could be added in DBpedia, addressing the 3rd quality aspect: number of typed concepts. The second one uses an Open Relation Extraction (ORE) system that allows to detect relations in a text. By using this system on the abstract (i.e. the first paragraph of the Wikipedia page) of each concept, and classifying the extracted relation depending on their semantic meaning, we can 1) propose novel relations between domain concepts, and 2) propose additional potential classes. These two methods currently only represent the first step, but the preliminary results we obtain are very encouraging, and seem to indicate that they are absolutely relevant to help correcting the issues highlighted in the first part.\"\n"
+      +  "projects": {
+      +    "_id": "ldenigermaster"
+      +    "cosupervisor": "Michel Deslauriers"
+      +    "current": false
+      +    "description": "\"In the current state of the semantic web, the quantity of available data and the multiplicity of its uses impose the continuous evaluation of the quality of this data, on the various Linked Open Data (LOD) datasets. These datasets are based on the RDF syntax, i.e. <subject, relation, object> triples, such as <Montréal, is a city of, Québec>. As a consequence, the LOD cloud can be represented as a huge graph, where every triple links the two nodes “subject” and “object”, by an edge “relation”. In this representation, each dataset is a sub-graph. DBpedia, one of the major datasets, is colloquially considered to be the central hub of this cloud. Indeed, the ultimate purpose of DBpedia is to provide all the information present in Wikipedia, “translated” into RDF, and therefore covers a wide range of domains, allowing a linkage with every other LOD dataset, including the most specialized. From this wide coverage arises one of the fundamental concepts of this project: the notion of “domain”. Informally, a domain is a set of subjects with a common thematic. For instance, the domain Mathematics contains several subjects such as algebra, function or addition. More formally, a domain is a sub-graph of DBpedia, where the nodes represent domain-related concepts.\nCurrently, the automatic extraction methods for DBpedia are usually far less efficient when the target subject is conceptual than when it is a named entity (such as a person, city or company). Hence our first hypothesis: the domain-related information available on DBpedia is often poor, since domains are constituted of concepts. In the first part of this research project, we confirm this hypothesis by evaluating the quality of domain-related knowledge in DBpedia for 17 domains chosen semi-randomly. This evaluation is based on three numerical aspects of the “quality” of a domain: 1 – number of inbound and outbound links for each concepts, 2 – number of links between two domain concepts compared to the number of links between the domain and the rest of DBpedia, 3- number of typed concepts (i.e. representing the instance of a class : for example, Addition is an instance of the class Mathematical operation : the concept Addition is typed if the relation <addition, type, mathematical operation> appears in DBpedia). We reach the conclusion that the domain-related, conceptual information present in DBpedia is indeed poor on the three axis.\nIn the second half of this work, we give two solutions to the quality problem highlighted in the first half. The first one allows to propose potential classes that could be added in DBpedia, addressing the 3rd quality aspect: number of typed concepts. The second one uses an Open Relation Extraction (ORE) system that allows to detect relations in a text. By using this system on the abstract (i.e. the first paragraph of the Wikipedia page) of each concept, and classifying the extracted relation depending on their semantic meaning, we can 1) propose novel relations between domain concepts, and 2) propose additional potential classes. These two methods currently only represent the first step, but the preliminary results we obtain are very encouraging, and seem to indicate that they are absolutely relevant to help correcting the issues highlighted in the first part.\"\n"
+      +    "publications": [
+      +      {
+      +        "_id": "deniger2015"
+      +        "authors": [
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "November"
+      +        "title": "Assessing the Quality of Domain Concepts Descriptions in DBpedia"
+      +        "venue": "12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"
+      +        "year": 2015
+      +      }
+      +      {
+      +        "_id": "deniger2017"
+      +        "authors": [
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "January"
+      +        "title": "Assessing and Improving Domain Knowledge Representation in DBpedia"
+      +        "venue": "Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"
+      +        "year": 2017
+      +      }
+      +      {
+      +        "_id": "gelinas2016"
+      +        "authors": [
+      +          "Joey Gelinas"
+      +          "Christophe Deniger"
+      +          "Alphonsine Beauchamps"
+      +          "Michel Deslauriers"
+      +        ]
+      +        "month": "May"
+      +        "title": "Entity Typing and Linking using SPARQL Patterns and DBpedia"
+      +        "venue": "ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"
+      +        "year": 2016
+      +      }
+      +    ]
+      +    "student": "Christophe Deniger"
+      +    "supervisor": "Alphonsine Beauchamps"
+      +    "thesisUrl": "https://publications.polymtl.ca/2409/"
+      +    "title": "Evaluation and enhancement of DBpedia quality for representing domain knowledge"
+      +    "type": "master"
+      +    "year": 2016
+      +  }
+         "publications": [
+      -    "deniger2017"
+      -    "gelinas2016"
+      -    "deniger2015"
+      +    {
+      +      "_id": "deniger2015"
+      +      "authors": [
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "November"
+      +      "title": "Assessing the Quality of Domain Concepts Descriptions in DBpedia"
+      +      "venue": "12th International Conference on Signal Image Technology & Internet Based Systems, Bangkok, p. 254-261"
+      +      "year": 2015
+      +    }
+      +    {
+      +      "_id": "deniger2017"
+      +      "authors": [
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "January"
+      +      "title": "Assessing and Improving Domain Knowledge Representation in DBpedia"
+      +      "venue": "Open Journal of Semantic Web (OJSW), 4(1) : p. 1-19"
+      +      "year": 2017
+      +    }
+      +    {
+      +      "_id": "gelinas2016"
+      +      "authors": [
+      +        "Joey Gelinas"
+      +        "Christophe Deniger"
+      +        "Alphonsine Beauchamps"
+      +        "Michel Deslauriers"
+      +      ]
+      +      "month": "May"
+      +      "title": "Entity Typing and Linking using SPARQL Patterns and DBpedia"
+      +      "venue": "ESWC-16 Open Knowledge Extraction Challenge, Heraklion, Greece"
+      +      "year": 2016
+      +    }
+         ]
+      -  "student": "Christophe Deniger"
+      -  "supervisor": "Alphonsine Beauchamps"
+      -  "thesisUrl": "https://publications.polymtl.ca/2409/"
+      -  "title": "Evaluation and enhancement of DBpedia quality for representing domain knowledge"
+      -  "type": "master"
+      -  "year": 2016
+       }
+      
+      at projectsService.getProjectById (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\projects-mongo.spec.js:78:30)
+      at db.collection.find.toArray (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\projects.js:30:1104)
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+  21) Projects mongo service should return error if project is not found:
+     Uncaught AssertionError: expected { projects: [], publications: [] } to deeply equal null
+      at projectsService.getProjectById (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\tests\services\projects-mongo.spec.js:89:33)
+      at getProjects (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\projects.js:30:1860)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\services\mongo\projects.js:15:777
+      at result (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:410:17)
+      at executeCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:402:9)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:62)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\utils.js:128:55)
+      at completeClose (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:898:14)
+      at _endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:37)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:195:5)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at Cursor.close (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:909:19)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:224:23)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:38)
+      at self._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:46)
+      at ClientSession.endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\sessions.js:134:41)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:190:13)
+      at Cursor._endSession (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:231:59)
+      at _setCursorNotifiedImpl (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:434:17)
+      at setCursorNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:426:3)
+      at setCursorDeadAndNotified (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:419:3)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:547:5)
+      at Cursor.next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:766:3)
+      at Cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\cursor.js:216:36)
+      at fetchDocs (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:217:12)
+      at cursor._next (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb\lib\operations\cursor_ops.js:243:7)
+      at handleCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:204:5)
+      at nextFunction (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:578:5)
+      at done (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:653:7)
+      at queryCallback (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\cursor.js:701:18)
+      at C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src\node_modules\mongodb-core\lib\connection\pool.js:397:18
+      at process._tickCallback (internal/process/next_tick.js:61:11)
+
+
+
+------------------|----------|----------|----------|----------|-------------------|
+File              |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------------|----------|----------|----------|----------|-------------------|
+All files         |    70.42 |    61.59 |    78.21 |    68.75 |                   |
+ helpers          |        0 |      100 |        0 |        0 |                   |
+  formatter.js    |        0 |      100 |        0 |        0 |           1,3,4,5 |
+ routes           |        0 |        0 |        0 |        0 |                   |
+  home.js         |        0 |        0 |        0 |        0 |... 16,19,20,22,29 |
+  index.js        |        0 |      100 |        0 |        0 |  1,2,4,5,6,7,8,10 |
+  projects.js     |        0 |        0 |        0 |        0 |... 35,39,40,42,49 |
+  publications.js |        0 |        0 |        0 |        0 |... 71,72,73,75,80 |
+  team.js         |        0 |        0 |        0 |        0 |... 14,17,18,20,27 |
+ routes/rest      |    86.51 |    88.66 |       95 |    86.51 |                   |
+  feed.js         |      100 |      100 |      100 |      100 |                   |
+  index.js        |        0 |      100 |        0 |        0 |... 10,11,12,13,15 |
+  members.js      |    90.91 |    85.71 |      100 |    90.91 |                20 |
+  projects.js     |    96.43 |    95.24 |      100 |    96.43 |                37 |
+  publications.js |    92.19 |    85.48 |      100 |    92.19 | 60,69,114,138,144 |
+ services         |      100 |      100 |      100 |      100 |                   |
+  feed.js         |      100 |      100 |      100 |      100 |                   |
+  utils.js        |      100 |      100 |      100 |      100 |                   |
+ services/mongo   |    85.71 |    55.17 |    89.66 |    88.71 |                   |
+  factory.js      |        0 |      100 |        0 |        0 |               1,2 |
+  news.js         |    93.75 |       50 |      100 |      100 |                26 |
+  projects.js     |    92.86 |    58.82 |      100 |    96.97 |                67 |
+  publication.js  |    77.78 |    54.29 |    80.77 |    78.43 |... 66,167,168,170 |
+  seminar.js      |    94.74 |       50 |      100 |      100 |                28 |
+  team.js         |    91.67 |       50 |      100 |      100 |                20 |
+ services/yaml    |    87.65 |    69.66 |    87.88 |    86.92 |                   |
+  factory.js      |        0 |      100 |        0 |        0 |               1,2 |
+  news.js         |      100 |      100 |      100 |      100 |                   |
+  projects.js     |      100 |       80 |      100 |      100 |                68 |
+  publication.js  |    67.92 |    41.94 |    70.83 |    65.85 |... 92,93,94,95,97 |
+  seminar.js      |    97.73 |    77.78 |      100 |    97.06 |               103 |
+  team.js         |      100 |      100 |      100 |      100 |                   |
+------------------|----------|----------|----------|----------|-------------------|

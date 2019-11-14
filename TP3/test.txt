@@ -1,0 +1,8 @@
+
+> TP3-LOG4420@0.0.1 test C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src
+> npm run setup && node node_modules/nyc/bin/nyc --reporter=html --reporter=text node_modules/mocha/bin/mocha --recursive --reporter=spec --color=false tests
+
+
+> TP3-LOG4420@0.0.1 setup C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src
+> node setup.js
+

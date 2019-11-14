@@ -1,3 +1,0 @@
-npx nodemon // Rafraîchit la page lors mise à jour + démarre le serveur.
-.urlencoded est un raccourci pour recevoir un formulaire.
-utilisez les services (dossier /services) pour mocker MongoDB...

@@ -17,26 +17,26 @@ const { getTranslation } = require('../utils')
  *  @param {projectsCallback} callback - Fonction de rappel pour obtenir le résultat
  */
 const getProjects = fs => language => callback => {
-  fs.readFile('./data/projects.yml', 'utf8', (err, content) => {
-    if (err) {
-      callback(err, null)
-    } else {
-      const yamlContentOpt = yaml.safeLoad(content)
-      const projects = ((yamlContentOpt === null) ? [] : yamlContentOpt)
-        // .sort((p1, p2) => p1.year < p2.year ? 1 : p1.year > p2.year ? -1 : 0)
-        .map(project => {
-          const translatedTitle = getTranslation(language, project.title)
-          const translatedDescription = getTranslation(language, project.description)
-          return {
-            ...project,
-            title: translatedTitle,
-            description: translatedDescription,
-            publications: (project.publications === undefined) ? [] : project.publications
-          }
-        })
-      callback(null, projects)
-    }
-  })
+    fs.readFile('./data/projects.yml', 'utf8', (err, content) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            const yamlContentOpt = yaml.safeLoad(content)
+            const projects = ((yamlContentOpt === null) ? [] : yamlContentOpt)
+                // .sort((p1, p2) => p1.year < p2.year ? 1 : p1.year > p2.year ? -1 : 0)
+                .map(project => {
+                    const translatedTitle = getTranslation(language, project.title)
+                    const translatedDescription = getTranslation(language, project.description)
+                    return {
+                        ...project,
+                        title: translatedTitle,
+                        description: translatedDescription,
+                        publications: (project.publications === undefined) ? [] : project.publications
+                    }
+                })
+            callback(null, projects)
+        }
+    })
 }
 
 /**
@@ -57,26 +57,26 @@ const getProjects = fs => language => callback => {
  *  @param {projectCallback} callback - Fonction de rappel pour obtenir le résultat
  */
 const getProjectById = fs => translationObj => language => id => callback => {
-  getProjects(fs)(language)((err, projects) => {
-    if (err) {
-      callback(err, null)
-    } else {
-      const projectOpt = projects.find(p => p._id === id)
-      if (projectOpt) {
-        callback(null, projectOpt)
-      } else {
-        const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS'['PROJECT_NOT_FOUND_MSG']]
-        const error = new Error(errorMsg)
-        error.name = 'NOT_FOUND'
-        callback(error, null)
-      }
-    }
-  })
+    getProjects(fs)(language)((err, projects) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            const projectOpt = projects.find(p => p._id === id)
+            if (projectOpt) {
+                callback(null, projectOpt)
+            } else {
+                const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS' ['PROJECT_NOT_FOUND_MSG']]
+                const error = new Error(errorMsg)
+                error.name = 'NOT_FOUND'
+                callback(error, null)
+            }
+        }
+    })
 }
 
 module.exports = fs => {
-  return {
-    getProjects: getProjects(fs),
-    getProjectById: getProjectById(fs)
-  }
+    return {
+        getProjects: getProjects(fs),
+        getProjectById: getProjectById(fs)
+    }
 }

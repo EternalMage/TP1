@@ -37,7 +37,10 @@ module.exports = servicePublication => {
                     });
                 }
             } else {
-                res.status(200).json(publications);
+                res.status(200).json({
+                    "count": publications.length,
+                    publications
+                });
             }
         })
     });
@@ -61,6 +64,7 @@ module.exports = servicePublication => {
         }
 
         // Check if body is empty
+        console.log("===> Content BODY : " + JSON.stringify(Object.keys(req.body)))
         if (Object.keys(req.body).length === 0) {
             pushError('PUB_CREATE_ERROR')
         }
@@ -71,7 +75,8 @@ module.exports = servicePublication => {
         }
 
         // Check is year is >=0
-        if (req.body.year < 0) {
+        console.log("===> Number ? : " + typeof Number(req.body.year) + " | value " + req.body.year + " | " + Number(req.body.year))
+        if (req.body.year < 0 || req.body.year === undefined || typeof Number(req.body.year) !== 'number') {
             pushError('YEAR_NOT_INT_FORM');
         }
 

@@ -61,23 +61,34 @@ const getProjectById = db => translationObj => language => id => callback => {
         if (err) callback(err, [])
         else {
             const projectOpt = projects.find(p => p._id === id)
-            db.collection("publications").find({ "_id": { $in: projectOpt.publications } }).toArray((error, result) => {
-                if (err) {
-                    console.log('===> Error when requesting project from DB.');
-                } else {
-                    projectOpt.publications = result
-                    if (projectOpt) {
-                        console.log('GET SPECIFIC PROJECT FROM DATABASE');
-                        callback(null, projectOpt)
+            if (projectOpt !== undefined && projectOpt.publications !== undefined) {
+                db.collection("publications").find({ "_id": { $in: projectOpt.publications } }).toArray((error, result) => {
+                    if (err) {
+                        console.log('===> Error when requesting project from DB.');
                     } else {
-                        const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS' ['PROJECT_NOT_FOUND_MSG']]
-                        const error = new Error(errorMsg)
-                        error.name = 'NOT_FOUND'
-                        callback(error, null)
+                        projectOpt.publications = result
+                        console.log('GET SPECIFIC PROJECT FROM DATABASE');
+                        result = {
+                            "projects": projectOpt,
+                            "publications": projectOpt.publications
+                        }
+                        console.log("===> FOUND_PROJECT : " + JSON.stringify(result))
+                        callback(null, result)
                     }
-                }
 
-            })
+                })
+            } else {
+                const errorMsg = translationObj === undefined && translationObj['PROJECTS'] === undefined && translationObj['PROJECTS']['PROJECT_NOT_FOUND_MSG'] === undefined ? `${id} not found` : translationObj['PROJECTS' ['PROJECT_NOT_FOUND_MSG']]
+                const error = new Error(errorMsg)
+                error.name = 'NOT_FOUND'
+                console.log("===> project NOT_FOUND ")
+                result = {
+                    "projects": [],
+                    "publications": []
+                }
+                console.log("===> FOUND_PROJECT : " + JSON.stringify(result))
+                callback(error, result)
+            }
         }
     })
 }

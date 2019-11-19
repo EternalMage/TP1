@@ -46,8 +46,7 @@ module.exports = servicePublication => {
     });
 
     router.post('/', (req, res, next) => {
-        console.log(req.body.year)
-        console.log("===> Requesting Publication Creation..." + req.body)
+        console.log('Request ...')
             // Publication body rules
         const TITLE_CHAR_MIN = 5;
         const MONTH_MIN = 0;
@@ -63,37 +62,46 @@ module.exports = servicePublication => {
             }
         }
 
-        // Check if body is empty
-        if (Object.keys(req.body).length === 0) {
-            pushError('PUB_CREATE_ERROR')
-        }
 
-        // Check if authors empty
-        if (req.body.authors === undefined || req.body.authors.length === 0) {
-            pushError('AUTHOR_EMPTY_FORM');
-        }
+        if (req.body === undefined) {
+            console.log("type:: " + typeof req.body)
+            pushError('EMPTY_PUBLICATION_FORM')
+        } else {
 
-        // Check is year is >=0
-        if (req.body.year < 0 || req.body.year === undefined || isNaN(Number(req.body.year))) {
-            pushError('YEAR_NOT_INT_FORM');
-        }
+            // Check if body is empty
+            if (Object.keys(req.body).length === 0) {
+                pushError('PUB_CREATE_ERROR')
+            }
 
-        // Check if MONTH_MIN =< month =< MONTH_MAX
-        if (req.body.month < MONTH_MIN || req.body.month > MONTH_MAX || req.body.month === undefined || isNaN(Number(req.body.month))) {
-            pushError('MONTH_ERROR_FORM');
-        }
+            // Check if authors empty
+            if (req.body.authors === undefined || req.body.authors.length === 0) {
+                pushError('AUTHOR_EMPTY_FORM');
+            }
 
-        // Check if title.length >= 5
-        //console.log("===> Title ? : " + req.body.title)
-        if (req.body.title === undefined || req.body.title.length < TITLE_CHAR_MIN) {
-            pushError('PUB_AT_LEAST_5_CHAR_FORM');
-        }
+            // Check is year is >=0
+            if (req.body.year < 0 || req.body.year === undefined || isNaN(Number(req.body.year))) {
+                pushError('YEAR_NOT_INT_FORM');
+            }
 
-        if (req.body.venue === undefined || req.body.venue.length < VENUE_CHAR_MIN ) {
-            pushError('VENUE_AT_LEAST_5_CHAR_FORM');
+            // Check if MONTH_MIN =< month =< MONTH_MAX
+            if (req.body.month < MONTH_MIN || req.body.month > MONTH_MAX || req.body.month === undefined || isNaN(Number(req.body.month))) {
+                pushError('MONTH_ERROR_FORM');
+            }
+
+            // Check if title.length >= 5
+            //console.log("===> Title ? : " + req.body.title)
+            if (req.body.title === undefined || req.body.title.length < TITLE_CHAR_MIN) {
+                pushError('PUB_AT_LEAST_5_CHAR_FORM');
+            }
+
+            if (req.body.venue === undefined || req.body.venue.length < VENUE_CHAR_MIN) {
+                pushError('VENUE_AT_LEAST_5_CHAR_FORM');
+            }
+
         }
 
         if (ERRORS.length > 0) {
+            console.log("ERROR JSON !!!!")
             res.status(400).json({
                 'errors': ERRORS
             });

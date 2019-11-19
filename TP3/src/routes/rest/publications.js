@@ -137,7 +137,12 @@ module.exports = servicePublication => {
         servicePublication.removePublication(req.params.id)((err, result) => {
             if (err) {
                 if (err.name === 'NOT_FOUND') {
-                    if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_NOT_FOUND_ERROR'] === undefined) {
+                    console.log("===> DELETE ERROR " + req.app.locals.t['ERRORS']['PUB_DELETE_ERROR'])
+                    if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_DELETE_ERROR'] !== undefined) {
+                        res.status(404).json({
+                            'errors': [req.app.locals.t['ERRORS']['PUB_DELETE_ERROR']]
+                        });
+                    } else if (req.app.locals.t['ERRORS']['PUB_NOT_FOUND_ERROR'] === undefined) {
                         res.status(404).json({
                             'errors': [err.message]
                         });
@@ -147,6 +152,7 @@ module.exports = servicePublication => {
                         });
                     }
                 } else {
+                    console.log("===> DELETE ERROR " + req.app.locals.t['ERRORS']['PUB_DELETE_ERROR'])
                     if (req.app.locals.t === undefined || req.app.locals.t['ERRORS'] === undefined || req.app.locals.t['ERRORS']['PUB_DELETE_ERROR'] === undefined) {
                         res.status(404).json({
                             'errors': [err.message]

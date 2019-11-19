@@ -30,10 +30,10 @@ router.get('/:id', (req, res, next) => {
             throw error
         } else {
             let project = JSON.parse(body);
-            console.log(body);
+            console.log("===> RETURN project " + JSON.stringify(project))
             let projectPublications = project.publications
             res.render('./../views/project', {
-                project: project,
+                project: project.project,
                 publications: projectPublications
             }, (err, html) => {
                 if (err) {

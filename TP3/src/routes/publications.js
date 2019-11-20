@@ -4,7 +4,7 @@ const moment = require('moment')
 const request = require("request")
 const base_url = "http://localhost:3000/api/publications"
 
-const renderPubs = (res, body, limit, sort_by, order_by, page) => {
+const renderPubs = (res, body, limit, sort_by, order_by, page, next) => {
     const url = base_url + "?order_by=" + order_by + "&sort_by=" + sort_by + "&limit=" + limit + "&page=" + page
     request.get(url, (error, response, body) => {
         const errors = error === null ? [] : error
@@ -12,7 +12,7 @@ const renderPubs = (res, body, limit, sort_by, order_by, page) => {
             throw error
         } else {
             res.render('./../views/publication', {
-                publications: JSON.parse(body),
+                publications: JSON.parse(body).publications,
                 pubFormErrors: errors,
                 monthNames: [],
                 pagingOptions: {
@@ -23,7 +23,7 @@ const renderPubs = (res, body, limit, sort_by, order_by, page) => {
                 }
             }, (err, html) => {
                 if (err) {
-                    throw err;
+                    next(err);
                 } else {
                     res.send(html)
                 }
@@ -41,11 +41,13 @@ router.post('/', (req, res, next) => {
     const order_by = req.query.order_by ? req.query.order_by : 'desc'
     console.log("SEND TO API -> " + req.body)
     console.log(JSON.stringify(req.body))
-    request.post(base_url, { form: req.body }, (error, response, body) => {
+    request.post(base_url, {
+        form: req.body
+    }, (error, response, body) => {
         if (error) {
-            throw error
+            next(error)
         } else {
-            renderPubs(res, body, limit, sort_by, order_by, page)
+            renderPubs(res, body, limit, sort_by, order_by, page, next)
         }
     })
 })
@@ -56,9 +58,9 @@ router.delete('/', (req, res, next) => {
     const order_by = req.query.order_by ? req.query.order_by : 'desc'
     request.delete(base_url, (error, response, body) => {
         if (error) {
-            throw error
+            next(error)
         } else {
-            renderPubs(res, body, limit, sort_by, order_by, page)
+            renderPubs(res, body, limit, sort_by, order_by, page, next)
         }
     })
 })
@@ -70,9 +72,9 @@ router.get('/', (req, res, next) => {
     const url = base_url + "?order_by=" + order_by + "&sort_by=" + sort_by + "&limit=" + limit + "&page=" + page
     request.get(url, (error, response, body) => {
         if (error) {
-            throw error
+            next(error)
         } else {
-            renderPubs(res, body, limit, sort_by, order_by, page)
+            renderPubs(res, body, limit, sort_by, order_by, page, next)
         }
     })
 })

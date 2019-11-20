@@ -55,9 +55,8 @@ module.exports = (serviceProjects, servicePublication) => {
                 }
             } else {
                 console.log("===> publications : " + JSON.stringify(projects.publications))
-                projects.projects.description = (projects.projects.description === "") ? "\n" : projects.projects.description
                 res.status(200).json({
-                    "project": projects.projects,
+                    "project": projects.projects !== undefined ? projects.projects : {publications: []},
                     "publications": projects.publications
                 });
             }

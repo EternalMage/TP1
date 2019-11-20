@@ -37,9 +37,10 @@ module.exports = servicePublication => {
                     });
                 }
             } else {
+                console.log("===> NO ERROR servicePublication.getPublications")
                 res.status(200).json({
                     "count": publications.length,
-                    publications
+                    "publications": publications
                 });
             }
         })

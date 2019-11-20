@@ -1,15 +1,15 @@
 
-> TP3-LOG4420@0.0.1 test C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src
+> TP3-LOG4420@0.0.1 test C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src
 > npm run setup && node node_modules/nyc/bin/nyc --reporter=html --reporter=text node_modules/mocha/bin/mocha --recursive --reporter=spec --color=false tests
 
 
-> TP3-LOG4420@0.0.1 setup C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src
+> TP3-LOG4420@0.0.1 setup C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP3\src
 > node setup.js
 
 
 
   GET /api/feed
-    √ should get feeds
+    √ should get feeds (152ms)
     √ should handle errors in fetching data
     √ should send default error message if not defined
 
@@ -29,59 +29,65 @@
     √ should send default error in fetching specific project
 
   GET /api/publications
-    √ should get publications (477ms)
+    √ should get publications (810ms)
     √ should handle errors in fetching data
-    √ should send default error message if not defined (54ms)
+    √ should send default error message if not defined
 
   POST /api/publications
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
 ===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
-    √ should send error if cannot create publication (66ms)
-    1) should send error if no publication is sent
-    2) should send error if empty publication is sent
-2000
-===> Requesting Publication Creation...[object Object]
+    √ should send error if cannot create publication (73ms)
+Request ...
+type:: undefined
+ERROR JSON !!!!
+    √ should send error if no publication is sent
+Request ...
+type:: undefined
+ERROR JSON !!!!
+    √ should send error if empty publication is sent
+Request ...
+ERROR JSON !!!!
     √ should send error if no author is defined
-undefined
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if no year is defined
-ab
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if year is not an int
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if no month is defined
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if month is not an int
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if month is not between 0 and 11
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if no title is defined
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if title has less than 5 characters
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if no venue is defined
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send error if venue has less than 5 characters
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
+ERROR JSON !!!!
     √ should send cascading errors if errors in publication creation
-2000
-===> Requesting Publication Creation...[object Object]
+Request ...
 ===> Creating Publication...{"title":"Mon titre","year":2000,"month":0,"authors":["Auteur"],"venue":"Conférence"}
     √ should create publication if body is valid
 
   DELETE /api/publications
     √ should remove publication by id
+===> DELETE ERROR Aie... Erreur...
     √ should handle errors in fetching data
-    3) should return 404 if project does not exist
+===> DELETE ERROR Aie... Erreur...
+    √ should return 404 if project does not exist
 
   Feeds service
     getFeeds
@@ -140,53 +146,12 @@ ab
     √ should default in fr language if not existing
 
 
-  66 passing (845ms)
-  3 failing
-
-  1) POST /api/publications should send error if no publication is sent:
-     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
-      at Test._assertHeader (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:245:14)
-      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
-      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
-      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
-      at emitCloseNT (net.js:1618:8)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
-
-  2) POST /api/publications should send error if empty publication is sent:
-     Error: expected "Content-Type" matching /json/, got "text/html; charset=utf-8"
-      at Test._assertHeader (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:245:14)
-      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
-      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
-      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
-      at emitCloseNT (net.js:1618:8)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
-
-  3) DELETE /api/publications should return 404 if project does not exist:
-
-      Error: expected { errors: [ 'Aie... Erreur...' ] } response body, got { errors: [ 'Erreur' ] }
-      + expected - actual
-
-       {
-         "errors": [
-      -    "Erreur"
-      +    "Aie... Erreur..."
-         ]
-       }
-      
-      at error (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:301:13)
-      at Test._assertBody (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:205:14)
-      at Test._assertFunction (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:283:11)
-      at Test.assert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:173:18)
-      at Server.localAssert (C:\Users\Thoai-Vi Le\Desktop\Poly\A19\LOG4420\LOG4420_TP1\TP3\src\node_modules\supertest\lib\test.js:131:12)
-      at emitCloseNT (net.js:1618:8)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
-
-
+  69 passing (1s)
 
 ------------------|----------|----------|----------|----------|-------------------|
 File              |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
 ------------------|----------|----------|----------|----------|-------------------|
-All files         |    52.08 |    51.95 |    49.16 |    52.35 |                   |
+All files         |    52.32 |    51.92 |    49.16 |    52.61 |                   |
  helpers          |        0 |      100 |        0 |        0 |                   |
   formatter.js    |        0 |      100 |        0 |        0 |           1,3,4,5 |
  routes           |        0 |        0 |        0 |        0 |                   |
@@ -195,12 +160,12 @@ All files         |    52.08 |    51.95 |    49.16 |    52.35 |                 
   projects.js     |        0 |        0 |        0 |        0 |... 35,39,40,42,49 |
   publications.js |        0 |        0 |        0 |        0 |... 71,72,73,75,80 |
   team.js         |        0 |        0 |        0 |        0 |... 14,17,18,20,27 |
- routes/rest      |    86.29 |    89.32 |       95 |    86.29 |                   |
+ routes/rest      |     85.5 |    87.85 |       95 |     85.5 |                   |
   feed.js         |      100 |      100 |      100 |      100 |                   |
   index.js        |        0 |      100 |        0 |        0 |... 10,11,12,13,15 |
   members.js      |    90.91 |    85.71 |      100 |    90.91 |                20 |
   projects.js     |    96.43 |    95.24 |      100 |    96.43 |                37 |
-  publications.js |    91.94 |    86.76 |      100 |    91.94 | 60,68,113,137,143 |
+  publications.js |    89.86 |    84.72 |      100 |    89.86 |... 45,146,150,157 |
  services         |      100 |      100 |      100 |      100 |                   |
   feed.js         |      100 |      100 |      100 |      100 |                   |
   utils.js        |      100 |      100 |      100 |      100 |                   |

@@ -6,3 +6,8 @@ TP3/exemples/websimple/node_modules/
 TP3/src/coverage/
 
 TP3/src/.nyc_output/
+TP4/src/node_modules/
+
+TP4/src/package-lock.json
+
+TP4/src/server/node_modules/

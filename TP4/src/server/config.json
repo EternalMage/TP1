@@ -1,0 +1,4 @@
+{
+    "dbUrl": "mongodb+srv://log4420tp3:polymtl@tp3log4420-app2g.mongodb.net/test?retryWrites=true&w=majority",
+    "dbName": "TP3LOG4420"
+}

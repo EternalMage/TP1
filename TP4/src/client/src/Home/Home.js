@@ -9,12 +9,29 @@ const pug = window.pug
 
 export default () => {
 
-  const feeds = []
-  const loading = false
-
+  //const feeds = []
+  //const loading = false
+  const [feeds, setFeeds] = useState([])
+  const [loading, setLoading] = useState(true)
+/*
   // À COMPLÉTER
   // 1- Récupérer les nouvelles du service web http://localhost:3000/api/feed avec 'fetch' et avec l'entête 'accept-language' à 'fr'.
   // 2- Une fois que les données ont été récupérées, le loading devient false
+  useEffect(() => {
+    const fetchfeed = async () => {
+      const response = await fetch('http://localhost:3000/api/feed', {
+        headers: {
+          'Accept': 'application/json',
+          'accept-language': 'fr'
+        }
+      })
+      console.log('Response Received')
+      const feeds = await response.json();
+      setFeeds(feeds)
+      setLoading(false)
+    }
+    fetchfeed()
+  }, [])*/
 
   return pug`
     .jumbotron

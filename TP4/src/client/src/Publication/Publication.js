@@ -164,7 +164,7 @@ export default props => {
 
         button.trigger Ajouter une publication
 
-        PublicationCreationModal()
+        //PublicationCreationModal()
 
         p
           | Trié par: #{''}
@@ -178,7 +178,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        PublicationTable(publications=publications)
+        PublicationTable(publications=publications.publications)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber, onClick=paginationClickHandler) &laquo;

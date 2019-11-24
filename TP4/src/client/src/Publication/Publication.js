@@ -38,6 +38,7 @@ export default props => {
     'orderBy': 'desc'
   }) 
   const [showModal, setShowModal] = useState(false) 
+  const [deleteState, setDeleteState] = useState(false)
 
   let search_params = new URLSearchParams(props.location.search);
   const url_order_param = search_params.get('order_by')
@@ -52,32 +53,33 @@ export default props => {
   const page = url_page_param ? url_page_param : 1
   const url = base_url + "?order_by=" + order_by + "&sort_by=" + sort_by + "&limit=" + limit + "&page=" + page
 
-  useEffect(() => {
+  useEffect(() => { // == componentDidMount
     const fetchPublications = async () => {
       const response = await fetch(url)
       const publications = await response.json();
       setPublications(publications)
       setLoading(false)
+      setDeleteState(false)
     }
     fetchPublications()
     console.log('useEffect')
-  }, [pagingOptions, showModal])
+  }, [pagingOptions, showModal, deleteState])
 
   /*const publications = {
     count: 0,
     publications: []
   }
 
-  const showModal = true*/
+  const showModal = true
 
-  /*const pagingOptions = {
+  const pagingOptions = {
     'limit': 10,
     'pageNumber': 1,
     'sortBy': 'date',
     'orderBy': 'desc'
-  }*/
+  }
 
-  //const loading = false
+  const loading = false*/
 
   const errors = []
 
@@ -152,6 +154,16 @@ export default props => {
     showModal ? setShowModal(false) : setShowModal(true)
   }
 
+  const trashButtonHandler = e => {
+    const deletePublication = async () => {
+      const response = await fetch(base_url + e.currentTarget.dataset.id, { method: 'DELETE' })
+      const responseText = await response.text();
+      console.log('Delete response: ' + responseText)
+      setDeleteState(true)
+    }
+    deletePublication()
+  }
+
   return pug `
     .loading-container
       if loading
@@ -184,7 +196,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        PublicationTable(publications=publications.publications)
+        PublicationTable(publications=publications.publications, trashButtonHandler=trashButtonHandler)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber, onClick=paginationClickHandler) &laquo;

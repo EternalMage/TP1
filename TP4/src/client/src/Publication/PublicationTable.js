@@ -6,6 +6,7 @@ const pug = window.pug
 
 export default props => {
   const publications = props.publications
+  const trashButtonHandler = props.trashButtonHandler
 
   return pug `
     table.publications
@@ -13,7 +14,7 @@ export default props => {
         each pub, i in publications
           tr(key=pub._id)
             td
-              .del-icon(data-id=pub._id) #[i.fa.fa-trash-o.fa-2x]
+              .del-icon(data-id=pub._id, onClick=trashButtonHandler) #[i.fa.fa-trash-o.fa-2x]
 
             td
               span.annee= pub.year

@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, {
+  useState,
+  useEffect
+} from 'react'
 
 import './Publication.css'
 
@@ -22,10 +25,41 @@ export default props => {
   // - Gestion du formulaire de création d'une publication.
   //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
   //   Si le serveur renvoie une erreur, alors affichez les erreurs.
-  const publications = {
+
+  const [publications, setPublications] = useState({
     count: 0,
     publications: []
-  }
+  })
+  const [loading, setLoading] = useState(true)
+
+  let search_params = new URLSearchParams(props.location.search);
+  const url_order_param = search_params.get('order_by')
+  const url_sort_param = search_params.get('sort_by')
+  const url_limit_param = search_params.get('limit')
+  const url_page_param = search_params.get('page')
+
+  const base_url = 'http://localhost:3000/api/publications/'
+  const order_by = url_order_param ? url_order_param : 'desc'
+  const sort_by = url_sort_param ? url_sort_param : 'date'
+  const limit = url_limit_param ? url_limit_param : 10
+  const page = url_page_param ? url_page_param : 1
+  const url = base_url + "?order_by=" + order_by + "&sort_by=" + sort_by + "&limit=" + limit + "&page=" + page
+
+  useEffect(() => {
+    const fetchPublications = async () => {
+      const response = await fetch(url)
+      const publications = await response.json();
+      setPublications(publications)
+      setLoading(false)
+    }
+    fetchPublications()
+    console.log('useEffect')
+  }, [])
+
+  /*const publications = {
+    count: 0,
+    publications: []
+  }*/
 
   const showModal = true
 
@@ -36,7 +70,7 @@ export default props => {
     'orderBy': 'desc'
   }
 
-  const loading = false
+  //const loading = false
 
   const errors = []
 
@@ -53,7 +87,10 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOptions = { ...pagingOptions, 'sortBy': e.target.value }
+    const newPagingOptions = {
+      ...pagingOptions,
+      'sortBy': e.target.value
+    }
   }
 
   // Fonction à exécuter si on change l'ordre de trie: order_by
@@ -64,7 +101,10 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOptions = { ...pagingOptions, 'orderBy': e.target.value }
+    const newPagingOptions = {
+      ...pagingOptions,
+      'orderBy': e.target.value
+    }
   }
 
   const elementsPerPageHandler = e => {
@@ -75,7 +115,11 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOption = { ...pagingOptions, 'limit': Number(e.target.value), 'pageNumber': 1 }
+    const newPagingOption = {
+      ...pagingOptions,
+      'limit': Number(e.target.value),
+      'pageNumber': 1
+    }
   }
 
   const paginationClickHandler = e => {
@@ -86,10 +130,13 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOptions = { ...pagingOptions, 'pageNumber': Number(e.target.dataset.pagenumber) }
+    const newPagingOptions = {
+      ...pagingOptions,
+      'pageNumber': Number(e.target.dataset.pagenumber)
+    }
   }
 
-  return pug`
+  return pug `
     .loading-container
       if loading
         Loader(loading=loading)
@@ -120,30 +167,7 @@ export default props => {
             option(value="desc") décroissant
             option(value="asc") croissant
 
-        table.publications
-          tbody
-            each pub, i in publications.publications
-              tr(key=pub._id)
-                td
-                  .del-icon(data-id=pub._id) #[i.fa.fa-trash-o.fa-2x]
-
-                td
-                  span.annee= pub.year
-
-                  br
-
-                  if pub.month
-                    span.mois= pub.month
-
-                td.publication
-                  p.pubtitle= pub.title
-
-                  p.authors= pub.authors.join(', ')
-
-                  p.venuetype
-
-                  p.venue
-                    i= pub.venue
+        PublicationTable(publications=publications)
 
         .pagination
           a.pagination-link(data-pagenumber=previousPageNumber) &laquo;

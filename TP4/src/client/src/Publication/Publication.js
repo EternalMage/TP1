@@ -37,6 +37,7 @@ export default props => {
     'sortBy': 'date',
     'orderBy': 'desc'
   }) 
+  const [showAddPub, setShowAddPub] = useState(false) 
 
   let search_params = new URLSearchParams(props.location.search);
   const url_order_param = search_params.get('order_by')
@@ -60,7 +61,7 @@ export default props => {
     }
     fetchPublications()
     console.log('useEffect')
-  }, [pagingOptions])
+  }, [pagingOptions, showAddPub])
 
   /*const publications = {
     count: 0,
@@ -147,6 +148,10 @@ export default props => {
     setPagingOptions(newPagingOptions)
   }
 
+  const buttonAddPubHandler = e => {
+    showAddPub ? setShowAddPub(false) : setShowAddPub(true)
+  }
+
   return pug `
     .loading-container
       if loading
@@ -162,9 +167,10 @@ export default props => {
               each err, i in errors
                 li(key="error" + i)= err
 
-        button.trigger Ajouter une publication
+        button.trigger(onClick=buttonAddPubHandler) Ajouter une publication
 
-        //PublicationCreationModal()
+        if showAddPub
+          PublicationCreationModal()
 
         p
           | Trié par: #{''}

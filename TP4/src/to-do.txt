@@ -1,5 +1,4 @@
 Projet;
-3- Réutilisez la composante PublicationTable
 4- Si on supprime une publication, la liste doit être mise à jour.
 
 

@@ -4,7 +4,6 @@ Projet;
 
 
 Publication;
-// - Si on clique sur le bouton X de la modal, elle doit se fermer.
 // - Supprimez une publication si on clique sur le bouton de suppression et rechargez la page.
 // - Gestion du formulaire de création d'une publication.
 //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.

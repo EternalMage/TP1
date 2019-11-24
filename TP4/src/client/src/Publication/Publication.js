@@ -170,7 +170,7 @@ export default props => {
         button.trigger(onClick=buttonModalHandler) Ajouter une publication
 
         if showModal
-          PublicationCreationModal()
+          PublicationCreationModal(buttonModalHandler=buttonModalHandler)
 
         p
           | Trié par: #{''}

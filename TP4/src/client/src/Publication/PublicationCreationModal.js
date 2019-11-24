@@ -5,6 +5,7 @@ const moment = window.moment
 
 export default props => {
   const monthNames = moment.months()
+  const buttonModalHandler = props.buttonModalHandler
 
   const defaultFormData = {
     'year': '',
@@ -19,7 +20,7 @@ export default props => {
   return pug`
     .modal(className="show-modal")
       .modal-content
-        i.fa.fa-window-close.fa-2x.close-button
+        i.fa.fa-window-close.fa-2x.close-button(onClick=buttonModalHandler)
 
         h2 Création d'une publication
 

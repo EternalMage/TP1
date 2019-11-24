@@ -31,6 +31,12 @@ export default props => {
     publications: []
   })
   const [loading, setLoading] = useState(true)
+  const [pagingOptions, setPagingOptions] = useState({
+    'limit': 10,
+    'pageNumber': 1,
+    'sortBy': 'date',
+    'orderBy': 'desc'
+  }) 
 
   let search_params = new URLSearchParams(props.location.search);
   const url_order_param = search_params.get('order_by')
@@ -54,7 +60,7 @@ export default props => {
     }
     fetchPublications()
     console.log('useEffect')
-  }, [])
+  }, [pagingOptions])
 
   /*const publications = {
     count: 0,
@@ -63,12 +69,12 @@ export default props => {
 
   const showModal = true
 
-  const pagingOptions = {
+  /*const pagingOptions = {
     'limit': 10,
     'pageNumber': 1,
     'sortBy': 'date',
     'orderBy': 'desc'
-  }
+  }*/
 
   //const loading = false
 
@@ -91,6 +97,8 @@ export default props => {
       ...pagingOptions,
       'sortBy': e.target.value
     }
+    console.log(newPagingOptions)
+    setPagingOptions(newPagingOptions)
   }
 
   // Fonction à exécuter si on change l'ordre de trie: order_by
@@ -105,6 +113,7 @@ export default props => {
       ...pagingOptions,
       'orderBy': e.target.value
     }
+    setPagingOptions(newPagingOptions)
   }
 
   const elementsPerPageHandler = e => {
@@ -115,11 +124,12 @@ export default props => {
       pathname: props.location.pathname,
       search: '?' + search_params.toString()
     })
-    const newPagingOption = {
+    const newPagingOptions = {
       ...pagingOptions,
       'limit': Number(e.target.value),
       'pageNumber': 1
     }
+    setPagingOptions(newPagingOptions)
   }
 
   const paginationClickHandler = e => {
@@ -134,6 +144,7 @@ export default props => {
       ...pagingOptions,
       'pageNumber': Number(e.target.dataset.pagenumber)
     }
+    setPagingOptions(newPagingOptions)
   }
 
   return pug `
@@ -170,18 +181,18 @@ export default props => {
         PublicationTable(publications=publications)
 
         .pagination
-          a.pagination-link(data-pagenumber=previousPageNumber) &laquo;
+          a.pagination-link(data-pagenumber=previousPageNumber, onClick=paginationClickHandler) &laquo;
           each page in [...Array(numberOfPages).keys()].map(p => p + 1)
             a.pagination-link(
               key="pagination-link-" + page,
               className=page == pagingOptions.pageNumber ? "active" : "",
-              data-pagenumber=page)= page
+              data-pagenumber=page, onClick=paginationClickHandler)= page
 
-          a.pagination-link(data-pagenumber=nextPageNumber) &raquo;
+          a.pagination-link(data-pagenumber=nextPageNumber, onClick=paginationClickHandler) &raquo;
 
           p
             | Afficher
-            select#elementsPerPageSection(defaultValue=pagingOptions.limit)
+            select#elementsPerPageSection(defaultValue=pagingOptions.limit, onChange=elementsPerPageHandler)
               each value in [10, 20, 30, 50, 100]
                 option(key="option" + value, value=value)= value
 

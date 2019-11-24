@@ -24,6 +24,7 @@ export default props => {
   const [project, setProject] = useState({})
   const [publications, setPublications] = useState([])
   const [loading, setLoading] = useState(true)
+  const [deleteState, setDeleteState] = useState(false)
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -33,12 +34,24 @@ export default props => {
         }
       })
       const project = await response.json();
-      setProject(project["project"])
-      setPublications(project["publications"])
+      console.log('useEffect()')
+      setProject(project.project)
+      setPublications(project.publications)
       setLoading(false)
+      setDeleteState(false)
     }
     fetchProject()
-  }, [])
+  }, [deleteState])
+
+  const trashButtonHandler = e => {
+    const deletePublication = async () => {
+      const response = await fetch('http://localhost:3000/api/publications/' + e.currentTarget.dataset.id, { method: 'DELETE' })
+      const responseText = await response.text();
+      console.log('Delete response: ' + responseText)
+      setDeleteState(true)
+    }
+    deletePublication()
+  }
 
   return pug`
     .loading-container
@@ -75,6 +88,6 @@ export default props => {
 
           if publications.length > 0
             h2 Publications
-            PublicationTable(publications=publications)
+            PublicationTable(publications=publications, trashButtonHandler=trashButtonHandler)
   `
 }

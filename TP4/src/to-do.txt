@@ -2,3 +2,8 @@ Publication;
 // - Gestion du formulaire de création d'une publication.
 //   Si le formulaire a été correctement rempli, affichez la nouvelle publication dans la table.
 //   Si le serveur renvoie une erreur, alors affichez les erreurs.
+
+
+Notes:
+Dans publications, quand je click delete, pour une raison que je comprends pas, pourquoi il fait DEUX fois 
+le console log USE EFFECT au lieu de une seule fois... hm ca me gosse ca!

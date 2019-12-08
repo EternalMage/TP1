@@ -1,0 +1,32 @@
+09:34:54.239 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
+09:34:54.377 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+2019-12-03 09:34:54.440:INFO::main: Logging initialized @614ms to org.seleniumhq.jetty9.util.log.StdErrLog
+09:34:54.750 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+09:34:55.267 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+09:34:55.747 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "acceptSslCerts": true,
+  "browserName": "firefox",
+  "javascriptEnabled": true,
+  "marionette": true,
+  "name": "All"
+}
+09:34:55.749 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.firefox.GeckoDriverService)
+1575383696997	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\jonathan\\AppData\\Local\\Temp\\rust_mozprofileHisuiA"
+1575383697581	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: mozillaAddons
+1575383697582	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: telemetry
+1575383697582	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: resource://pdf.js/
+1575383697582	addons.webextension.screenshots@mozilla.org	WARN	Loading extension 'screenshots@mozilla.org': Reading manifest: Invalid extension permission: about:reader*
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1575383700500	Marionette	INFO	Listening on port 54393
+09:35:00.932 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+09:35:01.021 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 2edc1ec5-7202-4215-81d6-72379bba445b (org.openqa.selenium.firefox.GeckoDriverService)
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+1575383708295	Marionette	INFO	Stopped listening on port 54393
+[Child 11040, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1572401533/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 11040, Chrome_ChildThread] WARNING
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 11592, Chrome_ChildThread] WARNING: 
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+09:35:09.350 INFO [ActiveSessions$1.onStop] - Removing session 2edc1ec5-7202-4215-81d6-72379bba445b (org.openqa.selenium.firefox.GeckoDriverService)

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="3"
+            tests="3">
+
+  <testsuite name="all"
+    errors="0" failures="3" hostname="" id="" package="all" skipped="0"
+    tests="3" time="7.253" timestamp="">
+  
+    <testcase name="Page d&#39;accueil" classname="all" time="2.556" assertions="1">  <failure message="Le menu de la page d&#39;accueil est sélectionné in 1000 ms. - expected [0;32m&#34;present&#34;[0m but got: [0;31m&#34;not present&#34;[0m">    at Object.Page d&#39;accueil (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:17:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+
+    <failure message="    at Object.Page d&#39;accueil (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:17:15)">    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+    </testcase>
+  
+    <testcase name="Page de projets" classname="all" time="2.226" assertions="3">
+
+    
+
+      <failure message="Le menu de la page de projets est sélectionné in 1000 ms. - expected [0;32m&#34;present&#34;[0m but got: [0;31m&#34;not present&#34;[0m">    at Object.Page de projets (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:42:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+
+    <failure message="    at Object.Page de projets (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:42:15)">    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+    </testcase>
+  
+    <testcase name="Page de publications" classname="all" time="2.471" assertions="4">
+
+    
+
+    
+
+      <failure message="Le menu de la page de publications est sélectionné in 1000 ms. - expected [0;32m&#34;present&#34;[0m but got: [0;31m&#34;not present&#34;[0m">    at Object.Page de publications (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:115:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+
+    <failure message="    at Object.Page de publications (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:115:15)">    at process._tickCallback (internal/process/next_tick.js:68:7)</failure>
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

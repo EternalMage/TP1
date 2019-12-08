@@ -1,0 +1,53 @@
+
+> log4420-labo@1.0.0 e2e C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src
+> cd ./server && npm run setup && cd .. && nightwatch --config ./tests/nightwatch.conf.js --env firefox tests/e2e/all.js
+
+
+> TP3-LOG4420@0.0.1 setup C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\server
+> node setup.js
+
+Connected successfully to server
+
+[0;36m[All] Test Suite[0m
+[0;35m================[0m
+[31m ImageMagick Not Found[39m
+ EasyImage requires ImageMagick to work. Install it from http://www.imagemagick.org/script/binary-releases.php.
+
+Running:  [0;32mPage d'accueil[0m
+
+[0;32m×[0m Le menu de la page d'accueil est sélectionné in 1000 ms. - expected [0;32m"present"[0m but got: [0;31m"not present"[0m
+[0;90m    at Object.Page d'accueil (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:17:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)[0m 
+
+
+[0;31mFAILED:[0m [0;31m1[0m assertions failed (2.556s)
+Running:  [0;32mPage de projets[0m
+
+[0;32m√[0m Le menu de la page d'accueil n'est pas sélectionné  - 66 ms.
+[0;32m√[0m Le menu de la page d'équipe n'est pas sélectionné  - 20 ms.
+[0;32m×[0m Le menu de la page de projets est sélectionné in 1000 ms. - expected [0;32m"present"[0m but got: [0;31m"not present"[0m
+[0;90m    at Object.Page de projets (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:42:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)[0m 
+
+
+[0;31mFAILED:[0m [0;31m1[0m assertions failed and  [0;32m2[0m passed (2.226s)
+Running:  [0;32mPage de publications[0m
+
+[0;32m√[0m Le menu de la page d'accueil n'est pas sélectionné  - 35 ms.
+[0;32m√[0m Le menu de la page d'équipe n'est pas sélectionné  - 16 ms.
+[0;32m√[0m Le menu de la page de projets n'est pas sélectionné  - 18 ms.
+[0;32m×[0m Le menu de la page de publications est sélectionné in 1000 ms. - expected [0;32m"present"[0m but got: [0;31m"not present"[0m
+[0;90m    at Object.Page de publications (C:\Users\jonathan\Desktop\LOG4420-rep\repository\TP4\src\tests\e2e\all.js:115:15)
+    at process._tickCallback (internal/process/next_tick.js:68:7)[0m 
+
+
+[0;31mFAILED:[0m [0;31m1[0m assertions failed and  [0;32m3[0m passed (2.471s)
+[1;31m_________________________________________________[0m
+
+[1;31mTEST FAILURE:[0m  [0;31m3[0m assertions failed, [0;32m5[0m passed. 15.556s
+
+[0;31m × all[0m
+ – [0;90mPage d'accueil[0m [1;33m(2.556s)[0m
+ – [0;90mPage de projets[0m [1;33m(2.226s)[0m
+ – [0;90mPage de publications[0m [1;33m(2.471s)[0m
+
